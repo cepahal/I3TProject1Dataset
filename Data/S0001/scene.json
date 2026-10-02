@@ -34,12 +34,6 @@
           "direction": "toward_front_of_surface",
           "distance_cm": null,
           "description": "Slide the book toward the front edge so that a strip along one side is exposed for grasping."
-        },
-        {
-          "action": "rotate_target",
-          "direction": null,
-          "distance_cm": null,
-          "description": "Stand the book upright on its spine or edge so a larger graspable surface is exposed."
         }
       ],
       "other_notes": "Cover is glossy paperback; thin flat object."
