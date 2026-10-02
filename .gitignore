@@ -1,0 +1,22 @@
+# macOS files
+.DS_Store
+._*
+
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
