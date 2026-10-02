@@ -1,0 +1,89 @@
+{
+  "scene_id": "S0001",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg"
+  ],
+  "scene_description": "Small black pedestal table in a corner next to a wall, holding a paperback book, a 1000-piece puzzle box, and an upright acrylic flyer stand.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "red paperback book",
+      "description": "Paperback book titled 'Strange Tastes' (red cover with flame imagery, yellow title text) lying flat and angled diagonally on the black pedestal surface, near the front-left edge, to the left of the blue Springbok puzzle box.",
+      "approximate_dimensions_m": {
+        "width": 0.15,
+        "depth": 0.23,
+        "height": 0.03,
+        "measurement_type": "measured"
+      },
+      "orientation": "flat",
+      "nearby_obstacles": [
+        "Puzzle box to the right of the book",
+        "Upright acrylic flyer stand behind the book"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Open space on the front and left sides toward the pedestal edge; book is only about 3 cm thick and lies flush on the surface, leaving little to grip from above or the sides.",
+      "manipulation_factors": [
+        "awkward_orientation",
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_surface",
+          "distance_cm": null,
+          "description": "Slide the book toward the front edge so that a strip along one side is exposed for grasping."
+        },
+        {
+          "action": "rotate_target",
+          "direction": null,
+          "distance_cm": null,
+          "description": "Stand the book upright on its spine or edge so a larger graspable surface is exposed."
+        }
+      ],
+      "other_notes": "Cover is glossy paperback; thin flat object."
+    },
+    {
+      "target_id": "T002",
+      "name": "puzzle box",
+      "description": "Blue-and-red Springbok 1000-piece puzzle box (autumn red covered bridge on the lid, blue tape reading '2 missing pieces') lying flat and slightly skewed at the front-right of the black pedestal surface, close to the right edge, to the right of the red book.",
+      "approximate_dimensions_m": {
+        "width": 0.3,
+        "depth": 0.3,
+        "height": 0.06,
+        "measurement_type": "measured"
+      },
+      "orientation": "flat",
+      "nearby_obstacles": [
+        "Book to the left of the box"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Open space around the front and right sides, and the box is close to the pedestal edge so its sides are easily approached.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Box is large but shallow; blue tape on the lid is a visible identifier. Contents may shift when lifted."
+    },
+    {
+      "target_id": "T003",
+      "name": "acrylic flyer stand",
+      "description": "Clear acrylic sign holder standing upright at the rear of the black pedestal surface, holding a gray 'LOVE PUZZLES? Join The Cozy Cornerpiece Club' flyer, behind and between the book and the puzzle box.",
+      "approximate_dimensions_m": {
+        "width": 0.21,
+        "depth": 0.06,
+        "height": 0.28,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Open space on all sides; the book and box are in front of it but do not block access from the sides or rear.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Transparent, thin-walled acrylic with a small base footprint (about 6 cm deep), so it may be easy to tip."
+    }
+  ],
+  "source": "locally staged scene"
+}
