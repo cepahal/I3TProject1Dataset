@@ -1,0 +1,115 @@
+{
+  "scene_id": "S0004",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Gray booth table holding a closed silver laptop with a yellow speckled fruit on its lid. To the right, a brown takeaway cup with a bright green lid and cardboard sleeve stands on folded brown paper napkins.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "silver laptop",
+      "description": "Closed silver Apple laptop with a blue character sticker on its lid, lying flat to the left of the cup; the yellow fruit rests on the lid near the sticker.",
+      "approximate_dimensions_m": {
+        "width": 0.34,
+        "depth": 0.24,
+        "height": 0.01,
+        "measurement_type": "measured"
+      },
+      "orientation": "closed and lying flat",
+      "nearby_obstacles": [
+        "Yellow fruit resting on the lid",
+        "Cup and napkins to the right, separated by a visible gap"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "Several outer edges are exposed, but the underside rests close to the table. The fruit occupies part of the top surface and would need attention before lifting or tilting the laptop.",
+      "manipulation_factors": [
+        "under_another_object",
+        "partially_obstructed"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "off_laptop",
+          "distance_cm": null,
+          "description": "Move the yellow fruit from the laptop onto a clear part of the table before moving the laptop."
+        }
+      ],
+      "other_notes": "Blockage refers to the fruit resting on part of the lid; the laptop is not trapped."
+    },
+    {
+      "target_id": "T002",
+      "name": "yellow fruit",
+      "description": "Round yellow-green speckled fruit resting on the closed laptop near the blue sticker, to the left of the green-lidded cup.",
+      "approximate_dimensions_m": {
+        "width": 0.08,
+        "depth": 0.08,
+        "height": 0.08,
+        "measurement_type": "measured"
+      },
+      "orientation": "resting upright with stem indentation facing upward",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Upper surface and sides are exposed, with no surrounding object touching or covering the fruit. The laptop supports its underside.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Fruit variety is not assumed. No obvious environmental change is needed to access the fruit itself."
+    },
+    {
+      "target_id": "T003",
+      "name": "brown cup",
+      "description": "Tall brown takeaway cup with a bright green plastic lid and cardboard sleeve, standing on the brown napkins to the right of the laptop.",
+      "approximate_dimensions_m": {
+        "width": 0.09,
+        "depth": 0.09,
+        "height": 0.135,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Closed laptop to the left, separated by a visible gap"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Lid and cup sides are exposed, with clear overhead access and space separating the cup from the laptop. Napkins support the base.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Lid has a drinking opening. Contents and temperature are unknown; no obvious environmental adjustment is needed for access."
+    },
+    {
+      "target_id": "T004",
+      "name": "brown napkins",
+      "description": "Folded brown paper napkins beneath the green-lidded cup, to the right of the laptop; this target is the visible napkin stack as a whole.",
+      "approximate_dimensions_m": {
+        "width": 0.125,
+        "depth": 0.17,
+        "height": null,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat beneath the cup",
+      "nearby_obstacles": [
+        "Brown cup standing on the napkins"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "Outer edges are exposed, but the cup covers and loads the central portion of the stack. Removing the napkins without moving the cup could disturb it.",
+      "manipulation_factors": [
+        "under_another_object",
+        "partially_obstructed"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "off_napkins",
+          "distance_cm": null,
+          "description": "Lift the cup onto a clear, stable part of the tabletop before removing the napkins."
+        }
+      ],
+      "other_notes": "Target is the stack rather than an individual hidden sheet. Number of napkins is unknown."
+    }
+  ],
+  "source": "User-provided photographs in the scene images folder."
+}

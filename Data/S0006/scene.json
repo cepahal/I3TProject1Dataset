@@ -1,0 +1,225 @@
+{
+  "scene_id": "S0006",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Dark cabinet top with raised side and rear panels beside white and orange walls. A yellow pencil and metal paper clip lie on the left near a white instruction manual topped by a black remote. An upright paper towel roll, blue spray bottle, and gray eraser occupy the right side, leaving a broad open central area. Three photographs show the arrangement from different viewpoints.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "yellow pencil",
+      "description": "Yellow wooden pencil with a pink eraser lying along the left side of the cabinet top, beside the paper clip and to the left of the instruction manual.",
+      "approximate_dimensions_m": {
+        "width": 0.17,
+        "depth": 0.005,
+        "height": 0.005,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat, roughly parallel to the left side panel",
+      "nearby_obstacles": [
+        "Raised left side panel",
+        "Paper clip beside the pencil"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Pencil is close to the raised left panel, restricting approach from that side. Its upper surface and side facing the cabinet center are exposed.",
+      "manipulation_factors": [
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_center_of_surface",
+          "distance_cm": null,
+          "description": "Move the pencil away from the raised left panel into the clear central area to expose both sides."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T002",
+      "name": "gray eraser",
+      "description": "Rectangular gray whiteboard eraser lying near the front-right of the cabinet top, in front of the blue spray bottle.",
+      "approximate_dimensions_m": {
+        "width": 0.12,
+        "depth": 0.045,
+        "height": 0.025,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat",
+      "nearby_obstacles": [
+        "Raised right side panel",
+        "Blue spray bottle behind the eraser"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Top and front face are exposed with visible space around the eraser. It is separated from the spray bottle and can be approached from the open center and front.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "No obvious environmental adjustment is needed for access."
+    },
+    {
+      "target_id": "T003",
+      "name": "blue spray bottle",
+      "description": "Blue cylindrical spray bottle with a white pump and white-green label, standing in front of the paper towel roll and behind the gray eraser on the right side of the cabinet top.",
+      "approximate_dimensions_m": {
+        "width": 0.05,
+        "depth": 0.05,
+        "height": 0.19,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Paper towel roll immediately behind the bottle",
+        "Gray eraser in front",
+        "Raised right side panel"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Front and upper portions are exposed. The paper towel roll restricts clearance behind the bottle; the eraser occupies some space ahead of its base.",
+      "manipulation_factors": [
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_center_of_surface",
+          "distance_cm": null,
+          "description": "Move the bottle into the open central area, leaving space between it, the paper towel roll, and the eraser."
+        },
+        {
+          "action": "move_obstacle",
+          "direction": "away_from_spray_bottle",
+          "distance_cm": null,
+          "description": "Move the paper towel roll farther left into the open central area to increase space behind and beside the spray bottle while leaving the bottle upright in place."
+        }
+      ],
+      "other_notes": "contents and fill level are unknown."
+    },
+    {
+      "target_id": "T004",
+      "name": "black remote",
+      "description": "Black LG remote control with colored buttons resting button-side up on the white instruction manual on the left side of the cabinet top.",
+      "approximate_dimensions_m": {
+        "width": 0.17,
+        "depth": 0.05,
+        "height": 0.02,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat, buttons facing upward",
+      "nearby_obstacles": [
+        "Raised rear panel near the far end"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Buttons and long side edges are exposed. The manual is underneath rather than covering the remote; the remote can be accessed from above and the open center side.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "No obvious environmental adjustment is needed to access the remote itself."
+    },
+    {
+      "target_id": "T005",
+      "name": "white instruction manual",
+      "description": "White instruction booklet with a stethoscope illustration, lying beneath the black remote to the right of the yellow pencil.",
+      "approximate_dimensions_m": {
+        "width": 0.1,
+        "depth": 0.14,
+        "height": null,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat",
+      "nearby_obstacles": [
+        "Black remote resting on the manual",
+        "Raised left and rear panels nearby"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "The remote covers and loads part of the booklet. Some paper edges remain exposed, but moving the booklet independently could disturb the remote.",
+      "manipulation_factors": [
+        "under_another_object",
+        "partially_obstructed"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "off_manual",
+          "distance_cm": null,
+          "description": "Move the remote onto a clear part of the cabinet top before picking up the instruction manual."
+        }
+      ],
+      "other_notes": "Height of null reflects the thinness of the booklet; it does not mean physically zero thickness."
+    },
+    {
+      "target_id": "T006",
+      "name": "metal paper clip",
+      "description": "Large silver wire paper clip lying next to the yellow pencil, on the side facing the cabinet center and to the left of the instruction manual.",
+      "approximate_dimensions_m": {
+        "width": 0.01,
+        "depth": 0.045,
+        "height": 0.0,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat",
+      "nearby_obstacles": [
+        "Yellow pencil immediately beside it",
+        "Raised left side panel nearby"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Wire is exposed from above but lies flush against the surface. The pencil and left panel reduce space on one side.",
+      "manipulation_factors": [
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "away_from_pencil_toward_center",
+          "distance_cm": null,
+          "description": "Separate the paper clip from the pencil by moving it into the open central area."
+        }
+      ],
+      "other_notes": "Width is the short axis and depth the long axis. Height of 0 is retained as a rounded thin-object approximation, not literal zero thickness. The separate small metal item by the manual is not this target."
+    },
+    {
+      "target_id": "T007",
+      "name": "paper towel roll",
+      "description": "Upright white paper towel roll with an exposed cardboard core, positioned toward the rear-right of the cabinet top behind the blue spray bottle.",
+      "approximate_dimensions_m": {
+        "width": 0.12,
+        "depth": 0.12,
+        "height": 0.21,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright, core opening facing upward",
+      "nearby_obstacles": [
+        "Blue spray bottle immediately in front",
+        "Raised rear and right panels"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "Top and left side are exposed. The spray bottle blocks part of the lower front approach, while the surrounding panels limit low approaches from the rear and right.",
+      "manipulation_factors": [
+        "partially_obstructed",
+        "limited_approach_space"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "away_from_front_of_roll",
+          "distance_cm": null,
+          "description": "Move the spray bottle into the clear central area to expose the front of the paper towel roll."
+        },
+        {
+          "action": "translate_target",
+          "direction": "left_toward_open_center",
+          "distance_cm": null,
+          "description": "Move the upright paper towel roll left into the clear central area, separating it from the spray bottle and right side panel."
+        }
+      ],
+      "other_notes": "Width and depth represent outer diameter. Physical blockage is partial and approach-dependent; the roll is accessible from above."
+    }
+  ],
+  "source": "User-provided scene photographs and object dimensions. Targets restricted to the user-listed objects, with two unlabeled dimension entries interpreted as the paper clip and paper towel roll."
+}

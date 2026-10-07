@@ -1,0 +1,137 @@
+{
+  "scene_id": "S0012",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Brown countertop beside a stainless-steel sink and a chrome faucet with two lever handles. A clear tray holds a Joy dish soap bottle and a round soap-dispensing dish brush to the left of the faucet. A second clear bottle containing blue liquid stands behind the red-marked faucet lever near the backsplash. Three photographs show the arrangement from different viewpoints. Four targets are annotated; surrounding fixtures and dishes are background context.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "Joy dish soap bottle",
+      "description": "Clear plastic bottle with a blue Joy Ultra label and an open pale yellow flip cap, standing on the right portion of the clear tray next to the dish brush, to the left of the faucet.",
+      "approximate_dimensions_m": {
+        "width": 0.075,
+        "depth": 0.055,
+        "height": 0.19,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright, flip cap open",
+      "nearby_obstacles": [
+        "Dish brush close to the lower left side",
+        "Raised rim of the supporting tray"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Neck and upper body are exposed. The dish brush and shallow tray rim limit clearance near the lower body, while the front and upper approaches remain open.",
+      "manipulation_factors": [
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "out_of_tray_to_clear_counter",
+          "distance_cm": null,
+          "description": "Place the Joy bottle upright on clear countertop to the left of the tray, leaving space around its base and sides."
+        },
+        {
+          "action": "move_obstacle",
+          "direction": "away_from_joy_bottle",
+          "distance_cm": null,
+          "description": "Move the dish brush out of the tray to expose the left side of the Joy bottle while leaving the bottle upright in place."
+        }
+      ],
+      "other_notes": "Flip cap is open and liquid is visible inside; keep the bottle upright when repositioning it."
+    },
+    {
+      "target_id": "T002",
+      "name": "blue-liquid bottle",
+      "description": "Tall clear bottle with an open light blue flip cap and blue liquid at the bottom, standing directly on the counter near the backsplash, behind the faucet lever marked with a red dot and behind-right of the Joy bottle.",
+      "approximate_dimensions_m": {
+        "width": 0.07,
+        "depth": 0.045,
+        "height": 0.21,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright, flip cap open",
+      "nearby_obstacles": [
+        "Faucet lever with red marker in front of part of the bottle",
+        "Backsplash behind the bottle",
+        "Joy bottle toward the front-left"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "Cap and upper body are exposed. The fixed faucet assembly and its lever restrict a direct front approach to the lower body; the backsplash limits rear approach space.",
+      "manipulation_factors": [
+        "partially_obstructed",
+        "limited_approach_space"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "left_away_from_faucet_and_backsplash",
+          "distance_cm": null,
+          "description": "Lift the bottle clear of the faucet lever and place it upright on open counter space to the left of the tray, with room around its sides and behind it."
+        }
+      ],
+      "other_notes": "Blockage is partial and approach-dependent. Product identity is not confirmed from the visible back label. The open cap and visible liquid favor keeping it upright."
+    },
+    {
+      "target_id": "T003",
+      "name": "soap-dispensing dish brush",
+      "description": "Short round dish brush with a black palm grip, transparent blue-filled reservoir, white collar, and pale bristles, standing bristles-down on the left portion of the clear tray beside the Joy bottle.",
+      "approximate_dimensions_m": {
+        "width": 0.07,
+        "depth": 0.07,
+        "height": 0.1,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright, bristles resting on tray and black grip facing upward",
+      "nearby_obstacles": [
+        "Joy bottle beside the brush",
+        "Shallow tray rim around the bristle base"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Black palm grip and upper reservoir are exposed above the tray. The neighboring bottle and tray rim are close to the lower brush, but the raised grip remains accessible from above and the open left side.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Target is the complete brush, including its reservoir and bristles. No obvious environmental change is needed to access its exposed grip."
+    },
+    {
+      "target_id": "T004",
+      "name": "clear rectangular tray",
+      "description": "Shallow transparent rectangular tray with rounded corners and a ridged base, holding the dish brush and Joy bottle on the counter immediately left of the sink rim.",
+      "approximate_dimensions_m": {
+        "width": 0.2,
+        "depth": 0.11,
+        "height": 0.02,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat, open side upward",
+      "nearby_obstacles": [
+        "Joy bottle standing inside the tray",
+        "Dish brush standing inside the tray",
+        "Sink opening immediately beside the tray"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "Much of the outer rim is visible, but the bottle and brush occupy and load the interior. The sink opening limits supported repositioning on the sink-facing side; clear counter space is available to the left.",
+      "manipulation_factors": [
+        "under_another_object",
+        "partially_obstructed"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "out_of_tray",
+          "distance_cm": null,
+          "description": "Move the Joy bottle and dish brush onto clear countertop before lifting the tray, exposing its interior and avoiding disturbance of the items it supports."
+        }
+      ],
+      "other_notes": "Target is the tray itself. Its material is not confirmed visually. The objects inside are annotated separately."
+    }
+  ],
+  "source": "User-provided photographs in S0012/images."
+}

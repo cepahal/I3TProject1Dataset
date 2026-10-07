@@ -1,0 +1,186 @@
+{
+  "scene_id": "S0010",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Wooden table surrounded by upholstered chairs, holding a loosely collapsed black umbrella with an extended shaft and wooden handle, a mesh pencil pouch, a stack of lined paper, an upright opened Celsius can, a light gray padded case, and a small dark gray hard case.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "black umbrella with wooden handle",
+      "description": "Black umbrella lying across the left part of the wooden table, with a loosely gathered canopy beside the light gray padded case and a black shaft extending toward the wooden handle and wrist loop near the table edge.",
+      "approximate_dimensions_m": {
+        "width": 0.46,
+        "depth": 0.49,
+        "height": 0.125,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying on its side on the tabletop, rotated in the table plane relative to the user-defined front-facing measurement reference; canopy loosely collapsed and shaft extended",
+      "nearby_obstacles": [
+        "Light gray padded case beside the canopy",
+        "Paper stack near the canopy edge"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Wooden handle and much of the shaft are exposed. Loose canopy fabric and rib ends occupy a broad irregular area near the gray case and the paper stack.",
+      "manipulation_factors": [
+        "awkward_orientation"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "reconfigure_target",
+          "direction": "gather_canopy_around_shaft",
+          "distance_cm": null,
+          "description": "Gather the loose canopy and ribs into a compact closed bundle and secure the wrap strap if functional, keeping the handle exposed."
+        },
+        {
+          "action": "translate_target",
+          "direction": "toward_clear_tabletop_away_from_paper_and_case",
+          "distance_cm": null,
+          "description": "Move the umbrella as a whole into the broad clear tabletop area beyond the objects, separating the loose canopy from the paper stack and gray case while keeping the handle exposed."
+        }
+      ],
+      "other_notes": "User-measured dimensions are 46 x 49 x 12.5 cm, converted to meters. Width and depth refer to the user-defined front-facing measurement reference, not the horizontal and vertical directions in the photographs or an axis-aligned footprint on the table. The umbrella is rotated in the scene; retain the supplied dimension labels rather than swapping them with the camera viewpoint. No numerical rotation angle was supplied. Target includes canopy, shaft, handle, and attached straps; whether the measured envelope includes the full extended shaft and wrist loop remains unspecified."
+    },
+    {
+      "target_id": "T002",
+      "name": "stack of lined paper",
+      "description": "Stack of white ruled loose-leaf paper with punched holes and a red margin, near the front table edge, between the mesh pencil pouch and the upright Celsius can; one far corner is next to the black umbrella canopy.",
+      "approximate_dimensions_m": {
+        "width": 0.2,
+        "depth": 0.27,
+        "height": 0.01,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat, ruled face upward",
+      "nearby_obstacles": [
+        "Umbrella canopy at one far corner",
+        "Celsius can close to the right side"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "Most of the upper face and front edges are exposed. The umbrella fabric appears to overlap a small part of the far corner; the can is close to one side. The underside rests directly on the tabletop.",
+      "manipulation_factors": [
+        "partially_obstructed"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "away_from_paper_corner",
+          "distance_cm": null,
+          "description": "Move or gather the umbrella canopy away from the corner of the paper stack, leaving the stack edges exposed."
+        },
+        {
+          "action": "translate_target",
+          "direction": "away_from_umbrella_and_can",
+          "distance_cm": null,
+          "description": "Slide the paper stack as a unit toward clear tabletop space, away from the umbrella corner and can, until the perimeter is exposed; stop short of overhanging the table edge."
+        }
+      ],
+      "other_notes": "User measured the whole stack as 20 x 27 x 1 cm, converted to meters. Width is the shorter sheet edge, depth the longer edge, and height the full stack thickness. Target is the entire stack, not an individual sheet. Physical blockage refers only to the apparent small canopy overlap; the stack is not covered as a whole."
+    },
+    {
+      "target_id": "T003",
+      "name": "opened Celsius can",
+      "description": "Tall slim silver-white Celsius beverage can with an orange band and an open pull tab, standing immediately beside the paper stack and in front of the small dark gray hard case in image 01.",
+      "approximate_dimensions_m": {
+        "width": 0.055,
+        "depth": 0.055,
+        "height": 0.16,
+        "measurement_type": "estimated"
+      },
+      "orientation": "upright, drinking opening exposed",
+      "nearby_obstacles": [
+        "Paper stack close to the base on one side",
+        "Small dark gray hard case nearby"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Top and most of the cylindrical body are exposed. Nearby objects do not trap or cover the can, and an approach from the open tabletop side is available.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "User supplied the ambiguous four-value measurement 5.5 x 5 x 5 x 16. Provisionally interpreted as 5.5 x 5.5 x 16 cm for a round can, pending clarification. Height of 16 cm comes directly from the supplied last value; both horizontal extents use an assumed 5.5 cm diameter. The complete dimension set is marked estimated because the transcription is unresolved, not because it was physically measured by the annotator. Opening is visible; remaining liquid and fill level are unknown. No obvious environmental change is required for access."
+    },
+    {
+      "target_id": "T004",
+      "name": "mesh pencil pouch",
+      "description": "Rectangular gray-edged mesh zippered pouch containing pens and a white semicircular protractor, lying near the front table edge to the left of the paper stack.",
+      "approximate_dimensions_m": {
+        "width": 0.24,
+        "depth": 0.11,
+        "height": 0.025,
+        "measurement_type": "estimated"
+      },
+      "orientation": "lying flat, mesh face upward",
+      "nearby_obstacles": [
+        "Umbrella shaft nearby on the opposite side from the paper stack"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Broad top face, zipper edge, and much of the perimeter are exposed near the table edge, with no object resting on the pouch.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Target is the entire pouch and its contents as a unit; enclosed stationery is not counted as separate exposed targets. Dimensions estimated from the user-measured 20 x 27 cm paper stack across the three views: width is the long pouch axis, depth the short axis, and height the filled thickness. Thickness is less certain than the footprint. These are coarse visual estimates, not a verified product specification."
+    },
+    {
+      "target_id": "T005",
+      "name": "light gray padded case",
+      "description": "Large light gray fabric-covered rounded case with an oval opening near one end and a dark seam around its edge, lying beside the umbrella canopy behind the paper stack.",
+      "approximate_dimensions_m": {
+        "width": 0.21,
+        "depth": 0.23,
+        "height": 0.055,
+        "measurement_type": "estimated"
+      },
+      "orientation": "lying flat, oval opening facing upward",
+      "nearby_obstacles": [
+        "Loose umbrella canopy immediately beside its left edge"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Upper surface, oval opening, and much of the front and right perimeter are exposed. Umbrella fabric lies close to the left edge, reducing approach space on that side.",
+      "manipulation_factors": [
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "away_from_gray_case",
+          "distance_cm": null,
+          "description": "Gather or move the umbrella canopy away from the left edge of the gray case to expose its perimeter."
+        },
+        {
+          "action": "translate_target",
+          "direction": "away_from_umbrella_canopy",
+          "distance_cm": null,
+          "description": "Move the gray padded case into the clear tabletop area beyond its exposed side to create a gap from the umbrella canopy, leaving its oval opening facing upward."
+        }
+      ],
+      "other_notes": "Exact product identity and contents are unverified. Dimensions estimated relative to the measured paper stack across the three views: width is across the shorter broad face, depth the longer face dimension, and height the maximum thickness above the table. The estimate describes the exterior envelope including the padded rim, not the opening. Height is low confidence; no online model dimensions were substituted."
+    },
+    {
+      "target_id": "T006",
+      "name": "small dark gray hard case",
+      "description": "Small elongated dark gray rounded rectangular hard case on the table next to the Celsius can, farther from the paper stack than the can; it appears behind the can in image 01 and to its right in image 03.",
+      "approximate_dimensions_m": {
+        "width": 0.16,
+        "depth": 0.065,
+        "height": 0.035,
+        "measurement_type": "estimated"
+      },
+      "orientation": "lying flat, closed broad face upward",
+      "nearby_obstacles": [
+        "Celsius can nearby at one side"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Top and most of the perimeter are exposed. The can is nearby but leaves other approach directions open, with substantial clear tabletop beyond the case.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Appears to be an eyeglasses-style case, but exact type and contents are unverified. Dimensions estimated relative to the measured paper stack and cross-checked against the provisional can scale: width is the long axis, depth the short axis, and height the maximum closed thickness. Visual estimates may differ by several centimeters; no exact model was established online."
+    }
+  ],
+  "source": "User-provided scene photographs and measurements for the umbrella, paper stack, and can. Measurement units are interpreted as centimeters. Other dimensions are visual estimates using the measured paper stack as the main scale reference. Can measurement transcription is provisional and documented in its other_notes; no unverified online product dimensions are treated as known."
+}
