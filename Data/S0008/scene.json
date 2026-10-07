@@ -1,0 +1,478 @@
+{
+  "scene_id": "S0008",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Wooden shelving unit with two occupied levels. The upper occupied shelf holds two stacked black cases, two medicine bottles, a small white box, a large orange container, two stacked black cartons, and a blue case. The bottom shelf holds a blue retail package, a gray container, a small jar, a clear bag of packets, a purple cup stack, and a brown zippered bag. Left and right refer to the shelving unit viewed from its open front.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "upper black zippered case",
+      "description": "Upper of two black rounded rectangular zippered cases stacked at the far left of the upper occupied shelf, immediately left of the orange-capped bottle.",
+      "approximate_dimensions_m": {
+        "width": 0.13,
+        "depth": 0.2,
+        "height": 0.06,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat on another case",
+      "nearby_obstacles": [
+        "Left shelf side panel",
+        "Orange-capped bottle immediately to the right"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Top and front edge are exposed; the left panel and neighboring bottle reduce side approach space.",
+      "manipulation_factors": [
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "out_of_stack_to_clear_surface",
+          "distance_cm": null,
+          "description": "Place the upper case separately on a clear surface with space around both long sides."
+        }
+      ],
+      "other_notes": "Target is the upper closed case as a whole; contents are unknown."
+    },
+    {
+      "target_id": "T002",
+      "name": "lower black zippered case",
+      "description": "Lower of the two stacked black zippered cases at the far left of the upper occupied shelf, directly beneath the larger-looking upper case.",
+      "approximate_dimensions_m": {
+        "width": 0.13,
+        "depth": 0.2,
+        "height": 0.06,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat beneath another case",
+      "nearby_obstacles": [
+        "Upper black case resting on it",
+        "Left shelf side panel",
+        "Medicine bottles to the right"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "Front edge is visible, but much of the top is covered and loaded by the upper case.",
+      "manipulation_factors": [
+        "under_another_object",
+        "partially_obstructed",
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "off_lower_case",
+          "distance_cm": null,
+          "description": "Move the upper black case to a clear surface before picking up the lower case."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T003",
+      "name": "orange-capped DayQuil bottle",
+      "description": "Upright bottle with an orange DayQuil cap on the upper occupied shelf, between the stacked black cases and the dark blue-capped NyQuil bottle.",
+      "approximate_dimensions_m": {
+        "width": 0.06,
+        "depth": 0.045,
+        "height": 0.17,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Black cases immediately to the left",
+        "NyQuil bottle immediately to the right"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Cap and front face are exposed, but the bottle is closely flanked by the cases and the other bottle.",
+      "manipulation_factors": [
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "away_from_cases_and_other_bottle",
+          "distance_cm": null,
+          "description": "Place the orange-capped bottle in clear shelf space with gaps on both sides."
+        },
+        {
+          "action": "move_obstacle",
+          "direction": "away_from_dayquil_bottle",
+          "distance_cm": null,
+          "description": "Move the neighboring NyQuil bottle to separate clear shelf space to expose the right side of the DayQuil bottle; the black cases would remain on its left."
+        }
+      ],
+      "other_notes": "Product name identifies the visible packaging; contents and fill level are unverified."
+    },
+    {
+      "target_id": "T004",
+      "name": "blue-capped NyQuil bottle",
+      "description": "Upright dark bottle with a dark blue NyQuil cap on the upper occupied shelf, immediately right of the orange-capped bottle and left of the flat white Mighty Patch box.",
+      "approximate_dimensions_m": {
+        "width": 0.045,
+        "depth": 0.06,
+        "height": 0.17,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "DayQuil bottle immediately to the left",
+        "Mighty Patch box beside its lower right side"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Cap and front face are exposed. The adjacent bottle limits side clearance, and the small box occupies space beside the base.",
+      "manipulation_factors": [
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "away_from_adjacent_objects",
+          "distance_cm": null,
+          "description": "Separate the NyQuil bottle from the DayQuil bottle and small white box in clear shelf space."
+        },
+        {
+          "action": "move_obstacle",
+          "direction": "away_from_left_side_of_nyquil",
+          "distance_cm": null,
+          "description": "Move the DayQuil bottle away from the NyQuil bottle to open a gap between their bodies."
+        }
+      ],
+      "other_notes": "Product name identifies the visible packaging; contents and fill level are unverified."
+    },
+    {
+      "target_id": "T005",
+      "name": "white Mighty Patch box",
+      "description": "Small flat white box marked Mighty Patch and 24 on the upper occupied shelf, between the NyQuil bottle and the large orange Tide container.",
+      "approximate_dimensions_m": {
+        "width": 0.085,
+        "depth": 0.125,
+        "height": 0.02,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat, printed broad face upward",
+      "nearby_obstacles": [
+        "NyQuil bottle to the left",
+        "Orange Tide container immediately to the right"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Top and thin front edge are exposed; the taller objects on either side restrict lateral access.",
+      "manipulation_factors": [
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "away_from_bottle_and_container",
+          "distance_cm": null,
+          "description": "Move the small white box to clear shelf space so its edges can be approached independently."
+        },
+        {
+          "action": "move_obstacle",
+          "direction": "away_from_left_edge_of_patch_box",
+          "distance_cm": null,
+          "description": "Move the NyQuil bottle away from the small white box to expose its left edge while leaving the box flat."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T006",
+      "name": "orange Tide container",
+      "description": "Large orange plastic container with a round orange lid and a recessed side handle, standing near the center of the upper occupied shelf, right of the Mighty Patch box and left of the stacked black cartons.",
+      "approximate_dimensions_m": {
+        "width": 0.115,
+        "depth": 0.2,
+        "height": 0.2,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Mighty Patch box near the lower left side",
+        "Wooden shelf above the lid",
+        "Shelf back panel behind the container"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Front and right side are exposed. The lid is relatively close to the shelf above, limiting a direct approach from overhead.",
+      "manipulation_factors": [
+        "low_overhead_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "forward_out_of_shelf_compartment",
+          "distance_cm": null,
+          "description": "Move the container forward onto a stable supporting surface outside the overhead shelf to provide access above the lid."
+        }
+      ],
+      "other_notes": "Visible Tide PODS branding identifies the container; contents and weight are unknown. Do not assume the container is full."
+    },
+    {
+      "target_id": "T007",
+      "name": "upper Barebells carton",
+      "description": "Upper of two black Barebells Cookies and Cream cartons stacked on the right of the upper occupied shelf; it sits at an angle across the lower carton.",
+      "approximate_dimensions_m": {
+        "width": 0.21,
+        "depth": 0.15,
+        "height": 0.06,
+        "measurement_type": "measured"
+      },
+      "orientation": "resting on another carton, rotated relative to it",
+      "nearby_obstacles": [
+        "Lower Barebells carton supporting it",
+        "Shelf back panel behind the stack"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Front, top, and much of the sides are exposed. No object rests on the upper carton. The lower carton is its support. ",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Target is the upper carton as a whole. Its contents and whether it is open are not established; no obvious environmental change is required for access to the exposed carton."
+    },
+    {
+      "target_id": "T008",
+      "name": "lower Barebells carton",
+      "description": "Lower black Barebells Cookies and Cream carton on the right of the upper occupied shelf, directly beneath the rotated upper carton and left of the blue zippered case.",
+      "approximate_dimensions_m": {
+        "width": 0.15,
+        "depth": 0.21,
+        "height": 0.06,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying on shelf beneath another carton",
+      "nearby_obstacles": [
+        "Upper Barebells carton resting on it",
+        "Blue zippered case to the right"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "Front face is exposed, but the upper carton covers and loads much of the top.",
+      "manipulation_factors": [
+        "under_another_object",
+        "partially_obstructed"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "off_lower_carton",
+          "distance_cm": null,
+          "description": "Remove the upper Barebells carton to a clear surface before manipulating the lower carton."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T009",
+      "name": "blue zippered case",
+      "description": "Small elongated blue zippered hard case lying at the far right of the upper occupied shelf, between the Barebells carton stack and the right wooden side panel.",
+      "approximate_dimensions_m": {
+        "width": 0.07,
+        "depth": 0.17,
+        "height": 0.05,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat, long axis extending toward the back panel",
+      "nearby_obstacles": [
+        "Barebells cartons immediately to the left",
+        "Right shelf side panel"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Rounded front end and zipper pull are visible; the narrow space between the cartons and side panel restricts access to the long sides.",
+      "manipulation_factors": [
+        "low_side_clearance",
+        "limited_approach_space"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "away_from_blue_case",
+          "distance_cm": null,
+          "description": "Relocate the adjacent Barebells cartons, upper carton first, to expose the left side of the blue case."
+        },
+        {
+          "action": "translate_target",
+          "direction": "forward_out_of_narrow_gap",
+          "distance_cm": null,
+          "description": "Draw the blue case forward along its long axis onto a stable clear supporting surface, so its long sides are no longer confined between the cartons and side panel."
+        }
+      ],
+      "other_notes": "Contents are unknown; no specific use for the case is assumed."
+    },
+    {
+      "target_id": "T010",
+      "name": "blue blister package",
+      "description": "Blue retail backing card holding two small white tubes, lying near the front-left of the bottom shelf, to the left of the upright gray container.",
+      "approximate_dimensions_m": {
+        "width": 0.07,
+        "depth": 0.14,
+        "height": 0.02,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat, packaged tubes facing upward",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Top, front, and side edges are exposed, with visible space around the package near the shelf front.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Target is the complete retail package, not an individual enclosed tube. No obvious environmental adjustment is needed."
+    },
+    {
+      "target_id": "T011",
+      "name": "small gray container",
+      "description": "Small upright gray cylindrical container with a rounded silver-gray cap on the bottom shelf, between the blue blister package and the small blue-lidded jar.",
+      "approximate_dimensions_m": {
+        "width": 0.035,
+        "depth": 0.035,
+        "height": 0.095,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Top and sides are exposed, with visible gaps from neighboring objects.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Exact product type and contents are not assumed. No obvious environmental adjustment is needed."
+    },
+    {
+      "target_id": "T012",
+      "name": "small blue-lidded jar",
+      "description": "Small pale translucent jar with a dark blue lid on the bottom shelf, right of the gray container and left of the clear zipper bag.",
+      "approximate_dimensions_m": {
+        "width": 0.06,
+        "depth": 0.03,
+        "height": 0.06,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Clear bag and its contents to the right"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Lid and front face are exposed, with space to the left. The nearby bag does not visibly cover or trap the jar.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Contents are unknown. No obvious environmental adjustment is needed."
+    },
+    {
+      "target_id": "T013",
+      "name": "clear zipper bag of packets",
+      "description": "Clear plastic zipper bag with a blue-purple closure containing several white printed packets, lying near the center of the bottom shelf, between the blue-lidded jar and the purple cup stack.",
+      "approximate_dimensions_m": {
+        "width": 0.19,
+        "depth": 0.16,
+        "height": 0.07,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat, closure along the right side",
+      "nearby_obstacles": [
+        "Purple cup stack immediately to the right",
+        "Small blue-lidded jar to the left"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Broad upper surface and front edge are exposed. The cup stack is close to the closure side, reducing room to grasp that edge.",
+      "manipulation_factors": [
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "away_from_bag",
+          "distance_cm": null,
+          "description": "Move the purple cup stack away from the zipper bag to expose the bag closure and right edge."
+        },
+        {
+          "action": "translate_target",
+          "direction": "away_from_cup_stack",
+          "distance_cm": null,
+          "description": "Move the filled zipper bag toward clear space at the front-center of the shelf, keeping it fully supported and avoiding the small jar, to expose its closure edge."
+        }
+      ],
+      "other_notes": "Target is the bag and its enclosed packets as a unit. Packet contents and count are not assumed."
+    },
+    {
+      "target_id": "T014",
+      "name": "purple cup stack",
+      "description": "Upright purple paper cup stack with several white rims or covers visible at the top, on the bottom shelf immediately right of the clear zipper bag and in front of the left portion of the brown zippered bag.",
+      "approximate_dimensions_m": {
+        "width": 0.08,
+        "depth": 0.08,
+        "height": 0.12,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Clear zipper bag to the left",
+        "Brown zippered bag immediately behind and to the right"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Front face and top are exposed, while adjacent bags reduce clearance at the left and rear sides.",
+      "manipulation_factors": [
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "away_from_adjacent_bags",
+          "distance_cm": null,
+          "description": "Place the cup stack in clear shelf space with gaps between it and both bags."
+        }
+      ],
+      "other_notes": "Target is the visible cup assembly as a whole. Exact cup count and whether the white top is a lid or protective wrapping are uncertain."
+    },
+    {
+      "target_id": "T015",
+      "name": "brown zippered bag",
+      "description": "Brown rectangular soft-sided bag with multiple zipper tracks on top, sitting at the rear-right of the bottom shelf behind and to the right of the purple cup stack.",
+      "approximate_dimensions_m": {
+        "width": 0.24,
+        "depth": 0.12,
+        "height": 0.14,
+        "measurement_type": "measured"
+      },
+      "orientation": "resting on its base, broad side facing shelf opening",
+      "nearby_obstacles": [
+        "Purple cup stack in front of its left portion",
+        "Right shelf side panel",
+        "Shelf back panel"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "Much of the broad front face is exposed. The cup stack blocks part of a front-left approach; the right and rear panels limit access from those directions.",
+      "manipulation_factors": [
+        "partially_obstructed",
+        "limited_approach_space"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "away_from_front_of_bag",
+          "distance_cm": null,
+          "description": "Move the purple cup stack away from the front-left of the brown bag to expose more of its front and side."
+        },
+        {
+          "action": "translate_target",
+          "direction": "forward_away_from_back_panel",
+          "distance_cm": null,
+          "description": "Move the brown bag forward into the clear space immediately in front of its broad face, keeping it fully supported and clear of the cups, to increase clearance behind it."
+        }
+      ],
+      "other_notes": "Physical blockage is partial and approach-dependent. Target is the entire brown bag; contents are unknown."
+    }
+  ],
+  "source": "User-provided photographs in S0008/images and object measurements supplied 2026-10-06, interpreted as centimeters. For this scene, width and depth are assigned to physical object edges oriented predominantly across the shelf and front-to-back respectively; height is vertical in the resting pose. These are pose-aware edge labels, not exact shelf-axis bounding-box extents or image-pixel dimensions. Oblique placement is not assigned an invented angle. Numeric lengths remain user-measured; mapping them to axes is a visual interpretation documented per target. Grouped measurements are applied to matching pairs."
+}

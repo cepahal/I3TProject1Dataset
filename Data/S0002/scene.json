@@ -1,0 +1,141 @@
+{
+  "scene_id": "S0002",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Beige dining table with a rectangular perforated metal basket containing brown paper napkins near the front edge. A pepper shaker and a salt shaker stand close together immediately behind the basket.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "metal basket",
+      "description": "Rectangular silver basket with circular perforations, holding brown paper napkins near the front edge of the beige table, directly in front of the two glass shakers.",
+      "approximate_dimensions_m": {
+        "width": 0.25,
+        "depth": 0.13,
+        "height": 0.06,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright, open top facing upward",
+      "nearby_obstacles": [
+        "Salt and pepper shakers immediately behind the rear basket wall"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Front and short side walls are exposed, with overhead space and access near the table edge. The shakers are close to the rear wall but do not trap the basket.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Target is the basket as a container; the napkins inside are annotated separately. No obvious environmental adjustment is needed to access its exposed sides. Width is the long basket side; depth is the shorter side."
+    },
+    {
+      "target_id": "T002",
+      "name": "brown napkin",
+      "description": "Topmost brown paper napkin lying flat on the stack inside the perforated metal basket, distinct from the separate napkin near the distant plate.",
+      "approximate_dimensions_m": {
+        "width": 0.17,
+        "depth": 0.125,
+        "height": null,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat",
+      "nearby_obstacles": [
+        "Raised basket walls surrounding the napkin stack",
+        "Other napkins directly beneath the target"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "Top face is exposed through the open basket. Raised walls restrict lateral access, and the napkin rests directly on other sheets with little separation for picking a single sheet.",
+      "manipulation_factors": [
+        "low_side_clearance",
+        "limited_approach_space"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "upward_and_out_of_basket",
+          "distance_cm": null,
+          "description": "Separate and lift an edge of the top napkin, then place that napkin on a clear part of the table for individual access."
+        }
+      ],
+      "other_notes": "Physical blockage is partial and refers to lateral access through the basket walls; overhead access remains open. Thin flexible sheets may be lifted together if not separated. Height remains unknown because the thickness of a single folded napkin cannot be reliably distinguished from the stack. Dimensions refer to the top napkin, not the whole stack or an unfolded sheet."
+    },
+    {
+      "target_id": "T003",
+      "name": "pepper shaker",
+      "description": "Clear glass shaker containing dark pepper with a perforated silver lid, standing immediately behind the basket beside the white-filled salt shaker; it is left of the salt shaker.",
+      "approximate_dimensions_m": {
+        "width": 0.04,
+        "depth": 0.04,
+        "height": 0.13,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Salt shaker immediately beside it",
+        "Rear wall of the metal basket in front of its lower body"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "Lid and upper body are exposed. Little space separates the two shakers, and the basket obstructs a low approach from the front.",
+      "manipulation_factors": [
+        "low_side_clearance",
+        "partially_obstructed"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "away_from_salt_shaker_and_basket",
+          "distance_cm": null,
+          "description": "Move the pepper shaker into open tabletop space, separating it from the salt shaker and the basket."
+        },
+        {
+          "action": "move_obstacle",
+          "direction": "away_from_front_of_shakers",
+          "distance_cm": null,
+          "description": "Move the napkin basket sideways into clear tabletop space to expose the lower front of the target shaker; this improves front access without moving the shaker."
+        }
+      ],
+      "other_notes": "Blockage is partial and approach-dependent; the shaker is not enclosed or covered from above."
+    },
+    {
+      "target_id": "T004",
+      "name": "salt shaker",
+      "description": "Clear glass shaker containing white salt with a perforated silver lid, standing immediately behind the basket beside the dark-filled pepper shaker; it is right of the pepper shaker.",
+      "approximate_dimensions_m": {
+        "width": 0.04,
+        "depth": 0.04,
+        "height": 0.13,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Pepper shaker immediately beside it",
+        "Rear wall of the metal basket in front of its lower body"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "Lid and upper body are exposed. The neighboring shaker limits side clearance, and the basket obstructs a low approach from the front.",
+      "manipulation_factors": [
+        "low_side_clearance",
+        "partially_obstructed"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "away_from_pepper_shaker_and_basket",
+          "distance_cm": null,
+          "description": "Move the salt shaker into open tabletop space, separating it from the pepper shaker and the basket."
+        },
+        {
+          "action": "move_obstacle",
+          "direction": "away_from_front_of_shakers",
+          "distance_cm": null,
+          "description": "Move the napkin basket sideways into clear tabletop space to expose the lower front of the target shaker; this improves front access without moving the shaker."
+        }
+      ],
+      "other_notes": "Blockage is partial and approach-dependent; overhead access remains available."
+    }
+  ],
+  "source": "User-provided photographs in the scene images folder."
+}

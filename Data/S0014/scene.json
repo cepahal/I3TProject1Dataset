@@ -1,0 +1,128 @@
+{
+  "scene_id": "S0014",
+  "images": [
+    "images/01.JPG",
+    "images/02.JPG",
+    "images/03.JPG"
+  ],
+  "scene_description": "Wooden desk holding a closed Plato Gorgias paperback with a yellow pencil lying across its cover, a white mug containing a spoon to the left, a small brown teddy bear in a blue shirt behind the book, and an orange on the clear surface to the right.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "yellow pencil",
+      "description": "Sharpened yellow wooden pencil with a silver ferrule and pale eraser, lying diagonally across the illustrated cover of the Plato Gorgias paperback; the tip points toward the orange title band and the teddy bear.",
+      "approximate_dimensions_m": {
+        "width": 0.19,
+        "depth": 0.005,
+        "height": 0.005,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat diagonally on the book cover",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "The shaft, tip, and eraser are exposed, with no object above or directly beside the pencil. The book supports its underside.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Target is the whole pencil. No obvious environmental change is needed to access its exposed upper surface and sides."
+    },
+    {
+      "target_id": "T002",
+      "name": "Plato Gorgias paperback",
+      "description": "Closed paperback titled Plato Gorgias, with an illustrated cover and an orange title band, lying near the front of the wooden desk beneath the yellow pencil, between the white mug and the foreground orange.",
+      "approximate_dimensions_m": {
+        "width": 0.215,
+        "depth": 0.14,
+        "height": 0.015,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat, front cover upward, long edge approximately across the desk in image 01",
+      "nearby_obstacles": [
+        "Yellow pencil resting diagonally across the cover"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "Most of the cover and outer edges are exposed, but the pencil rests on the book and could roll off if the book is lifted or tilted. The thin book lies flush against the desk with little access underneath.",
+      "manipulation_factors": [
+        "under_another_object",
+        "partially_obstructed"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "off_book",
+          "distance_cm": null,
+          "description": "Move the yellow pencil onto a clear part of the desk before manipulating the book."
+        },
+        {
+          "action": "translate_target",
+          "direction": "toward_front_edge_of_desk",
+          "distance_cm": null,
+          "description": "After removing the pencil, slide the book toward the front desk edge to expose a small portion of its underside while keeping most of the book supported."
+        }
+      ],
+      "other_notes": "Physical blockage refers to the pencil resting on part of the cover; the book is not trapped. The second candidate is a follow-up for underside access after the pencil is removed."
+    },
+    {
+      "target_id": "T003",
+      "name": "white ceramic mug",
+      "description": "Upright white ceramic mug with black printed names and 2021 near its base, standing to the left and slightly behind the book, with a metal spoon inside and its handle facing toward the open front area of the desk.",
+      "approximate_dimensions_m": {
+        "width": 0.08,
+        "depth": 0.08,
+        "height": 0.095,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright, opening upward and handle toward the front",
+      "nearby_obstacles": [
+        "Metal spoon inside the mug",
+        "Loose charging cables behind and to the left"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "The outer body and handle are exposed. Cables are nearby behind the mug but do not visibly wrap around the handle or trap the mug. The spoon occupies part of the interior without covering the external grip surfaces.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Target is the mug, not the spoon. Contents and temperature are unknown; the spoon could shift if the mug is tilted."
+    },
+    {
+      "target_id": "T004",
+      "name": "brown teddy bear",
+      "description": "Small brown plush teddy bear wearing a blue Duke Undergraduate Research Support Office shirt, sitting behind the book and to the right of the mug, with a blue clip and cord attached near its head and back.",
+      "approximate_dimensions_m": {
+        "width": 0.11,
+        "depth": 0.08,
+        "height": 0.11,
+        "measurement_type": "measured"
+      },
+      "orientation": "seated upright, face toward the front of the desk",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Head, torso, arms, and sides are exposed, with visible gaps from the mug, book, and nearby background items.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Target includes the bear and its attached clip and cord. Soft fabric can deform during grasping; no obvious environmental change is needed for access."
+    },
+    {
+      "target_id": "T005",
+      "name": "foreground orange",
+      "description": "Round yellow-orange citrus fruit on the clear desk surface to the right of the book and closer to the front desk edge, distinct from the second orange at the back beside the white rectangular electronic device.",
+      "approximate_dimensions_m": {
+        "width": 0.07,
+        "depth": 0.07,
+        "height": 0.07,
+        "measurement_type": "measured"
+      },
+      "orientation": "resting on the desk, stem indentation facing upward",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Top and sides are exposed, with a visible gap from the book and clear desk space around the fruit.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Only the foreground orange is this target. No obvious environmental change is needed for access."
+    }
+  ],
+  "source": "User-provided photographs and measured object dimensions, supplied in centimeters and converted to meters. Width and depth denote physical horizontal object axes in the resting pose, with height vertical; for the diagonal pencil, width denotes its long axis. These are edge lengths, not projected image dimensions."
+}
