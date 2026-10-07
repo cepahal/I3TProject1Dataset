@@ -1,0 +1,208 @@
+{
+  "scene_id": "S0005",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Granite kitchen countertop in the corner beside an electric stovetop. A blue-gray two-handled pot sits near the front of the counter, while an olive oil bottle, a salt shaker, a soy sauce bottle, and two small spice shakers stand in a tight row against the back wall. Glass baking dishes are visible at the right edge of the counter. Directional terms (front, back, left, right) refer to the view in 01.jpg, with the stovetop on the left and the wall at the back.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "Pot",
+      "description": "Blue-gray two-handled cooking pot with a gray interior, sitting open-side-up on the granite counter just to the right of the stovetop, in front of the row of bottles.",
+      "approximate_dimensions_m": {
+        "width": 0.26,
+        "depth": 0.26,
+        "height": 0.11,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Open counter surface to its front and right; there is a gap of roughly a hand's width between the pot and the bottles behind it.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Diameter and height as provided; the two side handles extend beyond the body."
+    },
+    {
+      "target_id": "T002",
+      "name": "Olive oil",
+      "description": "Tall green bottle of California extra virgin olive oil standing upright at the left end of the bottle row against the back wall, with the two small spice shakers on its left and the blue salt shaker on its right.",
+      "approximate_dimensions_m": {
+        "width": 0.06,
+        "depth": 0.06,
+        "height": 0.21,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Blue Celtic salt shaker immediately to its right",
+        "Small spice shakers immediately to its left",
+        "Back wall directly behind it"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Tightly packed with objects on both sides and the wall behind; only the front is open.",
+      "manipulation_factors": [
+        "against_wall",
+        "limited_approach_space"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_counter",
+          "distance_cm": 10,
+          "description": "Move the bottle approximately 10 cm toward the front of the counter, away from the wall and the neighboring shakers."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T003",
+      "name": "Soy sauce",
+      "description": "Bottle of Kikkoman soy sauce with a red cap standing upright at the right end of the bottle row against the back wall, immediately to the right of the blue salt shaker, with open counter to its right.",
+      "approximate_dimensions_m": {
+        "width": 0.05,
+        "depth": 0.05,
+        "height": 0.2,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Blue Celtic salt shaker immediately to its left",
+        "Back wall directly behind it"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Open counter surface on its right and front; the left side is close to the salt shaker.",
+      "manipulation_factors": [
+        "against_wall"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_counter",
+          "distance_cm": 10,
+          "description": "Move the bottle approximately 10 cm toward the front of the counter, away from the wall."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T004",
+      "name": "Celtic salt shaker",
+      "description": "Blue Celtic sea salt shaker standing upright in the middle of the bottle row against the back wall, between the green olive oil bottle on its left and the red-capped soy sauce bottle on its right.",
+      "approximate_dimensions_m": {
+        "width": 0.05,
+        "depth": 0.05,
+        "height": 0.15,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Olive oil bottle immediately to its left",
+        "Soy sauce bottle immediately to its right",
+        "Back wall directly behind it"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Wedged between two taller bottles with the wall behind; only the front is open.",
+      "manipulation_factors": [
+        "against_wall",
+        "limited_approach_space",
+        "surrounded_by_clutter"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_counter",
+          "distance_cm": 10,
+          "description": "Move the shaker approximately 10 cm toward the front of the counter, clear of the two neighboring bottles."
+        },
+        {
+          "action": "move_obstacle",
+          "direction": "left",
+          "distance_cm": 5,
+          "description": "Move the olive oil bottle approximately 5 cm to the left to open the left side of the shaker."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T005",
+      "name": "Oregano shaker",
+      "description": "Short spice shaker with a black cap and white label standing upright in front of the other small shaker, at the left of the row beside the olive oil bottle, near the corner where the counter meets the stovetop.",
+      "approximate_dimensions_m": {
+        "width": 0.035,
+        "depth": 0.035,
+        "height": 0.11,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Olive oil bottle immediately to its right",
+        "Cumin shaker directly behind it",
+        "Stovetop edge on its left"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Tight on the right (olive oil), rear (cumin shaker), and left (stovetop edge); open toward the front.",
+      "manipulation_factors": [
+        "limited_approach_space",
+        "surrounded_by_clutter"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_counter",
+          "distance_cm": 8,
+          "description": "Move the shaker approximately 8 cm toward the front of the counter, away from the neighboring objects."
+        }
+      ],
+      "other_notes": "Distinguished from the cumin shaker by its black cap, white label, and front position; the two small shakers are close together."
+    },
+    {
+      "target_id": "T006",
+      "name": "Cumin shaker",
+      "description": "Spice shaker holding tan-brown contents standing upright at the far left of the row, behind the black-capped oregano shaker, in the corner against the back wall and next to the olive oil bottle.",
+      "approximate_dimensions_m": {
+        "width": 0.04,
+        "depth": 0.04,
+        "height": 0.125,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Oregano shaker directly in front of it",
+        "Olive oil bottle to its right",
+        "Back wall directly behind it"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Boxed in by the wall behind, the oregano shaker in front, and the olive oil bottle on the right; the stovetop edge is on the left.",
+      "manipulation_factors": [
+        "against_wall",
+        "partially_obstructed",
+        "limited_approach_space"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "toward_front_of_counter",
+          "distance_cm": 10,
+          "description": "Move the oregano shaker approximately 10 cm toward the front so the cumin shaker is accessible from the front."
+        },
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_counter",
+          "distance_cm": 8,
+          "description": "Move the cumin shaker approximately 8 cm toward the front of the counter, away from the wall."
+        }
+      ],
+      "other_notes": "Distinguished from the oregano shaker by its tan-brown contents and rear position."
+    }
+  ],
+  "source": "locally collected scene"
+}

@@ -1,0 +1,102 @@
+{
+  "scene_id": "S0007",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Round dark-wood table in a common room holding a glass jar of orange artificial flowers, a large decorative metal jack, and a blue pool-ball triangle rack standing on edge. Directional terms (front, back, left, right) refer to the view in 01.jpg, with the jar on the left, the jack in the center, and the triangle on the right.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "Pool triangle",
+      "description": "Blue pool-ball rack (triangle with black stripe accents) standing upright on one edge at the right side of the table top, to the right of the metal jack, with open table surface to its right and front.",
+      "approximate_dimensions_m": {
+        "width": 0.29,
+        "depth": 0.045,
+        "height": null,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright on one edge, with the triangle plane vertical",
+      "nearby_obstacles": [
+        "Metal jack to its left, a short distance away"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Open table surface in front and to the right; the jack is on its left but not touching it.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Measured: 29 cm side length, 4.5 cm band height (shown as depth), 2 cm thickness. Its vertical extent while standing on an edge was not measured, so height is null."
+    },
+    {
+      "target_id": "T002",
+      "name": "Jack",
+      "description": "Large gold-colored metal jack resting on its ball-tipped arms in the center of the table, directly to the right of the flower jar with its arms nearly touching the base of the jar, and to the left of the blue triangle.",
+      "approximate_dimensions_m": {
+        "width": 0.16,
+        "depth": 0.16,
+        "height": 0.17,
+        "measurement_type": "measured"
+      },
+      "orientation": "resting on ball-tipped arms, arms splayed outward",
+      "nearby_obstacles": [
+        "Flower jar immediately to its left, nearly touching",
+        "Blue pool triangle to its right"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Open surface in front, but the jar is tight against its left side and the splayed arms offer irregular grasp surfaces.",
+      "manipulation_factors": [
+        "limited_approach_space",
+        "awkward_orientation"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_table",
+          "distance_cm": 10,
+          "description": "Move the jack approximately 10 cm toward the front of the table, away from the flower jar."
+        },
+        {
+          "action": "translate_target",
+          "direction": "right",
+          "distance_cm": 5,
+          "description": "Move the jack approximately 5 cm to the right to separate it from the jar base."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T003",
+      "name": "Flower pot",
+      "description": "Glass jar filled with orange artificial flowers and green foliage, standing upright at the left side of the table top, with the metal jack at its right and foliage spreading outward over the table surface on its left.",
+      "approximate_dimensions_m": {
+        "width": 0.12,
+        "depth": 0.12,
+        "height": 0.21,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Metal jack nearly touching its base on the right",
+        "Artificial foliage spreading out around and above the jar"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "The jar body is accessible, but the jack crowds one side and the foliage spreads well beyond the jar's footprint.",
+      "manipulation_factors": [
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "right",
+          "distance_cm": 10,
+          "description": "Move the jack approximately 10 cm to the right to clear the right side of the jar."
+        }
+      ],
+      "other_notes": "Dimensions as provided; the artificial flowers and foliage extend well beyond them."
+    }
+  ],
+  "source": "locally collected scene"
+}

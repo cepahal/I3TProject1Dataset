@@ -1,0 +1,200 @@
+{
+  "scene_id": "S0011",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Light wood credenza top against a wooden back panel, holding six small objects: a succulent, a clear tape roll, a lime-shaped squeeze toy, a black remote, a silver aluminum briefcase, and a blue painter's tape roll. Cabinet drawers with silver handles are below and a black bin is to the right. Directional terms (front, back, left, right) refer to the view in 01.jpg, with the wooden back panel at the back and the drawers at the front.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "Painter's tape",
+      "description": "Blue painter's tape roll lying flat on its side at the front-left of the credenza top, close to the front edge, with open surface on all sides.",
+      "approximate_dimensions_m": {
+        "width": 0.11,
+        "depth": 0.11,
+        "height": 0.03,
+        "measurement_type": "measured"
+      },
+      "orientation": "flat, lying on its side",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Large open area around the roll and close to the front edge; the central hole allows a pinch grasp through the ring.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Ring-shaped roll; dimensions are outer diameter and band width, with a ring thickness of about 1 cm."
+    },
+    {
+      "target_id": "T002",
+      "name": "Briefcase",
+      "description": "Silver aluminum briefcase with a textured lid and metal corner hardware lying flat on the right-center of the credenza top, to the right of the black remote and the clear tape roll.",
+      "approximate_dimensions_m": {
+        "width": 0.38,
+        "depth": 0.2,
+        "height": 0.06,
+        "measurement_type": "measured"
+      },
+      "orientation": "flat",
+      "nearby_obstacles": [
+        "Clear tape roll at its rear-left corner",
+        "Black remote a short distance to its left"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Open surface to its front and right sides; large flat footprint with a latch edge along its front.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Large and flat; contents are unknown."
+    },
+    {
+      "target_id": "T003",
+      "name": "Remote",
+      "description": "Black TV remote lying flat to the left of the clear tape roll and the briefcase, in the left-center of the credenza top, with the painter's tape roll in front of it to the left.",
+      "approximate_dimensions_m": {
+        "width": 0.06,
+        "depth": 0.22,
+        "height": 0.0254,
+        "measurement_type": "measured"
+      },
+      "orientation": "flat",
+      "nearby_obstacles": [
+        "Clear tape roll touching its upper end",
+        "Briefcase close to its right side"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Open surface on its left, but the clear tape roll and the briefcase crowd its right, and it is only about 2.5 cm thick.",
+      "manipulation_factors": [
+        "limited_approach_space",
+        "awkward_orientation"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "left",
+          "distance_cm": 8,
+          "description": "Move the remote approximately 8 cm to the left, away from the tape roll and briefcase."
+        },
+        {
+          "action": "translate_target",
+          "direction": "toward_front_edge",
+          "distance_cm": 10,
+          "description": "Slide the remote toward the front edge so part of it overhangs, exposing its sides for grasping."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T004",
+      "name": "Clear tape",
+      "description": "Translucent clear-tape roll lying flat at the back-center of the credenza top, just right of the black remote's upper end and just left of the briefcase's rear-left corner, with the green squeeze toy behind and to its right.",
+      "approximate_dimensions_m": {
+        "width": 0.09,
+        "depth": 0.09,
+        "height": 0.04,
+        "measurement_type": "measured"
+      },
+      "orientation": "flat, lying on its side",
+      "nearby_obstacles": [
+        "Black remote touching its left",
+        "Briefcase corner touching or nearly touching its right",
+        "Green squeeze toy close behind it"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Wedged between the remote and the briefcase with the back panel nearby; open mainly toward the front.",
+      "manipulation_factors": [
+        "limited_approach_space",
+        "surrounded_by_clutter"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "right",
+          "distance_cm": 10,
+          "description": "Move the briefcase approximately 10 cm to the right to open the right side of the tape roll."
+        },
+        {
+          "action": "move_obstacle",
+          "direction": "left",
+          "distance_cm": 5,
+          "description": "Move the remote approximately 5 cm to the left to open the left side of the tape roll."
+        }
+      ],
+      "other_notes": "Transparent with low contrast against the wood surface. Dimensions as provided: height 4 cm, outer diameter 9 cm, thickness 4 cm."
+    },
+    {
+      "target_id": "T005",
+      "name": "Succulent",
+      "description": "Small succulent in a yellow-and-blue patterned square pot at the left-rear of the credenza top, against the wooden back panel, behind and to the left of the black remote.",
+      "approximate_dimensions_m": {
+        "width": 0.05,
+        "depth": 0.05,
+        "height": 0.07,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Wooden back panel directly behind it"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Small and light with open surface to its front and sides, but it sits at the far back, against the panel.",
+      "manipulation_factors": [
+        "against_wall",
+        "far_from_accessible_edge"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "away_from_wall",
+          "distance_cm": 5,
+          "description": "Move the pot approximately 5 cm away from the back panel."
+        },
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_credenza",
+          "distance_cm": 10,
+          "description": "Move the pot approximately 10 cm toward the front of the credenza."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T006",
+      "name": "Squeeze toy",
+      "description": "Green lime-shaped squeeze toy resting at the rear center-right of the credenza top near the back panel, behind the left half of the briefcase and to the right of the clear tape roll.",
+      "approximate_dimensions_m": {
+        "width": 0.05,
+        "depth": 0.07,
+        "height": 0.05,
+        "measurement_type": "measured"
+      },
+      "orientation": "resting on its side (round shape)",
+      "nearby_obstacles": [
+        "Briefcase directly in front of it",
+        "Clear tape roll on its left",
+        "Wooden back panel close behind it"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "The briefcase screens its front, the tape roll is close on the left, and the wall is behind; open space remains to its right.",
+      "manipulation_factors": [
+        "partially_obstructed",
+        "limited_approach_space"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "right",
+          "distance_cm": 10,
+          "description": "Move the toy approximately 10 cm to the right along the back of the credenza, clear of the briefcase and tape roll."
+        }
+      ],
+      "other_notes": "Round shape that may roll when moved."
+    }
+  ],
+  "source": "locally collected scene"
+}

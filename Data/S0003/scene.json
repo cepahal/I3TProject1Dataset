@@ -1,0 +1,164 @@
+{
+  "scene_id": "S0003",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Low wooden coffee table with a dark reddish wood-grain top, surrounded by patterned upholstered cubes, holding six household objects spread across the surface: a green gum bottle, a white mug, a deck of playing cards, a TV remote, a yellow disinfecting wipes canister, and a navy water bottle. A small black strap or cord is also visible at the far right edge. Directional terms (front, back, left, right) refer to the view in 01.jpg, where the playing cards are nearest the viewer.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "Trident gum bottle",
+      "description": "Small green plastic gum bottle standing upright near the left-rear of the table top, behind and slightly to the right of the white mug, with open table surface on all sides.",
+      "approximate_dimensions_m": {
+        "width": 0.05,
+        "depth": 0.05,
+        "height": 0.09,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Open table surface on all sides; the nearest object is the white mug a short distance in front of it.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Small, light-looking object."
+    },
+    {
+      "target_id": "T002",
+      "name": "Water bottle",
+      "description": "Dark navy insulated water bottle with a clear lid standing upright at the right-center of the table top, immediately in front of the yellow wipes canister on the side facing the playing cards.",
+      "approximate_dimensions_m": {
+        "width": 0.06,
+        "depth": 0.06,
+        "height": 0.19,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Yellow wipes canister just behind it"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Open surface on the front, left, and right sides; the wipes canister is close behind it but does not restrict a side or front approach.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T003",
+      "name": "Disinfectant wipes bottle",
+      "description": "Yellow-and-white disinfecting wipes canister (lemon label) standing upright at the right-rear of the table top, close to the right edge, directly behind the navy water bottle.",
+      "approximate_dimensions_m": {
+        "width": 0.08,
+        "depth": 0.08,
+        "height": 0.21,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Navy water bottle directly in front of it, between the canister and the playing cards"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "The water bottle partially screens the canister from the front-left; the right side and rear are open toward the table edge.",
+      "manipulation_factors": [
+        "partially_obstructed"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": "left",
+          "distance_cm": 10,
+          "description": "Move the navy water bottle approximately 10 cm to the left so the front of the canister is unobstructed."
+        },
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_table",
+          "distance_cm": 10,
+          "description": "Move the canister approximately 10 cm toward the front of the table, clear of the water bottle."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T004",
+      "name": "Mug",
+      "description": "White ceramic mug standing upright at the left edge of the table, in front of and slightly left of the green gum bottle.",
+      "approximate_dimensions_m": {
+        "width": 0.1,
+        "depth": 0.1,
+        "height": 0.11,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Open surface on all sides and close to the left table edge, so it can be approached from the side.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Dimensions are the body diameter and height as provided; the handle extends beyond the body diameter."
+    },
+    {
+      "target_id": "T005",
+      "name": "Playing cards",
+      "description": "Red-and-white 'Bee' playing card box lying flat, slightly rotated, near the front edge of the table to the left of center, nearest the viewer in 01.jpg.",
+      "approximate_dimensions_m": {
+        "width": 0.1,
+        "depth": 0.07,
+        "height": 0.02,
+        "measurement_type": "measured"
+      },
+      "orientation": "flat",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Plenty of open surface around it and it is close to the front edge, but it is only about 2 cm thick and lies flush on the table.",
+      "manipulation_factors": [
+        "awkward_orientation"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_edge",
+          "distance_cm": 5,
+          "description": "Slide the card box approximately 5 cm toward the front edge so one end overhangs slightly, exposing its sides and underside for grasping."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T006",
+      "name": "TV remote",
+      "description": "Black TV remote lying flat at the back-center of the table top, between the green gum bottle on the left and the yellow wipes canister on the right, farthest from the front edge.",
+      "approximate_dimensions_m": {
+        "width": 0.06,
+        "depth": 0.2,
+        "height": 0.03,
+        "measurement_type": "measured"
+      },
+      "orientation": "flat",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Open surface all around it, but it lies flat, is only about 3 cm thick, and is far from the nearest table edge.",
+      "manipulation_factors": [
+        "far_from_accessible_edge",
+        "awkward_orientation"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_edge",
+          "distance_cm": 25,
+          "description": "Move the remote approximately 25 cm toward the front edge of the table so that part of it overhangs, exposing its sides for grasping."
+        }
+      ],
+      "other_notes": ""
+    }
+  ],
+  "source": "locally collected scene"
+}
