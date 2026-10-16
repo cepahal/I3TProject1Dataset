@@ -1,0 +1,97 @@
+{
+  "scene_id": "S0016",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Narrow wooden shelf with a wooden back and left side panel. A blue patterned pouch stands on the left, a black round container sits near the front in the middle, and a white deodorant stands beside a silver-lidded jar on the right.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "blue pouch",
+      "description": "Blue patterned fabric pouch with a red zipper and white Kiehl's lettering, standing at the left end of the shelf beside the black round container.",
+      "approximate_dimensions_m": {
+        "width": 0.23,
+        "depth": 0.06,
+        "height": 0.16,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Wooden back panel behind the pouch",
+        "Wooden side panel to the left"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "The front, top, and right side are exposed. The nearby wooden panels limit rear and left approaches, but access from the front remains open.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "The fabric pouch can deform when handled."
+    },
+    {
+      "target_id": "T002",
+      "name": "black round container",
+      "description": "Low round container with a black lid labeled GATSBY, near the front edge of the shelf between the blue pouch and white deodorant.",
+      "approximate_dimensions_m": {
+        "width": 0.08,
+        "depth": 0.08,
+        "height": 0.03,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat with lid facing upward",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "The lid and front edge are exposed, with space around the container and no object resting on top.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T003",
+      "name": "white deodorant",
+      "description": "Tall white oval deodorant container with teal NATIVE lettering, standing to the right of the black round container and to the left of the silver-lidded jar.",
+      "approximate_dimensions_m": {
+        "width": 0.055,
+        "depth": 0.03,
+        "height": 0.12,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Silver-lidded jar close to the right",
+        "Wooden back panel behind"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "The top and front are exposed. The adjacent jar reduces clearance on the right, but the deodorant is not covered and a front approach remains open.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T004",
+      "name": "silver-lidded jar",
+      "description": "Short pale jar with a reflective silver lid and OLAY lettering, standing to the right of the white deodorant.",
+      "approximate_dimensions_m": {
+        "width": 0.07,
+        "depth": 0.07,
+        "height": 0.06,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "White deodorant close to the left",
+        "Wooden back panel behind"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "The lid, front, and right side are exposed. The deodorant limits clearance on the left, but does not block access from the front.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": ""
+    }
+  ],
+  "source": ""
+}

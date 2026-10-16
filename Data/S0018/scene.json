@@ -1,0 +1,81 @@
+{
+  "scene_id": "S0018",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Wooden table beside a window, with a tall sauce bottle on the left, a ketchup bottle on the right, and an upright menu in a black holder behind and between them. Open tabletop extends toward the front edge.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "sauce bottle",
+      "description": "Tall clear glass bottle containing orange-brown sauce, with a black pour spout, standing to the left of the menu holder.",
+      "approximate_dimensions_m": {
+        "width": 0.065,
+        "depth": 0.065,
+        "height": 0.33,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "The bottle is upright with its body and neck exposed, open space around it, and no overhead obstruction. No obvious environmental change is needed.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Height includes the pour spout."
+    },
+    {
+      "target_id": "T002",
+      "name": "ketchup bottle",
+      "description": "Clear Heinz ketchup bottle containing red sauce, with a white cap, standing to the right and in front of the menu holder.",
+      "approximate_dimensions_m": {
+        "width": 0.065,
+        "depth": 0.065,
+        "height": 0.205,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "The bottle is upright with its body and neck exposed, open space around it, and no overhead obstruction. No obvious environmental change is needed.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Height includes the cap."
+    },
+    {
+      "target_id": "T003",
+      "name": "menu holder",
+      "description": "Black tabletop holder containing an upright yellow menu and a smaller ordering card, positioned behind and between the two bottles.",
+      "approximate_dimensions_m": {
+        "width": 0.105,
+        "depth": 0.075,
+        "height": 0.28,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Sauce bottle in front and to the left",
+        "Ketchup bottle in front and to the right"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "The holder sits farther back toward the window, with an open gap between the bottles for a forward approach. Moving it toward the open front edge would reduce the approach distance across the tabletop.",
+      "manipulation_factors": [
+        "far_from_accessible_edge"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_table",
+          "distance_cm": 20,
+          "description": "Move the menu holder approximately 20 cm toward the open front edge of the table, keeping it fully supported."
+        }
+      ],
+      "other_notes": "Target is the holder with its inserted cards."
+    }
+  ],
+  "source": ""
+}
