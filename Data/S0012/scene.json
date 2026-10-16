@@ -5,7 +5,7 @@
     "images/02.jpg",
     "images/03.jpg"
   ],
-  "scene_description": "Brown countertop beside a stainless-steel sink and a chrome faucet with two lever handles. A clear tray holds a Joy dish soap bottle and a round soap-dispensing dish brush to the left of the faucet. A second clear bottle containing blue liquid stands behind the red-marked faucet lever near the backsplash. Three photographs show the arrangement from different viewpoints. Four targets are annotated; surrounding fixtures and dishes are background context.",
+  "scene_description": "Brown countertop beside a stainless-steel sink and a chrome faucet with two lever handles. A clear tray holds a Joy dish soap bottle and a round soap-dispensing dish brush to the left of the faucet. A second clear bottle containing blue liquid stands behind the red-marked faucet lever near the backsplash. Four targets are annotated; surrounding fixtures and dishes are background context.",
   "targets": [
     {
       "target_id": "T001",
