@@ -32,14 +32,14 @@
         {
           "action": "translate_target",
           "direction": "out_of_tray_to_clear_counter",
-          "distance_cm": null,
-          "description": "Place the Joy bottle upright on clear countertop to the left of the tray, leaving space around its base and sides."
+          "distance_cm": 20,
+          "description": "Lift the Joy bottle from the tray and place it upright approximately 20 cm to the left on clear countertop, leaving space around its base and sides."
         },
         {
           "action": "move_obstacle",
           "direction": "away_from_joy_bottle",
-          "distance_cm": null,
-          "description": "Move the dish brush out of the tray to expose the left side of the Joy bottle while leaving the bottle upright in place."
+          "distance_cm": 15,
+          "description": "Lift the dish brush out of the tray and place it approximately 15 cm to the left on clear countertop to expose the left side of the Joy bottle."
         }
       ],
       "other_notes": "Flip cap is open and liquid is visible inside; keep the bottle upright when repositioning it."
@@ -71,8 +71,8 @@
         {
           "action": "translate_target",
           "direction": "left_away_from_faucet_and_backsplash",
-          "distance_cm": null,
-          "description": "Lift the bottle clear of the faucet lever and place it upright on open counter space to the left of the tray, with room around its sides and behind it."
+          "distance_cm": 30,
+          "description": "Lift the blue-liquid bottle clear of the faucet lever and place it upright approximately 30 cm to the left on open countertop, with room around its sides and behind it."
         }
       ],
       "other_notes": "Blockage is partial and approach-dependent. Product identity is not confirmed from the visible back label. The open cap and visible liquid favor keeping it upright."

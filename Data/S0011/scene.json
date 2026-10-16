@@ -112,12 +112,6 @@
       "candidate_improvements": [
         {
           "action": "move_obstacle",
-          "direction": "right",
-          "distance_cm": 10,
-          "description": "Move the briefcase approximately 10 cm to the right to open the right side of the tape roll."
-        },
-        {
-          "action": "move_obstacle",
           "direction": "left",
           "distance_cm": 5,
           "description": "Move the remote approximately 5 cm to the left to open the left side of the tape roll."

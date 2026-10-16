@@ -32,8 +32,8 @@
         {
           "action": "translate_target",
           "direction": "toward_front_of_surface",
-          "distance_cm": null,
-          "description": "Slide the book toward the front edge so that a strip along one side is exposed for grasping."
+          "distance_cm": 3,
+          "description": "Slide the book approximately 3 cm toward the front edge so that a narrow strip along one side is exposed for grasping, keeping most of the book supported."
         }
       ],
       "other_notes": "Cover is glossy paperback; thin flat object."

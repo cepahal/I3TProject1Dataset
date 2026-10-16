@@ -32,8 +32,8 @@
         {
           "action": "translate_target",
           "direction": "toward_center_of_surface",
-          "distance_cm": null,
-          "description": "Move the pencil away from the raised left panel into the clear central area to expose both sides."
+          "distance_cm": 10,
+          "description": "Move the pencil approximately 10 cm away from the raised left panel toward the clear central area to expose both sides."
         }
       ],
       "other_notes": ""
@@ -86,14 +86,14 @@
         {
           "action": "translate_target",
           "direction": "toward_center_of_surface",
-          "distance_cm": null,
-          "description": "Move the bottle into the open central area, leaving space between it, the paper towel roll, and the eraser."
+          "distance_cm": 15,
+          "description": "Move the spray bottle approximately 15 cm left into the open central area, separating it from the paper towel roll and eraser."
         },
         {
           "action": "move_obstacle",
           "direction": "away_from_spray_bottle",
-          "distance_cm": null,
-          "description": "Move the paper towel roll farther left into the open central area to increase space behind and beside the spray bottle while leaving the bottle upright in place."
+          "distance_cm": 15,
+          "description": "Move the paper towel roll approximately 15 cm left into the open central area to increase clearance around the spray bottle while leaving the bottle upright in place."
         }
       ],
       "other_notes": "contents and fill level are unknown."
@@ -145,8 +145,8 @@
         {
           "action": "move_obstacle",
           "direction": "off_manual",
-          "distance_cm": null,
-          "description": "Move the remote onto a clear part of the cabinet top before picking up the instruction manual."
+          "distance_cm": 15,
+          "description": "Lift the remote off the manual and place it approximately 15 cm to the right on clear cabinet top before picking up the manual."
         }
       ],
       "other_notes": "Height of null reflects the thinness of the booklet; it does not mean physically zero thickness."
@@ -176,8 +176,8 @@
         {
           "action": "translate_target",
           "direction": "away_from_pencil_toward_center",
-          "distance_cm": null,
-          "description": "Separate the paper clip from the pencil by moving it into the open central area."
+          "distance_cm": 10,
+          "description": "Move the paper clip approximately 10 cm away from the pencil toward the open central area."
         }
       ],
       "other_notes": "Width is the short axis and depth the long axis. Height of 0 is retained as a rounded thin-object approximation, not literal zero thickness. The separate small metal item by the manual is not this target."
@@ -208,14 +208,14 @@
         {
           "action": "move_obstacle",
           "direction": "away_from_front_of_roll",
-          "distance_cm": null,
-          "description": "Move the spray bottle into the clear central area to expose the front of the paper towel roll."
+          "distance_cm": 15,
+          "description": "Move the spray bottle approximately 15 cm left into the clear central area to expose the front of the paper towel roll."
         },
         {
           "action": "translate_target",
           "direction": "left_toward_open_center",
-          "distance_cm": null,
-          "description": "Move the upright paper towel roll left into the clear central area, separating it from the spray bottle and right side panel."
+          "distance_cm": 15,
+          "description": "Move the upright paper towel roll approximately 15 cm left into the clear central area, separating it from the spray bottle and right side panel."
         }
       ],
       "other_notes": "Width and depth represent outer diameter. Physical blockage is partial and approach-dependent; the roll is accessible from above."

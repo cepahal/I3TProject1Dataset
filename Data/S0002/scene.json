@@ -53,9 +53,9 @@
       "candidate_improvements": [
         {
           "action": "translate_target",
-          "direction": "upward_and_out_of_basket",
-          "distance_cm": null,
-          "description": "Separate and lift an edge of the top napkin, then place that napkin on a clear part of the table for individual access."
+          "direction": "out_of_basket_to_left",
+          "distance_cm": 25,
+          "description": "Lift the top napkin out of the basket and place it approximately 25 cm to the left of its original position on clear tabletop, separated from the other napkins."
         }
       ],
       "other_notes": "Physical blockage is partial and refers to lateral access through the basket walls; overhead access remains open. Thin flexible sheets may be lifted together if not separated. Height remains unknown because the thickness of a single folded napkin cannot be reliably distinguished from the stack. Dimensions refer to the top napkin, not the whole stack or an unfolded sheet."
@@ -86,14 +86,14 @@
         {
           "action": "translate_target",
           "direction": "away_from_salt_shaker_and_basket",
-          "distance_cm": null,
-          "description": "Move the pepper shaker into open tabletop space, separating it from the salt shaker and the basket."
+          "distance_cm": 10,
+          "description": "Move the pepper shaker approximately 10 cm left into open tabletop space, separating it from the salt shaker and basket."
         },
         {
           "action": "move_obstacle",
           "direction": "away_from_front_of_shakers",
-          "distance_cm": null,
-          "description": "Move the napkin basket sideways into clear tabletop space to expose the lower front of the target shaker; this improves front access without moving the shaker."
+          "distance_cm": 20,
+          "description": "Move the napkin basket approximately 20 cm sideways into clear tabletop space to expose the lower front of the target shaker."
         }
       ],
       "other_notes": "Blockage is partial and approach-dependent; the shaker is not enclosed or covered from above."
@@ -124,14 +124,14 @@
         {
           "action": "translate_target",
           "direction": "away_from_pepper_shaker_and_basket",
-          "distance_cm": null,
-          "description": "Move the salt shaker into open tabletop space, separating it from the pepper shaker and the basket."
+          "distance_cm": 10,
+          "description": "Move the salt shaker approximately 10 cm right into open tabletop space, separating it from the pepper shaker and basket."
         },
         {
           "action": "move_obstacle",
           "direction": "away_from_front_of_shakers",
-          "distance_cm": null,
-          "description": "Move the napkin basket sideways into clear tabletop space to expose the lower front of the target shaker; this improves front access without moving the shaker."
+          "distance_cm": 20,
+          "description": "Move the napkin basket approximately 20 cm sideways into clear tabletop space to expose the lower front of the target shaker."
         }
       ],
       "other_notes": "Blockage is partial and approach-dependent; overhead access remains available."

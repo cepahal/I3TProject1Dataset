@@ -51,14 +51,14 @@
         {
           "action": "move_obstacle",
           "direction": "off_book",
-          "distance_cm": null,
-          "description": "Move the yellow pencil onto a clear part of the desk before manipulating the book."
+          "distance_cm": 20,
+          "description": "Lift the yellow pencil off the book and place it approximately 20 cm to the left on clear desk space, avoiding the mug."
         },
         {
           "action": "translate_target",
           "direction": "toward_front_edge_of_desk",
-          "distance_cm": null,
-          "description": "After removing the pencil, slide the book toward the front desk edge to expose a small portion of its underside while keeping most of the book supported."
+          "distance_cm": 8,
+          "description": "After removing the pencil, slide the book approximately 8 cm toward the front desk edge to expose a small portion of its underside while keeping most of the book supported."
         }
       ],
       "other_notes": "Physical blockage refers to the pencil resting on part of the cover; the book is not trapped. The second candidate is a follow-up for underside access after the pencil is removed."

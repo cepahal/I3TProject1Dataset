@@ -397,8 +397,8 @@
         {
           "action": "translate_target",
           "direction": "away_from_cup_stack",
-          "distance_cm": null,
-          "description": "Move the filled zipper bag toward clear space at the front-center of the shelf, keeping it fully supported and avoiding the small jar, to expose its closure edge."
+          "distance_cm": 3,
+          "description": "Move the filled zipper bag approximately 3 cm toward the front-center of the shelf, keeping it fully supported and clear of the small jar, to expose its closure edge."
         }
       ],
       "other_notes": "Target is the bag and its enclosed packets as a unit. Packet contents and count are not assumed."
@@ -467,8 +467,8 @@
         {
           "action": "translate_target",
           "direction": "forward_away_from_back_panel",
-          "distance_cm": null,
-          "description": "Move the brown bag forward into the clear space immediately in front of its broad face, keeping it fully supported and clear of the cups, to increase clearance behind it."
+          "distance_cm": 3,
+          "description": "Move the brown bag approximately 3 cm forward into the space in front of its broad face, keeping it fully supported and clear of the cups, to increase clearance behind it."
         }
       ],
       "other_notes": "Physical blockage is partial and approach-dependent. Target is the entire brown bag; contents are unknown."

@@ -34,9 +34,9 @@
       "candidate_improvements": [
         {
           "action": "move_obstacle",
-          "direction": "onto_clear_counter_in_front_of_ipad",
+          "direction": "diagonally_forward_right_onto_clear_counter",
           "distance_cm": 20,
-          "description": "Lift the white charger from the iPad and place it on clear counter space approximately 20 cm toward the front. Keep it fully supported on the counter."
+          "description": "Lift the white charger off the iPad and place it approximately 20 cm diagonally forward-right on clear countertop, outside the area where the iPad will be placed. Keep the charger fully supported."
         },
         {
           "action": "translate_target",
@@ -69,8 +69,8 @@
         {
           "action": "translate_target",
           "direction": "toward_front_of_counter",
-          "distance_cm": 20,
-          "description": "Lift the charger from the iPad and move the white charger approximately 20 cm toward the front edge of the counter, into a clear position while keeping the entire object supported."
+          "distance_cm": 25,
+          "description": "Lift the charger from the iPad and move the white charger approximately 25 cm toward the front edge of the counter, into a clear position while keeping the entire object supported."
         }
       ],
       "other_notes": "The charger is unobstructed but set back on the iPad; repositioning could improve access from the counter front. Front means the foreground edge in images/01.jpg."

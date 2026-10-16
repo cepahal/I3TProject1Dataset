@@ -32,9 +32,9 @@
       "candidate_improvements": [
         {
           "action": "move_obstacle",
-          "direction": "off_laptop",
-          "distance_cm": null,
-          "description": "Move the yellow fruit from the laptop onto a clear part of the table before moving the laptop."
+          "direction": "off_laptop_toward_clear_rear_tabletop",
+          "distance_cm": 20,
+          "description": "Lift the fruit off the laptop and place it approximately 20 cm onto the clear tabletop behind the laptop, leaving the lid unobstructed."
         }
       ],
       "other_notes": "Blockage refers to the fruit resting on part of the lid; the laptop is not trapped."
@@ -103,9 +103,9 @@
       "candidate_improvements": [
         {
           "action": "move_obstacle",
-          "direction": "off_napkins",
-          "distance_cm": null,
-          "description": "Lift the cup onto a clear, stable part of the tabletop before removing the napkins."
+          "direction": "off_napkins_toward_front_of_table",
+          "distance_cm": 15,
+          "description": "Lift the cup off the napkins and place it approximately 15 cm toward the front on clear tabletop, keeping its base fully supported and clear of the laptop."
         }
       ],
       "other_notes": "Target is the stack rather than an individual hidden sheet. Number of napkins is unknown."

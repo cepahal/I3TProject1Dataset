@@ -37,9 +37,9 @@
         },
         {
           "action": "translate_target",
-          "direction": "toward_clear_tabletop_away_from_paper_and_case",
-          "distance_cm": null,
-          "description": "Move the umbrella as a whole into the broad clear tabletop area beyond the objects, separating the loose canopy from the paper stack and gray case while keeping the handle exposed."
+          "direction": "toward_rear_clear_tabletop",
+          "distance_cm": 30,
+          "description": "Lift the entire umbrella approximately 30 cm toward the clear rear area of the table, away from the paper stack and padded case. Keep its handle exposed and the whole umbrella supported."
         }
       ],
       "other_notes": "User-measured dimensions are 46 x 49 x 12.5 cm, converted to meters. Width and depth refer to the user-defined front-facing measurement reference, not the horizontal and vertical directions in the photographs or an axis-aligned footprint on the table. The umbrella is rotated in the scene; retain the supplied dimension labels rather than swapping them with the camera viewpoint. No numerical rotation angle was supplied. Target includes canopy, shaft, handle, and attached straps; whether the measured envelope includes the full extended shaft and wrist loop remains unspecified."
@@ -74,9 +74,9 @@
         },
         {
           "action": "translate_target",
-          "direction": "away_from_umbrella_and_can",
-          "distance_cm": null,
-          "description": "Slide the paper stack as a unit toward clear tabletop space, away from the umbrella corner and can, until the perimeter is exposed; stop short of overhanging the table edge."
+          "direction": "toward_front_edge_of_table",
+          "distance_cm": 3,
+          "description": "Slide the paper stack approximately 3 cm toward the front edge to separate its rear corner from the umbrella canopy, keeping all sheets together and fully supported."
         }
       ],
       "other_notes": "User measured the whole stack as 20 x 27 x 1 cm, converted to meters. Width is the shorter sheet edge, depth the longer edge, and height the full stack thickness. Target is the entire stack, not an individual sheet. Physical blockage refers only to the apparent small canopy overlap; the stack is not covered as a whole."
@@ -97,11 +97,20 @@
         "Small dark gray hard case nearby"
       ],
       "physically_blocked": false,
-      "clearance_notes": "Top and most of the cylindrical body are exposed. Nearby objects do not trap or cover the can, and an approach from the open tabletop side is available.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": "User supplied the ambiguous four-value measurement 5.5 x 5 x 5 x 16. Provisionally interpreted as 5.5 x 5.5 x 16 cm for a round can, pending clarification. Height of 16 cm comes directly from the supplied last value; both horizontal extents use an assumed 5.5 cm diameter. The complete dimension set is marked estimated because the transcription is unresolved, not because it was physically measured by the annotator. Opening is visible; remaining liquid and fill level are unknown. No obvious environmental change is required for access."
+      "clearance_notes": "Top and most of the cylindrical body are exposed. The paper stack is close to the base on one side; moving the can slightly away would increase side clearance while keeping access from the open tabletop side.",
+      "manipulation_factors": [
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "away_from_paper_stack",
+          "distance_cm": 5,
+          "description": "Move the Celsius can approximately 5 cm away from the paper stack into clear tabletop space, keeping it upright and clear of the small dark gray case."
+        }
+      ],
+      "other_notes": "User supplied the ambiguous four-value measurement 5.5 x 5 x 5 x 16. Provisionally interpreted as 5.5 x 5.5 x 16 cm for a round can, pending clarification. Height of 16 cm comes directly from the supplied last value; both horizontal extents use an assumed 5.5 cm diameter. The complete dimension set is marked estimated because the transcription is unresolved, not because it was physically measured by the annotator. Opening is visible; remaining liquid and fill level are unknown."
     },
     {
       "target_id": "T004",
@@ -153,9 +162,9 @@
         },
         {
           "action": "translate_target",
-          "direction": "away_from_umbrella_canopy",
-          "distance_cm": null,
-          "description": "Move the gray padded case into the clear tabletop area beyond its exposed side to create a gap from the umbrella canopy, leaving its oval opening facing upward."
+          "direction": "diagonally_right_and_back_away_from_umbrella",
+          "distance_cm": 15,
+          "description": "Lift the gray padded case and place it approximately 15 cm diagonally right and back into clear tabletop, away from the umbrella and behind the small dark gray case. Keep its oval opening upward."
         }
       ],
       "other_notes": "Exact product identity and contents are unverified. Dimensions estimated relative to the measured paper stack across the three views: width is across the shorter broad face, depth the longer face dimension, and height the maximum thickness above the table. The estimate describes the exterior envelope including the padded rim, not the opening. Height is low confidence; no online model dimensions were substituted."
