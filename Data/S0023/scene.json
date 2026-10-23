@@ -1,0 +1,162 @@
+{
+  "scene_id": "S0023",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Black-topped table against a cream wall. A hole punch lies on the open front-left. Along the wall sit a sanitizer pump with a tape dispenser in front of it, a wire letter tray of paper, and a pencil sharpener in the back-right corner. Front is the edge away from the wall.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "hole punch",
+      "description": "Black and silver three-hole punch lying diagonally on the open front-left of the table.",
+      "approximate_dimensions_m": {
+        "width": 0.11,
+        "depth": 0.31,
+        "height": 0.08,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat on its base",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Open table on all sides, well away from the other objects.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T002",
+      "name": "tape dispenser",
+      "description": "Black tape dispenser standing directly in front of the hand sanitizer near the back wall.",
+      "approximate_dimensions_m": {
+        "width": 0.09,
+        "depth": 0.17,
+        "height": 0.09,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Hand sanitizer pump directly behind it"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Sides and front are open, but it sits far back from the front edge.",
+      "manipulation_factors": [
+        "far_from_accessible_edge"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_table",
+          "distance_cm": 20,
+          "description": "Slide the tape dispenser approximately 20 cm toward the front of the table."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T003",
+      "name": "hand sanitizer pump",
+      "description": "Purell hand sanitizer pump bottle standing against the wall, behind the tape dispenser and left of the letter tray.",
+      "approximate_dimensions_m": {
+        "width": 0.1,
+        "depth": 0.035,
+        "height": 0.13,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Wall directly behind it",
+        "Tape dispenser directly in front",
+        "Letter tray close on its right"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Boxed in by the wall, the tape dispenser and the tray; only the left side is open.",
+      "manipulation_factors": [
+        "against_wall",
+        "limited_approach_space",
+        "far_from_accessible_edge"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "left",
+          "distance_cm": 15,
+          "description": "Move the sanitizer approximately 15 cm left along the wall, clear of the tape dispenser."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T004",
+      "name": "letter tray of paper",
+      "description": "Black wire-mesh letter tray holding a stack of printed paper, against the wall between the sanitizer and the pencil sharpener.",
+      "approximate_dimensions_m": {
+        "width": 0.22,
+        "depth": 0.31,
+        "height": 0.07,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat",
+      "nearby_obstacles": [
+        "Wall directly behind it",
+        "Sanitizer close on its left",
+        "Pencil sharpener close on its right"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Front edge is open, but the back is at the wall and both sides have little room.",
+      "manipulation_factors": [
+        "against_wall",
+        "low_side_clearance",
+        "far_from_accessible_edge"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_table",
+          "distance_cm": 15,
+          "description": "Slide the tray approximately 15 cm toward the front, keeping it level."
+        }
+      ],
+      "other_notes": "Paper may fall out if the tray is tilted."
+    },
+    {
+      "target_id": "T005",
+      "name": "pencil sharpener",
+      "description": "Black electric pencil sharpener with a clear shavings bin, standing in the back-right corner of the table with its cord running off the right side.",
+      "approximate_dimensions_m": {
+        "width": 0.07,
+        "depth": 0.07,
+        "height": 0.18,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Wall directly behind it",
+        "Letter tray close on its left",
+        "Power cord"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Front is open, but it sits against the wall at the right end of the table.",
+      "manipulation_factors": [
+        "against_wall",
+        "far_from_accessible_edge"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_table",
+          "distance_cm": 15,
+          "description": "Unplug the sharpener, then move it approximately 15 cm toward the front."
+        }
+      ],
+      "other_notes": "Plugged in; must be unplugged before it is moved."
+    }
+  ],
+  "source": "Staged permutation of S0025 and S0027, using the same objects in a different arrangement."
+}

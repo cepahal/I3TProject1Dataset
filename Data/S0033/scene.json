@@ -1,0 +1,338 @@
+{
+  "scene_id": "S0033",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Library shelf of reference books ending at a metal bookend. The green A-F volume leans on the blue A-K volume. The blue L-Z and a black Bompiani volume lie flat, spines to the back. Two Bompiani volumes stand by the bookend. Book sizes are for books lying flat; front is the open face of the shelf.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "blue A-K dictionary",
+      "description": "Blue 'dictionnaire des Littératures' A-K volume standing at the far left end of the shelf, with the green A-F volume leaning on it.",
+      "approximate_dimensions_m": {
+        "width": 0.19,
+        "depth": 0.28,
+        "height": 0.06,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright, spine facing out",
+      "nearby_obstacles": [
+        "Left end of the shelf",
+        "Green A-F volume leaning on its right side",
+        "Shelf about 1-3 cm above its top"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Left side is against the shelf end and the leaning green book presses on its right.",
+      "manipulation_factors": [
+        "partially_obstructed",
+        "low_side_clearance",
+        "low_overhead_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": null,
+          "distance_cm": null,
+          "description": "Stand the leaning green A-F volume upright so it no longer rests on this book."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T002",
+      "name": "green A-F dictionary",
+      "description": "Green 'Dictionnaire universel des littératures' A-F volume leaning left against the blue A-K volume.",
+      "approximate_dimensions_m": {
+        "width": 0.18,
+        "depth": 0.25,
+        "height": 0.075,
+        "measurement_type": "measured"
+      },
+      "orientation": "leaning to the left",
+      "nearby_obstacles": [
+        "Blue A-K volume supporting it",
+        "Green G-O volume at its lower right"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Spine and top are exposed, but it is tilted and may fall when its neighbors move.",
+      "manipulation_factors": [
+        "awkward_orientation"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "rotate_target",
+          "direction": null,
+          "distance_cm": null,
+          "description": "Stand the volume upright with its spine facing out."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T003",
+      "name": "green G-O dictionary",
+      "description": "Green 'Dictionnaire universel des littératures' G-O volume standing to the right of the leaning A-F volume.",
+      "approximate_dimensions_m": {
+        "width": 0.18,
+        "depth": 0.25,
+        "height": 0.075,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright, spine facing out",
+      "nearby_obstacles": [
+        "Green P-Z volume touching its right side",
+        "Shelf about 1-3 cm above its top"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Right side is packed; the upper left side is open where the A-F volume leans away.",
+      "manipulation_factors": [
+        "low_side_clearance",
+        "low_overhead_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_shelf",
+          "distance_cm": 5,
+          "description": "Pull the book approximately 5 cm forward so its sides stick out past its neighbors."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T004",
+      "name": "green P-Z dictionary",
+      "description": "Green 'Dictionnaire universel des littératures' P-Z volume standing between the green G-O volume and the beige index.",
+      "approximate_dimensions_m": {
+        "width": 0.18,
+        "depth": 0.25,
+        "height": 0.075,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright, spine facing out",
+      "nearby_obstacles": [
+        "Green G-O volume touching its left side",
+        "Beige index touching its right side",
+        "Shelf about 1-3 cm above its top"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Packed between books on both sides, with almost no room above it.",
+      "manipulation_factors": [
+        "low_side_clearance",
+        "low_overhead_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_shelf",
+          "distance_cm": 5,
+          "description": "Pull the book approximately 5 cm forward so its sides stick out past its neighbors."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T005",
+      "name": "beige index",
+      "description": "Thin beige 'Index des oeuvres' volume standing between the green P-Z volume and an upright green Bompiani volume.",
+      "approximate_dimensions_m": {
+        "width": 0.22,
+        "depth": 0.27,
+        "height": 0.03,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright, spine facing out",
+      "nearby_obstacles": [
+        "Green P-Z volume touching its left side",
+        "Green Bompiani volume touching its right side",
+        "Shelf about 1-3 cm above its top"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Only 3 cm thick and packed between books, with almost no room above it.",
+      "manipulation_factors": [
+        "low_side_clearance",
+        "limited_approach_space",
+        "low_overhead_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_shelf",
+          "distance_cm": 5,
+          "description": "Pull the index approximately 5 cm forward so its sides stick out past its neighbors."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T006",
+      "name": "left green Bompiani volume",
+      "description": "Small green 'Dizionario Bompiani' volume standing upright between the beige index and the flat stack of books.",
+      "approximate_dimensions_m": {
+        "width": 0.15,
+        "depth": 0.22,
+        "height": 0.04,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright, spine facing out",
+      "nearby_obstacles": [
+        "Beige index touching its left side",
+        "Flat stack of books at its lower right"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Left side is packed, but its upper right side is open above the low flat stack.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T007",
+      "name": "blue L-Z dictionary",
+      "description": "Blue 'dictionnaire des Littératures' L-Z volume lying flat in the middle of the shelf under a black Bompiani volume, spine facing the back.",
+      "approximate_dimensions_m": {
+        "width": 0.19,
+        "depth": 0.28,
+        "height": 0.06,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat, spine facing the back",
+      "nearby_obstacles": [
+        "Black Bompiani volume lying on top of it"
+      ],
+      "physically_blocked": true,
+      "clearance_notes": "Front page edges are exposed; the top is covered and the spine is hidden.",
+      "manipulation_factors": [
+        "under_another_object",
+        "awkward_orientation"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "move_obstacle",
+          "direction": null,
+          "distance_cm": null,
+          "description": "Lift the black Bompiani volume off the blue book."
+        },
+        {
+          "action": "rotate_target",
+          "direction": null,
+          "distance_cm": null,
+          "description": "Stand the blue book upright with its spine facing out, next to the A-K volume."
+        }
+      ],
+      "other_notes": "Spine faces the back, so the title can't be read."
+    },
+    {
+      "target_id": "T008",
+      "name": "flat black Bompiani volume",
+      "description": "Small black 'Dizionario Bompiani' volume lying flat on top of the blue L-Z volume, spine facing the back.",
+      "approximate_dimensions_m": {
+        "width": 0.15,
+        "depth": 0.22,
+        "height": 0.04,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat, spine facing the back",
+      "nearby_obstacles": [
+        "Blue L-Z volume underneath it"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Top and front page edges are exposed; the spine is hidden.",
+      "manipulation_factors": [
+        "awkward_orientation"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "rotate_target",
+          "direction": null,
+          "distance_cm": null,
+          "description": "Stand the volume upright with its spine facing out, beside the other Bompiani volumes."
+        }
+      ],
+      "other_notes": "Spine faces the back, so the title can't be read."
+    },
+    {
+      "target_id": "T009",
+      "name": "right green Bompiani volume",
+      "description": "Small green 'Dizionario Bompiani' volume standing near the bookend, angled slightly, with the last black Bompiani volume on its right.",
+      "approximate_dimensions_m": {
+        "width": 0.15,
+        "depth": 0.22,
+        "height": 0.04,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright, angled slightly toward the front-left",
+      "nearby_obstacles": [
+        "Black Bompiani volume touching its right side"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Left side is open above the flat stack; spine and top are exposed.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T010",
+      "name": "right black Bompiani volume",
+      "description": "Small black 'Dizionario Bompiani' volume standing between the right green Bompiani volume and the bookend.",
+      "approximate_dimensions_m": {
+        "width": 0.15,
+        "depth": 0.22,
+        "height": 0.04,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright, spine facing out",
+      "nearby_obstacles": [
+        "Green Bompiani volume touching its left side",
+        "Bookend touching its right side"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Packed between the green volume and the bookend; top and spine are exposed.",
+      "manipulation_factors": [
+        "low_side_clearance"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_shelf",
+          "distance_cm": 5,
+          "description": "Pull the book approximately 5 cm forward so its sides stick out past its neighbors."
+        }
+      ],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T011",
+      "name": "bookend",
+      "description": "Black metal bookend at the right end of the shelf, holding up the two upright Bompiani volumes.",
+      "approximate_dimensions_m": {
+        "width": 0.14,
+        "depth": 0.05,
+        "height": 0.215,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright",
+      "nearby_obstacles": [
+        "Black Bompiani volume leaning on its left side"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Top edge and right side are open.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Books may fall over if it is removed."
+    }
+  ],
+  "source": "Staged permutation of S0029 and S0031, using the same objects in a different arrangement."
+}
