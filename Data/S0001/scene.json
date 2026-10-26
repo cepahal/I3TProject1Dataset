@@ -4,80 +4,124 @@
     "images/01.jpg",
     "images/02.jpg"
   ],
-  "scene_description": "Small black pedestal table in a corner next to a wall, holding a paperback book, a 1000-piece puzzle box, and an upright acrylic flyer stand.",
-  "targets": [
+  "scene_description": "A small black pedestal beside a wall holds a red Strange Tastes paperback, a closed Springbok puzzle box with blue tape on its lid, and an upright clear acrylic flyer stand behind them.",
+  "examples": [
     {
-      "target_id": "T001",
-      "name": "red paperback book",
-      "description": "Paperback book titled 'Strange Tastes' (red cover with flame imagery, yellow title text) lying flat and angled diagonally on the black pedestal surface, near the front-left edge, to the left of the blue Springbok puzzle box.",
-      "approximate_dimensions_m": {
-        "width": 0.15,
-        "depth": 0.23,
-        "height": 0.03,
-        "measurement_type": "measured"
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the red Strange Tastes paperback and carry it to a nearby book-return cart. The puzzle box and flyer stand will remain on the pedestal.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. For this pickup the jaws require purchase on an exposed underside edge of the paperback. The book is within reach and payload capacity.",
+        "status_context": null
       },
-      "orientation": "flat",
-      "nearby_obstacles": [
-        "Puzzle box to the right of the book",
-        "Upright acrylic flyer stand behind the book"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Open space on the front and left sides toward the pedestal edge; book is only about 3 cm thick and lies flush on the surface, leaving little to grip from above or the sides.",
-      "manipulation_factors": [
-        "awkward_orientation",
-        "low_side_clearance"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "toward_front_of_surface",
-          "distance_cm": 3,
-          "description": "Slide the book approximately 3 cm toward the front edge so that a narrow strip along one side is exposed for grasping, keeping most of the book supported."
-        }
-      ],
-      "other_notes": "Cover is glossy paperback; thin flat object."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "red Strange Tastes paperback lying flat at the front-left of the black pedestal",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.03,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep most of the book supported on the pedestal",
+              "Do not disturb the puzzle box or flyer stand"
+            ],
+            "context": "Expose a narrow underside pickup edge before the robot collects the paperback."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The paperback lies flush on the pedestal, leaving no exposed underside for the stated gripper.",
+        "rationale": "A small human slide provides the purchase the robot needs without changing unrelated objects.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. The collector confirmed on 2026-10-26 that the original candidate movement distances were measured or deliberately staged. The distance here is reused from that target annotation, not inferred from RGB. Legacy T001, 3 cm toward the accessible edge, encoded backward in image 01. Keep most of the book supported. No alternate pickup tool is assumed."
+      }
     },
     {
-      "target_id": "T002",
-      "name": "puzzle box",
-      "description": "Blue-and-red Springbok 1000-piece puzzle box (autumn red covered bridge on the lid, blue tape reading '2 missing pieces') lying flat and slightly skewed at the front-right of the black pedestal surface, close to the right edge, to the right of the red book.",
-      "approximate_dimensions_m": {
-        "width": 0.3,
-        "depth": 0.3,
-        "height": 0.06,
-        "measurement_type": "measured"
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will lift the closed Springbok puzzle box and carry it level to a nearby game table. It will leave the book and flyer stand in place.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. For this task its jaw opening accommodates the box thickness and the box is within payload capacity. The planned grasp places one jaw above the lid and the other beneath the base at the exposed overhanging edge, supporting both halves during a level transfer.",
+        "status_context": null
       },
-      "orientation": "flat",
-      "nearby_obstacles": [
-        "Book to the left of the box"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Open space around the front and right sides, and the box is close to the pedestal edge so its sides are easily approached.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": "Box is large but shallow; blue tape on the lid is a visible identifier. Contents may shift when lifted."
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change before this supported, level transfer.",
+        "rationale": "The box has exposed outer sides. The stated grasp supports both halves, so an additional securing or relocation step is unnecessary.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. Legacy T002. A single parallel-jaw grasp across the box thickness is assumed, not a grasp spanning its full width or two-handed support. Blue tape is an identifier, not evidence of a secured lid."
+      }
     },
     {
-      "target_id": "T003",
-      "name": "acrylic flyer stand",
-      "description": "Clear acrylic sign holder standing upright at the rear of the black pedestal surface, holding a gray 'LOVE PUZZLES? Join The Cozy Cornerpiece Club' flyer, behind and between the book and the puzzle box.",
-      "approximate_dimensions_m": {
-        "width": 0.21,
-        "depth": 0.06,
-        "height": 0.28,
-        "measurement_type": "measured"
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will read the club information on the upright acrylic flyer stand and relay it to a visitor. It will not touch the pedestal or its objects.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume the robot can view and read the front of the flyer from its planned observation position.",
+        "status_context": null
       },
-      "orientation": "upright",
-      "nearby_obstacles": [],
-      "physically_blocked": false,
-      "clearance_notes": "Open space on all sides; the book and box are in front of it but do not block access from the sides or rear.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": "Transparent, thin-walled acrylic with a small base footprint (about 6 cm deep), so it may be easy to tip."
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is required for the planned non-contact reading task.",
+        "rationale": "The displayed face is visible; the book and puzzle box do not cover the flyer text.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Legacy T003. Transparency and a narrow base do not by themselves justify moving the stand for a non-contact task."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will read the title on the red Strange Tastes paperback for an inventory entry. The book will stay on the pedestal and no object will be handled.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume the robot can read the upward-facing cover from its planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No environmental adjustment is needed to read the exposed cover.",
+        "rationale": "The grasping limitation relevant to collecting the book does not apply to visual inventory.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Same target and input image as E001; different task. Do not copy the legacy generic-improvement flag into this label."
+      }
     }
-  ],
-  "source": "locally staged scene"
+  ]
 }

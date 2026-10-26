@@ -5,111 +5,239 @@
     "images/02.jpg",
     "images/03.jpg"
   ],
-  "scene_description": "Gray booth table holding a closed silver laptop with a yellow speckled fruit on its lid. To the right, a brown takeaway cup with a bright green lid and cardboard sleeve stands on folded brown paper napkins.",
-  "targets": [
+  "scene_description": "A gray booth table holds a closed silver Apple laptop with a blue character sticker and a round yellow-green speckled fruit on its lid. A brown takeaway cup with a green lid and cardboard sleeve stands on folded brown napkins to the right. The cup lid has an open drinking aperture that cannot be closed.",
+  "examples": [
     {
-      "target_id": "T001",
-      "name": "silver laptop",
-      "description": "Closed silver Apple laptop with a blue character sticker on its lid, lying flat to the left of the cup; the yellow fruit rests on the lid near the sticker.",
-      "approximate_dimensions_m": {
-        "width": 0.34,
-        "depth": 0.24,
-        "height": 0.01,
-        "measurement_type": "measured"
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will lift the closed silver laptop and carry it to a nearby charging desk. The takeaway cup, napkins, and fruit are to remain on this table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It carries one object at a time. For this task a grasp across the laptop thickness at an exposed edge is within jaw opening and payload capacity; handling disturbances are possible. It does not independently rearrange other tabletop objects.",
+        "status_context": null
       },
-      "orientation": "closed and lying flat",
-      "nearby_obstacles": [
-        "Yellow fruit resting on the lid",
-        "Cup and napkins to the right, separated by a visible gap"
-      ],
-      "physically_blocked": true,
-      "clearance_notes": "Several outer edges are exposed, but the underside rests close to the table. The fruit occupies part of the top surface and would need attention before lifting or tilting the laptop.",
-      "manipulation_factors": [
-        "under_another_object",
-        "partially_obstructed"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "move_obstacle",
-          "direction": "off_laptop_toward_clear_rear_tabletop",
-          "distance_cm": 20,
-          "description": "Lift the fruit off the laptop and place it approximately 20 cm onto the clear tabletop behind the laptop, leaving the lid unobstructed."
-        }
-      ],
-      "other_notes": "Blockage refers to the fruit resting on part of the lid; the laptop is not trapped."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "brown takeaway cup with a green lid and cardboard sleeve standing on the brown napkin stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift the cup clear of the napkins before translating it",
+              "Keep the cup upright",
+              "Keep the base fully supported on clear tabletop, away from other objects and the table edge"
+            ],
+            "context": "Separate the open cup from the laptop, fruit, and napkins before this interaction."
+          },
+          {
+            "target_object": "round yellow-green speckled fruit resting on the silver laptop beside the blue character sticker",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "forward",
+                "distance": 0.2,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift the fruit clear of the laptop before translating it",
+              "Set the fruit on clear tabletop behind the laptop",
+              "Keep clear of the cup and napkins and away from the table edge"
+            ],
+            "context": "Remove the fruit from the laptop before the robot lifts and carries the laptop."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The open cup is close to the laptop and napkins, and the fruit rests on the laptop lid. The cup could spill nearby and the fruit could fall when the laptop is lifted.",
+        "rationale": "Move the open cup away first, then remove the fruit from the laptop before the claw lifts the laptop.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. The collector confirmed on 2026-10-26 that the original candidate movement distances were measured or deliberately staged. The distance here is reused from that target annotation, not inferred from RGB. The 15 cm cup relocation is reused from legacy T004 and encoded backward toward the camera in image 01. The collector requires cup separation for every scene-4 interaction, including cup pickup and visual inventory. The collector confirms the drinking aperture cannot be closed. Beverage quantity and temperature are not invented. The fruit is also moved 20 cm forward, using legacy T001, before lifting its supporting laptop."
+      }
     },
     {
-      "target_id": "T002",
-      "name": "yellow fruit",
-      "description": "Round yellow-green speckled fruit resting on the closed laptop near the blue sticker, to the left of the green-lidded cup.",
-      "approximate_dimensions_m": {
-        "width": 0.08,
-        "depth": 0.08,
-        "height": 0.08,
-        "measurement_type": "measured"
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the round yellow-green fruit from the laptop lid and place it in a nearby fruit tray. The laptop and cup will remain on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It uses an opposing-jaw grasp on the fruit and carries it as one object. It approaches above the laptop, and small grasping or arm-positioning disturbances are possible.",
+        "status_context": null
       },
-      "orientation": "resting upright with stem indentation facing upward",
-      "nearby_obstacles": [],
-      "physically_blocked": false,
-      "clearance_notes": "Upper surface and sides are exposed, with no surrounding object touching or covering the fruit. The laptop supports its underside.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": "Fruit variety is not assumed. No obvious environmental change is needed to access the fruit itself."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "brown takeaway cup with a green lid and cardboard sleeve standing on the brown napkin stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift the cup clear of the napkins before translating it",
+              "Keep the cup upright",
+              "Keep the base fully supported on clear tabletop, away from other objects and the table edge"
+            ],
+            "context": "Separate the open cup from the laptop, fruit, and napkins before this interaction."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The open, non-closable cup is near the fruit pickup and laptop, where a spill could affect the electronics and napkins.",
+        "rationale": "Separate the cup before the fruit pickup. The fruit itself remains available for the robot to collect without a second preparatory relocation.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. The collector confirmed on 2026-10-26 that the original candidate movement distances were measured or deliberately staged. The distance here is reused from that target annotation, not inferred from RGB. The 15 cm cup relocation is reused from legacy T004 and encoded backward toward the camera in image 01. The collector requires cup separation for every scene-4 interaction, including cup pickup and visual inventory. The collector confirms the drinking aperture cannot be closed. Beverage quantity and temperature are not invented. Only the cup requires human relocation for this task."
+      }
     },
     {
-      "target_id": "T003",
-      "name": "brown cup",
-      "description": "Tall brown takeaway cup with a bright green plastic lid and cardboard sleeve, standing on the brown napkins to the right of the laptop.",
-      "approximate_dimensions_m": {
-        "width": 0.09,
-        "depth": 0.09,
-        "height": 0.135,
-        "measurement_type": "measured"
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the brown takeaway cup with the green lid and deliver it upright to a seated person. The laptop, fruit, and napkins will remain on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the cup sleeve between the parallel jaws and transports the cup as one object. It cannot close the drinking aperture, and small handling disturbances are possible even with an upright transport plan.",
+        "status_context": null
       },
-      "orientation": "upright",
-      "nearby_obstacles": [
-        "Closed laptop to the left, separated by a visible gap"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Lid and cup sides are exposed, with clear overhead access and space separating the cup from the laptop. Napkins support the base.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": "Lid has a drinking opening. Contents and temperature are unknown; no obvious environmental adjustment is needed for access."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "brown takeaway cup with a green lid and cardboard sleeve standing on the brown napkin stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift the cup clear of the napkins before translating it",
+              "Keep the cup upright",
+              "Keep the base fully supported on clear tabletop, away from other objects and the table edge"
+            ],
+            "context": "Separate the open cup from the laptop, fruit, and napkins before this interaction."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The robot would initially pick up an open cup next to the laptop and above the napkins, placing nearby objects in the area of a possible spill.",
+        "rationale": "The human first places the cup on separate clear tabletop. The robot then grasps it at that prepared pickup location, reducing spill consequences for the laptop and napkins.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. The collector confirmed on 2026-10-26 that the original candidate movement distances were measured or deliberately staged. The distance here is reused from that target annotation, not inferred from RGB. The 15 cm cup relocation is reused from legacy T004 and encoded backward toward the camera in image 01. The collector requires cup separation for every scene-4 interaction, including cup pickup and visual inventory. The collector confirms the drinking aperture cannot be closed. Beverage quantity and temperature are not invented. Only the cup requires human relocation for this task."
+      }
     },
     {
-      "target_id": "T004",
-      "name": "brown napkins",
-      "description": "Folded brown paper napkins beneath the green-lidded cup, to the right of the laptop; this target is the visible napkin stack as a whole.",
-      "approximate_dimensions_m": {
-        "width": 0.125,
-        "depth": 0.17,
-        "height": null,
-        "measurement_type": "measured"
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the entire folded brown napkin stack and place it on a nearby serving tray. The cup, laptop, and fruit are to remain on this table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grasps the entire napkin stack with its parallel jaws and carries the stack as one object. It does not first pick up other tabletop objects.",
+        "status_context": null
       },
-      "orientation": "lying flat beneath the cup",
-      "nearby_obstacles": [
-        "Brown cup standing on the napkins"
-      ],
-      "physically_blocked": true,
-      "clearance_notes": "Outer edges are exposed, but the cup covers and loads the central portion of the stack. Removing the napkins without moving the cup could disturb it.",
-      "manipulation_factors": [
-        "under_another_object",
-        "partially_obstructed"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "move_obstacle",
-          "direction": "off_napkins_toward_front_of_table",
-          "distance_cm": 15,
-          "description": "Lift the cup off the napkins and place it approximately 15 cm toward the front on clear tabletop, keeping its base fully supported and clear of the laptop."
-        }
-      ],
-      "other_notes": "Target is the stack rather than an individual hidden sheet. Number of napkins is unknown."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "brown takeaway cup with a green lid and cardboard sleeve standing on the brown napkin stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift the cup clear of the napkins before translating it",
+              "Keep the cup upright",
+              "Keep the base fully supported on clear tabletop, away from other objects and the table edge"
+            ],
+            "context": "Separate the open cup from the laptop, fruit, and napkins before this interaction."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The open cup stands on the target stack, and moving the napkins beneath it could tip or drag the cup and spill near the laptop.",
+        "rationale": "Relocating the cup removes its weight from the napkins and separates the spill source before the stack is collected.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. The collector confirmed on 2026-10-26 that the original candidate movement distances were measured or deliberately staged. The distance here is reused from that target annotation, not inferred from RGB. The 15 cm cup relocation is reused from legacy T004 and encoded backward toward the camera in image 01. The collector requires cup separation for every scene-4 interaction, including cup pickup and visual inventory. The collector confirms the drinking aperture cannot be closed. Beverage quantity and temperature are not invented. Only the cup requires human relocation for this task."
+      }
+    },
+    {
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will visually inventory the closed silver laptop by reading the Apple logo and blue character sticker. The laptop and everything on the table will remain stationary.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. The inventory step uses its camera; assume the exposed logo and visible portion of the sticker identify the laptop. The claw is not used to grasp anything during this inventory step.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "brown takeaway cup with a green lid and cardboard sleeve standing on the brown napkin stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift the cup clear of the napkins before translating it",
+              "Keep the cup upright",
+              "Keep the base fully supported on clear tabletop, away from other objects and the table edge"
+            ],
+            "context": "Separate the open cup from the laptop, fruit, and napkins before this interaction."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The open, non-closable cup remains beside the laptop and napkins in this shared table workspace.",
+        "rationale": "Apply the collector-required cup separation before this interaction as well. This is workspace spill protection, not a claim that visual inventory requires grasp clearance.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. The collector confirmed on 2026-10-26 that the original candidate movement distances were measured or deliberately staged. The distance here is reused from that target annotation, not inferred from RGB. The 15 cm cup relocation is reused from legacy T004 and encoded backward toward the camera in image 01. The collector requires cup separation for every scene-4 interaction, including cup pickup and visual inventory. The collector confirms the drinking aperture cannot be closed. Beverage quantity and temperature are not invented. Only the cup requires human relocation for this task."
+      }
     }
-  ],
-  "source": "User-provided photographs in the scene images folder."
+  ]
 }

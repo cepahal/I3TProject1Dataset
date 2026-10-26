@@ -5,160 +5,225 @@
     "images/02.jpg",
     "images/03.jpg"
   ],
-  "scene_description": "Low wooden coffee table with a dark reddish wood-grain top, surrounded by patterned upholstered cubes, holding six household objects spread across the surface: a green gum bottle, a white mug, a deck of playing cards, a TV remote, a yellow disinfecting wipes canister, and a navy water bottle. A small black strap or cord is also visible at the far right edge. Directional terms (front, back, left, right) refer to the view in 01.jpg, where the playing cards are nearest the viewer.",
-  "targets": [
+  "scene_description": "A wooden coffee table holds a green Trident gum container and white mug on the left, a Bee playing-card box near the front, a black remote farther back, and a navy tumbler with an open drinking aperture in its clear slider lid in front of a yellow wipes canister on the right. A small coiled black tether lies at the far-right edge.",
+  "examples": [
     {
-      "target_id": "T001",
-      "name": "Trident gum bottle",
-      "description": "Small green plastic gum bottle standing upright near the left-rear of the table top, behind and slightly to the right of the white mug, with open table surface on all sides.",
-      "approximate_dimensions_m": {
-        "width": 0.05,
-        "depth": 0.05,
-        "height": 0.09,
-        "measurement_type": "measured"
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the green Trident gum container and deliver it upright to a seated person. The mug and other objects will stay on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume the robot can reach the container and grasp its exposed body from above without contacting the mug.",
+        "status_context": null
       },
-      "orientation": "upright",
-      "nearby_obstacles": [],
-      "physically_blocked": false,
-      "clearance_notes": "Open table surface on all sides; the nearest object is the white mug a short distance in front of it.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": "Small, light-looking object."
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent issue requires a human change.",
+        "rationale": "The closed container stands separately with its upper body exposed and space for the stated approach.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Legacy T001. Contents and cap fastening are not inferred beyond the stated ability to grasp the body."
+      }
     },
     {
-      "target_id": "T002",
-      "name": "Water bottle",
-      "description": "Dark navy insulated water bottle with a clear lid standing upright at the right-center of the table top, immediately in front of the yellow wipes canister on the side facing the playing cards.",
-      "approximate_dimensions_m": {
-        "width": 0.06,
-        "depth": 0.06,
-        "height": 0.19,
-        "measurement_type": "measured"
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the navy tumbler with the clear lid and carry it upright to a seated person. The yellow wipes canister will stay where it is.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grasps the tumbler body between the parallel jaws and carries one container at a time. Small handling disturbances are possible; it cannot manipulate the lid slider while holding the tumbler.",
+        "status_context": null
       },
-      "orientation": "upright",
-      "nearby_obstacles": [
-        "Yellow wipes canister just behind it"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Open surface on the front, left, and right sides; the wipes canister is close behind it but does not restrict a side or front approach.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "sliding drinking-opening cover on the clear lid of the navy tumbler",
+            "action": {
+              "type": "close",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Keep the tumbler upright",
+              "Cover the drinking aperture fully without removing the lid"
+            ],
+            "context": "Close the drinking opening before the tumbler is moved or handled near the robot pickup path."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The drinking opening is open, so handling disturbances during pickup and transport could spill any remaining liquid.",
+        "rationale": "Closing the available slider reduces spill risk before the robot carries the tumbler; an upright plan alone does not eliminate that risk.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. Legacy T002. The collector confirmed that the tumbler is open and can be closed. The close action targets the drinking-opening slider, not the whole clear lid. Liquid level and temperature remain unspecified; closure is not a claim of a leak-proof seal."
+      }
     },
     {
-      "target_id": "T003",
-      "name": "Disinfectant wipes bottle",
-      "description": "Yellow-and-white disinfecting wipes canister (lemon label) standing upright at the right-rear of the table top, close to the right edge, directly behind the navy water bottle.",
-      "approximate_dimensions_m": {
-        "width": 0.08,
-        "depth": 0.08,
-        "height": 0.21,
-        "measurement_type": "measured"
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the yellow disinfecting-wipes canister and carry it to a cleaning cart. It will approach from the table edge nearest the Bee card box. All other objects will remain here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Its parallel jaws approach the lower body of the wipes canister from the table edge nearest the Bee box. This pickup requires room for both jaws and a clear approach; it does not autonomously rearrange neighboring objects.",
+        "status_context": null
       },
-      "orientation": "upright",
-      "nearby_obstacles": [
-        "Navy water bottle directly in front of it, between the canister and the playing cards"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "The water bottle partially screens the canister from the front-left; the right side and rear are open toward the table edge.",
-      "manipulation_factors": [
-        "partially_obstructed"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "move_obstacle",
-          "direction": "left",
-          "distance_cm": 10,
-          "description": "Move the navy water bottle approximately 10 cm to the left so the front of the canister is unobstructed."
-        },
-        {
-          "action": "translate_target",
-          "direction": "toward_front_of_table",
-          "distance_cm": 10,
-          "description": "Move the canister approximately 10 cm toward the front of the table, clear of the water bottle."
-        }
-      ],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "sliding drinking-opening cover on the clear lid of the navy tumbler",
+            "action": {
+              "type": "close",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Keep the tumbler upright",
+              "Cover the drinking aperture fully without removing the lid"
+            ],
+            "context": "Close the drinking opening before the tumbler is moved or handled near the robot pickup path."
+          },
+          {
+            "target_object": "navy tumbler with a clear lid standing directly in front of the yellow wipes canister",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the tumbler upright",
+              "Keep its base fully supported on the tabletop",
+              "Leave the card box and other objects undisturbed"
+            ],
+            "context": "Clear the near-side approach to the wipes canister before the robot reaches for it."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The open tumbler occupies the canister approach. Moving or striking it could spill liquid while leaving it in place could interfere with the claw pickup.",
+        "rationale": "First close the tumbler opening to reduce spill risk during its relocation, then move the tumbler left to clear the robot approach.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. The collector confirmed on 2026-10-26 that the original candidate movement distances were measured or deliberately staged. The distance here is reused from that target annotation, not inferred from RGB. Legacy T003 supplies the 10 cm leftward tumbler displacement in image 01. The collector confirmed the opening can be closed. Ordered steps are close the slider, then relocate the tumbler; do not assume closure alone clears the reach."
+      }
     },
     {
-      "target_id": "T004",
-      "name": "Mug",
-      "description": "White ceramic mug standing upright at the left edge of the table, in front of and slightly left of the green gum bottle.",
-      "approximate_dimensions_m": {
-        "width": 0.1,
-        "depth": 0.1,
-        "height": 0.11,
-        "measurement_type": "measured"
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the empty white ceramic mug and carry it upright to a nearby tray. The green gum container and other objects will stay on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grasps the mug body between the parallel jaws from the open tabletop side. Assume the mug is within reach and payload capacity.",
+        "status_context": null
       },
-      "orientation": "upright",
-      "nearby_obstacles": [],
-      "physically_blocked": false,
-      "clearance_notes": "Open surface on all sides and close to the left table edge, so it can be approached from the side.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": "Dimensions are the body diameter and height as provided; the handle extends beyond the body diameter."
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear environmental change is necessary for the stated mug transfer.",
+        "rationale": "The mug is empty and separated from the other objects, and the specified grasp does not require moving its handle or neighboring container.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. Legacy T004. The collector revised the existing mug annotation to say it is empty; that fact is retained. The task uses an exposed body grasp, not another end effector or simultaneous handling of neighboring objects."
+      }
     },
     {
-      "target_id": "T005",
-      "name": "Playing cards",
-      "description": "Red-and-white 'Bee' playing card box lying flat, slightly rotated, near the front edge of the table to the left of center, nearest the viewer in 01.jpg.",
-      "approximate_dimensions_m": {
-        "width": 0.1,
-        "depth": 0.07,
-        "height": 0.02,
-        "measurement_type": "measured"
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will lift the red-and-white Bee playing-card box and place it on a nearby game tray. Other objects will remain on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. The box is within reach and payload capacity. The planned grasp closes the parallel jaws on two exposed opposing sidewalls of the card box.",
+        "status_context": null
       },
-      "orientation": "flat",
-      "nearby_obstacles": [],
-      "physically_blocked": false,
-      "clearance_notes": "Plenty of open surface around it and it is close to the front edge, but it is only about 2 cm thick and lies flush on the table.",
-      "manipulation_factors": [
-        "awkward_orientation"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "toward_front_edge",
-          "distance_cm": 5,
-          "description": "Slide the card box approximately 5 cm toward the front edge so one end overhangs slightly, exposing its sides and underside for grasping."
-        }
-      ],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No environmental change is required for the stated opposing-sidewall grasp.",
+        "rationale": "The card box has clear surrounding tabletop and exposed opposing sidewalls that the parallel jaws can approach. The grasp uses those sidewalls rather than the broad top face.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. Legacy T005. The previous top-face pickup assumption and its justification have been removed. This example assumes an ordinary opposing-sidewall claw grasp is feasible; no special thin-sheet pickup tool is introduced."
+      }
     },
     {
-      "target_id": "T006",
-      "name": "TV remote",
-      "description": "Black TV remote lying flat at the back-center of the table top, between the green gum bottle on the left and the yellow wipes canister on the right, farthest from the front edge.",
-      "approximate_dimensions_m": {
-        "width": 0.06,
-        "depth": 0.2,
-        "height": 0.03,
-        "measurement_type": "measured"
+      "example_id": "E006",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the black TV remote and place it on a nearby side table for a seated person. The other tabletop objects will remain in place.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. The remote is within reach and payload capacity. The parallel jaws grasp its exposed opposing sides while it lies flat on the table.",
+        "status_context": null
       },
-      "orientation": "flat",
-      "nearby_obstacles": [],
-      "physically_blocked": false,
-      "clearance_notes": "Open surface all around it, but it lies flat, is only about 3 cm thick, and is far from the nearest table edge.",
-      "manipulation_factors": [
-        "far_from_accessible_edge",
-        "awkward_orientation"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "toward_front_edge",
-          "distance_cm": 25,
-          "description": "Move the remote approximately 25 cm toward the front edge of the table so that part of it overhangs, exposing its sides for grasping."
-        }
-      ],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No task-dependent environmental change is needed under the stated reach and grasp assumptions.",
+        "rationale": "The remote is isolated with exposed sides; distance from the near edge alone does not establish a reach failure.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. Legacy T006. This remains a single-claw side grasp; neither a different tool nor another gripper is assumed."
+      }
+    },
+    {
+      "example_id": "E007",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will read the product label on the yellow wipes canister for a supply inventory. No object will be handled.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume the robot can observe the canister's exposed label from the table's right side and read it at the planned viewing distance.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is required for this label-reading task.",
+        "rationale": "The tumbler does not cover the label from the stated observation side. A reach obstruction is irrelevant to a non-contact reading task.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Same wipes target as E003; the image is unchanged. The observation pose is an assumed task fact and does not require collecting a camera pose."
+      }
     }
-  ],
-  "source": "locally collected scene"
+  ]
 }

@@ -5,137 +5,211 @@
     "images/02.jpg",
     "images/03.jpg"
   ],
-  "scene_description": "Beige dining table with a rectangular perforated metal basket containing brown paper napkins near the front edge. A pepper shaker and a salt shaker stand close together immediately behind the basket.",
-  "targets": [
+  "scene_description": "A beige dining table holds a perforated silver basket of folded brown napkins near its front edge. Two glass shakers stand immediately behind the basket: dark pepper on the left and white salt on the right in image 01.",
+  "examples": [
     {
-      "target_id": "T001",
-      "name": "metal basket",
-      "description": "Rectangular silver basket with circular perforations, holding brown paper napkins near the front edge of the beige table, directly in front of the two glass shakers.",
-      "approximate_dimensions_m": {
-        "width": 0.25,
-        "depth": 0.13,
-        "height": 0.06,
-        "measurement_type": "measured"
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the perforated metal basket with its napkins inside and carry it level to another dining table. Both shakers will remain here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grasps one exposed basket rim with the parallel jaws, with the basket within reach and payload capacity. The transfer is slow and level indoors, without airflow sufficient to lift the napkins.",
+        "status_context": null
       },
-      "orientation": "upright, open top facing upward",
-      "nearby_obstacles": [
-        "Salt and pepper shakers immediately behind the rear basket wall"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Front and short side walls are exposed, with overhead space and access near the table edge. The shakers are close to the rear wall but do not trap the basket.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": "Target is the basket as a container; the napkins inside are annotated separately. No obvious environmental adjustment is needed to access its exposed sides. Width is the long basket side; depth is the shorter side."
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear problem requires human intervention for this basket transfer.",
+        "rationale": "The accessible basket walls provide a grasp and the napkins remain contained during the stated level transfer. Nearby shakers do not block the exposed sides.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. Legacy T001. This uses a single rim grasp, not two grippers supporting opposite basket walls."
+      }
     },
     {
-      "target_id": "T002",
-      "name": "brown napkin",
-      "description": "Topmost brown paper napkin lying flat on the stack inside the perforated metal basket, distinct from the separate napkin near the distant plate.",
-      "approximate_dimensions_m": {
-        "width": 0.17,
-        "depth": 0.125,
-        "height": null,
-        "measurement_type": "measured"
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/02.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect one folded brown napkin from the metal basket and deliver it to a diner. The remaining napkins and both shakers will stay on this table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume the robot can pick an isolated folded napkin from a flat surface with its parallel gripper, but has no tool for separating overlapping paper sheets or reaching laterally through basket walls.",
+        "status_context": null
       },
-      "orientation": "lying flat",
-      "nearby_obstacles": [
-        "Raised basket walls surrounding the napkin stack",
-        "Other napkins directly beneath the target"
-      ],
-      "physically_blocked": true,
-      "clearance_notes": "Top face is exposed through the open basket. Raised walls restrict lateral access, and the napkin rests directly on other sheets with little separation for picking a single sheet.",
-      "manipulation_factors": [
-        "low_side_clearance",
-        "limited_approach_space"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "out_of_basket_to_left",
-          "distance_cm": 25,
-          "description": "Lift the top napkin out of the basket and place it approximately 25 cm to the left of its original position on clear tabletop, separated from the other napkins."
-        }
-      ],
-      "other_notes": "Physical blockage is partial and refers to lateral access through the basket walls; overhead access remains open. Thin flexible sheets may be lifted together if not separated. Height remains unknown because the thickness of a single folded napkin cannot be reliably distinguished from the stack. Dimensions refer to the top napkin, not the whole stack or an unfolded sheet."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "topmost brown paper napkin on the stack inside the perforated silver basket",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.25,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift the napkin clear of the basket rim before moving left",
+              "Leave the remaining napkins in the basket",
+              "Place the napkin flat on clear tabletop with its edges exposed"
+            ],
+            "context": "Separate the top napkin from the stack and basket walls for the robot's single-napkin pickup."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The desired sheet lies directly on other napkins inside raised basket walls, which impede the stated single-sheet grasp.",
+        "rationale": "A human can separate one sheet quickly; preparing an isolated pickup avoids taking several napkins together.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. The collector confirmed on 2026-10-26 that the original candidate movement distances were measured or deliberately staged. The distance here is reused from that target annotation, not inferred from RGB. Legacy T002, 25 cm relocation. Image 02 is selected because camera-left leads along the broad clear tabletop rather than toward the near-left corner seen in image 01. Only the measured displacement length is reused; direction is grounded in image 02. Lift over the rim rather than drag through it; the composer does not execute collision avoidance."
+      }
     },
     {
-      "target_id": "T003",
-      "name": "pepper shaker",
-      "description": "Clear glass shaker containing dark pepper with a perforated silver lid, standing immediately behind the basket beside the white-filled salt shaker; it is left of the salt shaker.",
-      "approximate_dimensions_m": {
-        "width": 0.04,
-        "depth": 0.04,
-        "height": 0.13,
-        "measurement_type": "measured"
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the dark-filled pepper shaker and deliver it to a diner, leaving the salt shaker and napkin basket in place.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume the robot descends from above and closes parallel fingers around the upper glass body, above the basket rim. Its fingers need free space on both lateral sides of that body; it cannot carry the shaker by its cap.",
+        "status_context": null
       },
-      "orientation": "upright",
-      "nearby_obstacles": [
-        "Salt shaker immediately beside it",
-        "Rear wall of the metal basket in front of its lower body"
-      ],
-      "physically_blocked": true,
-      "clearance_notes": "Lid and upper body are exposed. Little space separates the two shakers, and the basket obstructs a low approach from the front.",
-      "manipulation_factors": [
-        "low_side_clearance",
-        "partially_obstructed"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "away_from_salt_shaker_and_basket",
-          "distance_cm": 10,
-          "description": "Move the pepper shaker approximately 10 cm left into open tabletop space, separating it from the salt shaker and basket."
-        },
-        {
-          "action": "move_obstacle",
-          "direction": "away_from_front_of_shakers",
-          "distance_cm": 20,
-          "description": "Move the napkin basket approximately 20 cm sideways into clear tabletop space to expose the lower front of the target shaker."
-        }
-      ],
-      "other_notes": "Blockage is partial and approach-dependent; the shaker is not enclosed or covered from above."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "dark-filled glass pepper shaker with a silver lid immediately behind the basket, left of the salt shaker",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the shaker upright",
+              "Lift clear of neighboring objects rather than push against them",
+              "Keep its base fully supported on the table"
+            ],
+            "context": "Separate the pepper shaker from the salt shaker before the robot's overhead body grasp."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The adjacent salt shaker leaves insufficient room for the finger on the pepper shaker's right side during the prescribed upper-body grasp.",
+        "rationale": "Separating the pepper shaker provides lateral finger clearance. The overhead approach uses the body above the basket rim, so the basket need not move.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. The collector confirmed on 2026-10-26 that the original candidate movement distances were measured or deliberately staged. The distance here is reused from that target annotation, not inferred from RGB. Legacy T003, 10 cm leftward shaker-relocation alternative selected. Do not also move the basket: the old candidates were alternatives. This label does not claim that 10 cm clears a low frontal path past the basket."
+      }
     },
     {
-      "target_id": "T004",
-      "name": "salt shaker",
-      "description": "Clear glass shaker containing white salt with a perforated silver lid, standing immediately behind the basket beside the dark-filled pepper shaker; it is right of the pepper shaker.",
-      "approximate_dimensions_m": {
-        "width": 0.04,
-        "depth": 0.04,
-        "height": 0.13,
-        "measurement_type": "measured"
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the white-filled salt shaker and deliver it to a diner, leaving the pepper shaker and napkin basket in place.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume the robot descends from above and closes parallel fingers around the upper glass body, above the basket rim. Its fingers need free space on both lateral sides of that body; it cannot carry the shaker by its cap.",
+        "status_context": null
       },
-      "orientation": "upright",
-      "nearby_obstacles": [
-        "Pepper shaker immediately beside it",
-        "Rear wall of the metal basket in front of its lower body"
-      ],
-      "physically_blocked": true,
-      "clearance_notes": "Lid and upper body are exposed. The neighboring shaker limits side clearance, and the basket obstructs a low approach from the front.",
-      "manipulation_factors": [
-        "low_side_clearance",
-        "partially_obstructed"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "away_from_pepper_shaker_and_basket",
-          "distance_cm": 10,
-          "description": "Move the salt shaker approximately 10 cm right into open tabletop space, separating it from the pepper shaker and basket."
-        },
-        {
-          "action": "move_obstacle",
-          "direction": "away_from_front_of_shakers",
-          "distance_cm": 20,
-          "description": "Move the napkin basket approximately 20 cm sideways into clear tabletop space to expose the lower front of the target shaker."
-        }
-      ],
-      "other_notes": "Blockage is partial and approach-dependent; overhead access remains available."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "white-filled glass salt shaker with a silver lid immediately behind the basket, right of the pepper shaker",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the shaker upright",
+              "Lift clear of neighboring objects rather than push against them",
+              "Keep its base fully supported on the table"
+            ],
+            "context": "Separate the salt shaker from the pepper shaker before the robot's overhead body grasp."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The adjacent pepper shaker leaves insufficient room for the finger on the salt shaker's left side during the prescribed upper-body grasp.",
+        "rationale": "Separating the salt shaker provides lateral finger clearance. The overhead approach is above the basket rim, so no basket relocation is needed.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. The collector confirmed on 2026-10-26 that the original candidate movement distances were measured or deliberately staged. The distance here is reused from that target annotation, not inferred from RGB. Legacy T004, 10 cm rightward shaker-relocation alternative selected. This label does not claim that the move clears a low frontal path past the basket."
+      }
+    },
+    {
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will visually identify the glass shaker containing dark pepper for a dining-table inventory. Neither shaker nor the basket will be handled.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. The inventory step uses its camera; assume the visible glass contents can be distinguished from its planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical intervention is required for this visual identification task.",
+        "rationale": "The relevant contents are visible above the basket rim and can be distinguished from the neighboring white-filled salt shaker without grasping either one.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. This replaces the previous cap-grasp scenario. The robot hardware is unchanged; only the task is non-contact. No specialized cap gripper or cap-based transport capability is assumed."
+      }
+    },
+    {
+      "example_id": "E006",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will visually identify the glass shaker containing white salt for a dining-table inventory. Neither shaker nor the basket will be handled.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. The inventory step uses its camera; assume the visible glass contents can be distinguished from its planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical intervention is required for this visual identification task.",
+        "rationale": "The relevant contents are visible above the basket rim and can be distinguished from the neighboring dark-filled pepper shaker without grasping either one.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Collector review on 2026-10-26 establishes one claw gripper with parallel jaws. Task-specific reach and payload assumptions do not introduce another end effector. This replaces the previous cap-grasp scenario. The robot hardware is unchanged; only the task is non-contact. No specialized cap gripper or cap-based transport capability is assumed."
+      }
     }
-  ],
-  "source": "User-provided photographs in the scene images folder."
+  ]
 }
