@@ -5,221 +5,395 @@
     "images/02.jpg",
     "images/03.jpg"
   ],
-  "scene_description": "Dark cabinet top with raised side and rear panels beside white and orange walls. A yellow pencil and metal paper clip lie on the left near a white instruction manual topped by a black remote. An upright paper towel roll, blue spray bottle, and gray eraser occupy the right side, leaving a broad open central area.",
-  "targets": [
+  "scene_description": "A dark cabinet top has raised left, right, and rear panels. A yellow pencil and silver paper clip lie beside a white instruction booklet supporting a black remote on the left. A white paper towel roll, blue pump spray bottle, and gray eraser occupy the right, with open space in the center.",
+  "examples": [
     {
-      "target_id": "T001",
-      "name": "yellow pencil",
-      "description": "Yellow wooden pencil with a pink eraser lying along the left side of the cabinet top, beside the paper clip and to the left of the instruction manual.",
-      "approximate_dimensions_m": {
-        "width": 0.17,
-        "depth": 0.005,
-        "height": 0.005,
-        "measurement_type": "measured"
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the yellow pencil and place it in a nearby stationery tray. The booklet, remote, and paper clip will stay on the cabinet.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grasps the pencil between opposing jaws. The pickup needs clearance on both sides of the pencil, including the side next to the raised panel.",
+        "status_context": null
       },
-      "orientation": "lying flat, roughly parallel to the left side panel",
-      "nearby_obstacles": [
-        "Raised left side panel",
-        "Paper clip beside the pencil"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Pencil is close to the raised left panel, restricting approach from that side. Its upper surface and side facing the cabinet center are exposed.",
-      "manipulation_factors": [
-        "low_side_clearance"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "toward_center_of_surface",
-          "distance_cm": 10,
-          "description": "Move the pencil approximately 10 cm away from the raised left panel toward the clear central area to expose both sides."
-        }
-      ],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "yellow pencil with a pink eraser lying beside the cabinet left panel",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the entire pencil supported on the cabinet top",
+              "Lift clear of the paper clip and booklet rather than drag into them"
+            ],
+            "context": "Bring the pencil into the open front area for a two-sided claw approach."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The raised side panel restricts one jaw approach to the pencil in its current location.",
+        "rationale": "Moving the pencil toward the open front creates approach space without placing it on the booklet or moving unrelated objects.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "The collector confirmed the single parallel-jaw claw and, on 2026-10-26, confirmed that existing numeric movement distances in scenes 6–10 may be reused as measured or deliberately staged. Task contexts are authored scenarios; task-specific grasp feasibility assumes compatible reach, jaw opening, and payload, without adding hardware. All three photographs were visually reviewed, but only the named image is an input. Legacy T001 supplies the 10 cm length. The direction is revised to camera-backward in image 01: the old generic centerward wording would take the pencil toward the booklet. This is a planned displacement using an established length, not an RGB-derived measurement or a claim that the revised vector was separately measured."
+      }
     },
     {
-      "target_id": "T002",
-      "name": "gray eraser",
-      "description": "Rectangular gray whiteboard eraser lying near the front-right of the cabinet top, in front of the blue spray bottle.",
-      "approximate_dimensions_m": {
-        "width": 0.12,
-        "depth": 0.045,
-        "height": 0.025,
-        "measurement_type": "measured"
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the gray rectangular eraser and deliver it to a nearby whiteboard tray. All other objects will stay on the cabinet.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Its parallel jaws require purchase on an exposed pickup edge, including access beneath that edge. A flat supported pose with only the upper face exposed is insufficient for this pickup.",
+        "status_context": null
       },
-      "orientation": "lying flat",
-      "nearby_obstacles": [
-        "Raised right side panel",
-        "Blue spray bottle behind the eraser"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Top and front face are exposed with visible space around the eraser. It is separated from the spray bottle and can be approached from the open center and front.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": "No obvious environmental adjustment is needed for access."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "gray rectangular whiteboard eraser lying in front of the blue spray bottle",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.07,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep most of the object supported on the surface",
+              "Expose only the pickup edge needed by the parallel jaws",
+              "Keep clear of neighboring objects"
+            ],
+            "context": "Prepare the eraser at the front surface edge for a clear claw grip."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The eraser lies flat on the cabinet top without the exposed lower edge required by the claw.",
+        "rationale": "Move the eraser toward the front edge to give the jaws clear purchase rather than assuming visible sides alone ensure a grasp.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "The collector confirmed the single parallel-jaw claw and, on 2026-10-26, confirmed that existing numeric movement distances in scenes 6–10 may be reused as measured or deliberately staged. Task contexts are authored scenarios; task-specific grasp feasibility assumes compatible reach, jaw opening, and payload, without adding hardware. All three photographs were visually reviewed, but only the named image is an input. Collector correction on 2026-10-26: the claw requires the specified prepared pickup edge. Toward the camera is encoded backward in the captured-heading frame. New distances supplied in this correction are intended annotation offsets, not measurements inferred from RGB. The collector specifies a 7 cm displacement toward the camera. This replaces the previous no-intervention pickup label."
+      }
     },
     {
-      "target_id": "T003",
-      "name": "blue spray bottle",
-      "description": "Blue cylindrical spray bottle with a white pump and white-green label, standing in front of the paper towel roll and behind the gray eraser on the right side of the cabinet top.",
-      "approximate_dimensions_m": {
-        "width": 0.05,
-        "depth": 0.05,
-        "height": 0.19,
-        "measurement_type": "measured"
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the blue spray bottle and carry it upright to a nearby cleaning cart. The paper towel roll and eraser will stay on the cabinet.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the bottle body with the parallel jaws from the front-center. Its jaws need space around the body; it does not pick up the bottle by the pump.",
+        "status_context": null
       },
-      "orientation": "upright",
-      "nearby_obstacles": [
-        "Paper towel roll immediately behind the bottle",
-        "Gray eraser in front",
-        "Raised right side panel"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Front and upper portions are exposed. The paper towel roll restricts clearance behind the bottle; the eraser occupies some space ahead of its base.",
-      "manipulation_factors": [
-        "low_side_clearance"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "toward_center_of_surface",
-          "distance_cm": 15,
-          "description": "Move the spray bottle approximately 15 cm left into the open central area, separating it from the paper towel roll and eraser."
-        },
-        {
-          "action": "move_obstacle",
-          "direction": "away_from_spray_bottle",
-          "distance_cm": 15,
-          "description": "Move the paper towel roll approximately 15 cm left into the open central area to increase clearance around the spray bottle while leaving the bottle upright in place."
-        }
-      ],
-      "other_notes": "contents and fill level are unknown."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "blue spray bottle with a white pump standing in front of the paper towel roll",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the bottle upright and fully supported",
+              "Avoid pressing the spray pump",
+              "Lift clear of the eraser rather than push through it"
+            ],
+            "context": "Separate the bottle from the roll, eraser, and side panel before the body grasp."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The roll and nearby eraser restrict the body-grasp approach to the spray bottle.",
+        "rationale": "Moving the target left into the open center gives both jaws access with one human relocation.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "The collector confirmed the single parallel-jaw claw and, on 2026-10-26, confirmed that existing numeric movement distances in scenes 6–10 may be reused as measured or deliberately staged. Task contexts are authored scenarios; task-specific grasp feasibility assumes compatible reach, jaw opening, and payload, without adding hardware. All three photographs were visually reviewed, but only the named image is an input. Legacy T003 supplies 15 cm leftward. Choose target relocation instead of also moving the towel roll. Pump contents, fill level, and lock state are unknown."
+      }
     },
     {
-      "target_id": "T004",
-      "name": "black remote",
-      "description": "Black LG remote control with colored buttons resting button-side up on the white instruction manual on the left side of the cabinet top.",
-      "approximate_dimensions_m": {
-        "width": 0.17,
-        "depth": 0.05,
-        "height": 0.02,
-        "measurement_type": "measured"
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the black LG remote and place it beside a nearby television. The white booklet will stay on the cabinet.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Its parallel jaws require purchase on an exposed pickup edge, including access beneath that edge. A flat supported pose with only the upper face exposed is insufficient for this pickup.",
+        "status_context": null
       },
-      "orientation": "lying flat, buttons facing upward",
-      "nearby_obstacles": [
-        "Raised rear panel near the far end"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Buttons and long side edges are exposed. The manual is underneath rather than covering the remote; the remote can be accessed from above and the open center side.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": "No obvious environmental adjustment is needed to access the remote itself."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "black LG remote resting button-side up on the white instruction booklet",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.13,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep most of the object supported on the surface",
+              "Expose only the pickup edge needed by the parallel jaws",
+              "Keep clear of neighboring objects",
+              "Lift clear of the booklet instead of dragging the booklet with it"
+            ],
+            "context": "Bring the remote to the front pickup edge while leaving the booklet behind."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The remote rests on the booklet away from the surface pickup edge, leaving insufficient purchase for the claw.",
+        "rationale": "Prepare the remote at the surface edge before the robot grasps it; its visible upper face is not a substitute for opposing-jaw purchase.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "The collector confirmed the single parallel-jaw claw and, on 2026-10-26, confirmed that existing numeric movement distances in scenes 6–10 may be reused as measured or deliberately staged. Task contexts are authored scenarios; task-specific grasp feasibility assumes compatible reach, jaw opening, and payload, without adding hardware. All three photographs were visually reviewed, but only the named image is an input. Collector correction on 2026-10-26: the claw requires the specified prepared pickup edge. Toward the camera is encoded backward in the captured-heading frame. New distances supplied in this correction are intended annotation offsets, not measurements inferred from RGB. The collector specifies a 13 cm displacement toward the camera. The booklet remains in place; no additional sideways remote move is requested."
+      }
     },
     {
-      "target_id": "T005",
-      "name": "white instruction manual",
-      "description": "White instruction booklet with a stethoscope illustration, lying beneath the black remote to the right of the yellow pencil.",
-      "approximate_dimensions_m": {
-        "width": 0.1,
-        "depth": 0.14,
-        "height": null,
-        "measurement_type": "measured"
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the entire white instruction booklet and carry it to a nearby document tray. The black remote must remain on the cabinet.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Its parallel jaws require purchase on an exposed pickup edge, including access beneath that edge. A flat supported pose with only the upper face exposed is insufficient for this pickup. It carries the booklet alone and does not remove the remote before the target pickup.",
+        "status_context": null
       },
-      "orientation": "lying flat",
-      "nearby_obstacles": [
-        "Black remote resting on the manual",
-        "Raised left and rear panels nearby"
-      ],
-      "physically_blocked": true,
-      "clearance_notes": "The remote covers and loads part of the booklet. Some paper edges remain exposed, but moving the booklet independently could disturb the remote.",
-      "manipulation_factors": [
-        "under_another_object",
-        "partially_obstructed"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "move_obstacle",
-          "direction": "off_manual",
-          "distance_cm": 15,
-          "description": "Lift the remote off the manual and place it approximately 15 cm to the right on clear cabinet top before picking up the manual."
-        }
-      ],
-      "other_notes": "Height of null reflects the thinness of the booklet; it does not mean physically zero thickness."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "black LG remote resting button-side up on the white instruction manual",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift the remote clear of the booklet before translating it",
+              "Set it on clear cabinet top away from the spray bottle and eraser"
+            ],
+            "context": "Remove the remote from the booklet before the robot lifts its support."
+          },
+          {
+            "target_object": "white instruction booklet with a stethoscope illustration beneath the black remote",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.12,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep most of the object supported on the surface",
+              "Expose only the pickup edge needed by the parallel jaws",
+              "Keep clear of neighboring objects",
+              "Keep the booklet pages together"
+            ],
+            "context": "Expose the booklet front edge for the claw after removing the remote."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The remote loads the booklet, and the booklet also lacks a prepared edge for the claw pickup.",
+        "rationale": "First move the remote off its support, then move the booklet to the front edge; removing the load alone does not prepare the grasp.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "The collector confirmed the single parallel-jaw claw and, on 2026-10-26, confirmed that existing numeric movement distances in scenes 6–10 may be reused as measured or deliberately staged. Task contexts are authored scenarios; task-specific grasp feasibility assumes compatible reach, jaw opening, and payload, without adding hardware. All three photographs were visually reviewed, but only the named image is an input. Collector correction on 2026-10-26: the claw requires the specified prepared pickup edge. Toward the camera is encoded backward in the captured-heading frame. New distances supplied in this correction are intended annotation offsets, not measurements inferred from RGB. Retain the existing 15 cm rightward remote removal, then use the collector-specified 12 cm backward booklet move. Booklet thickness remains unspecified."
+      }
     },
     {
-      "target_id": "T006",
-      "name": "metal paper clip",
-      "description": "Large silver wire paper clip lying next to the yellow pencil, on the side facing the cabinet center and to the left of the instruction manual.",
-      "approximate_dimensions_m": {
-        "width": 0.01,
-        "depth": 0.045,
-        "height": 0.0,
-        "measurement_type": "measured"
+      "example_id": "E006",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the large silver wire paper clip beside the yellow pencil and place it in a nearby stationery organizer. The pencil and booklet will remain on the cabinet.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Its parallel jaws require purchase on an exposed pickup edge, including access beneath that edge. A flat supported pose with only the upper face exposed is insufficient for this pickup. It pinches the exposed paper-clip edge and transports that clip as one item.",
+        "status_context": null
       },
-      "orientation": "lying flat",
-      "nearby_obstacles": [
-        "Yellow pencil immediately beside it",
-        "Raised left side panel nearby"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Wire is exposed from above but lies flush against the surface. The pencil and left panel reduce space on one side.",
-      "manipulation_factors": [
-        "low_side_clearance"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "away_from_pencil_toward_center",
-          "distance_cm": 10,
-          "description": "Move the paper clip approximately 10 cm away from the pencil toward the open central area."
-        }
-      ],
-      "other_notes": "Width is the short axis and depth the long axis. Height of 0 is retained as a rounded thin-object approximation, not literal zero thickness. The separate small metal item by the manual is not this target."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "large silver wire paper clip beside the yellow pencil, left of the instruction booklet",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep most of the object supported on the surface",
+              "Expose only the pickup edge needed by the parallel jaws",
+              "Keep clear of neighboring objects",
+              "Keep enough of the clip supported to prevent it falling off the cabinet"
+            ],
+            "context": "Expose a small paper-clip pickup edge at the front of the cabinet."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The thin wire clip lies flush on the cabinet top and lacks accessible purchase beneath it.",
+        "rationale": "Move the clip to a partly exposed front edge so the parallel jaws can pinch it.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "The collector confirmed the single parallel-jaw claw and, on 2026-10-26, confirmed that existing numeric movement distances in scenes 6–10 may be reused as measured or deliberately staged. Task contexts are authored scenarios; task-specific grasp feasibility assumes compatible reach, jaw opening, and payload, without adding hardware. All three photographs were visually reviewed, but only the named image is an input. Collector correction on 2026-10-26: the claw requires the specified prepared pickup edge. Toward the camera is encoded backward in the captured-heading frame. New distances supplied in this correction are intended annotation offsets, not measurements inferred from RGB. The collector specifies a 10 cm backward displacement and a physical-pickup task. The former visual-inventory scenario is replaced accordingly; no special thin-wire tool is assumed."
+      }
     },
     {
-      "target_id": "T007",
-      "name": "paper towel roll",
-      "description": "Upright white paper towel roll with an exposed cardboard core, positioned toward the rear-right of the cabinet top behind the blue spray bottle.",
-      "approximate_dimensions_m": {
-        "width": 0.12,
-        "depth": 0.12,
-        "height": 0.21,
-        "measurement_type": "measured"
+      "example_id": "E007",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the upright paper towel roll and carry it to a nearby cleaning cart. The blue spray bottle and eraser will remain on the cabinet.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It makes a frontal parallel-jaw grasp on the roll with compatible opening and payload. Its pickup needs an unobstructed approach and a roll position at the accessible front edge.",
+        "status_context": "The robot is paused before its next pickup in an ongoing cleaning-supply transfer routine. No object in this image has been moved."
       },
-      "orientation": "upright, core opening facing upward",
-      "nearby_obstacles": [
-        "Blue spray bottle immediately in front",
-        "Raised rear and right panels"
-      ],
-      "physically_blocked": true,
-      "clearance_notes": "Top and left side are exposed. The spray bottle blocks part of the lower front approach, while the surrounding panels limit low approaches from the rear and right.",
-      "manipulation_factors": [
-        "partially_obstructed",
-        "limited_approach_space"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "move_obstacle",
-          "direction": "away_from_front_of_roll",
-          "distance_cm": 15,
-          "description": "Move the spray bottle approximately 15 cm left into the clear central area to expose the front of the paper towel roll."
-        },
-        {
-          "action": "translate_target",
-          "direction": "left_toward_open_center",
-          "distance_cm": 15,
-          "description": "Move the upright paper towel roll approximately 15 cm left into the clear central area, separating it from the spray bottle and right side panel."
-        }
-      ],
-      "other_notes": "Width and depth represent outer diameter. Physical blockage is partial and approach-dependent; the roll is accessible from above."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "blue spray bottle with a white pump standing in front of the paper towel roll",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the bottle upright",
+              "Do not press the pump",
+              "Set the bottle on clear central cabinet top without contacting the eraser"
+            ],
+            "context": "Clear the front of the paper towel roll before the robot reaches around it."
+          },
+          {
+            "target_object": "upright white paper towel roll behind the blue spray bottle",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep most of the object supported on the surface",
+              "Expose only the pickup edge needed by the parallel jaws",
+              "Keep clear of neighboring objects",
+              "Keep the roll upright with its base supported; do not tip it over the cabinet edge"
+            ],
+            "context": "Bring the roll to the accessible front pickup area after clearing the bottle."
+          }
+        ]
+      },
+      "review": {
+        "phase": "during",
+        "category": "safety_from_robot",
+        "problem": "The spray bottle obstructs the approach, and the roll remains too far back for the required clear claw grip.",
+        "rationale": "Clear the spray bottle first, then bring the roll forward; neither step alone completes the preparation.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context",
+          "status_context"
+        ],
+        "notes": "The collector confirmed the single parallel-jaw claw and, on 2026-10-26, confirmed that existing numeric movement distances in scenes 6–10 may be reused as measured or deliberately staged. Task contexts are authored scenarios; task-specific grasp feasibility assumes compatible reach, jaw opening, and payload, without adding hardware. All three photographs were visually reviewed, but only the named image is an input. Collector correction on 2026-10-26: the claw requires the specified prepared pickup edge. Toward the camera is encoded backward in the captured-heading frame. New distances supplied in this correction are intended annotation offsets, not measurements inferred from RGB. Retain the existing 15 cm leftward bottle relocation, then use the collector-specified 10 cm backward roll move. The roll remains upright and supported. The ongoing-routine status remains an authored task fact."
+      }
+    },
+    {
+      "example_id": "E008",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will read the visible label on the blue spray bottle for an inventory entry. No object will be moved.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. This step uses the camera from the bottle front; assume the required visible label text is readable.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No human intervention is required for a non-contact reading of the exposed label.",
+        "rationale": "The grasp clearance needed for E003 is unnecessary for the stated observation task.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "The collector confirmed the single parallel-jaw claw and, on 2026-10-26, confirmed that existing numeric movement distances in scenes 6–10 may be reused as measured or deliberately staged. Task contexts are authored scenarios; task-specific grasp feasibility assumes compatible reach, jaw opening, and payload, without adding hardware. All three photographs were visually reviewed, but only the named image is an input. Same bottle and image as E003; no claim is made about label text on the hidden side."
+      }
+    },
+    {
+      "example_id": "E009",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will identify the black LG remote on the booklet using its visible buttons and branding. No object will be handled.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. This step uses its camera and can identify the exposed remote from the planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No change is needed to identify the visible upper object.",
+        "rationale": "The booklet underneath does not obstruct the remote face.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "The collector confirmed the single parallel-jaw claw and, on 2026-10-26, confirmed that existing numeric movement distances in scenes 6–10 may be reused as measured or deliberately staged. Task contexts are authored scenarios; task-specific grasp feasibility assumes compatible reach, jaw opening, and payload, without adding hardware. All three photographs were visually reviewed, but only the named image is an input. Same scene as E005, but no support is lifted. The remote should remain in place for this task."
+      }
     }
-  ],
-  "source": "User-provided scene photographs and object dimensions. Targets restricted to the user-listed objects, with two unlabeled dimension entries interpreted as the paper clip and paper towel roll."
+  ]
 }

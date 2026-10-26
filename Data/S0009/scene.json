@@ -5,111 +5,229 @@
     "images/02.jpg",
     "images/03.jpg"
   ],
-  "scene_description": "Interior of an open light-wood cabinet shelf with a hinged door on the left side and a top panel overhead. A Mastermind board game box and a blue poker-chip tin lie flat on a printed sheet of paper with a QR code, and a blue-capped Expo marker lies at the back. Directional terms (front, back, left, right) refer to the view in 01.jpg, looking into the cabinet from the front.",
-  "targets": [
+  "scene_description": "An open wooden cabinet shelf holds a diagonal Mastermind game box against the left panel, a closed blue poker-chip tin to its right, and a blue-capped Expo marker behind the tin near the rear panel. A printed QR-code sheet lies under parts of the box and tin.",
+  "examples": [
     {
-      "target_id": "T001",
-      "name": "Expo marker",
-      "description": "Blue-capped dry-erase (Expo) marker lying on its side at the rear of the shelf, directly behind the blue poker-chip tin and close to the back panel, just right of the upper end of the Mastermind box.",
-      "approximate_dimensions_m": {
-        "width": 0.015,
-        "depth": 0.14,
-        "height": 0.015,
-        "measurement_type": "measured"
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the blue-capped Expo marker and carry it to a nearby whiteboard tray. The game box, tin, and paper sheet will remain in the cabinet.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the marker body between parallel jaws from the open shelf front. It requires an unobstructed approach, clearance from the rear panel, and purchase around the thin marker body; it does not rearrange the tin first.",
+        "status_context": null
       },
-      "orientation": "flat, lying on its side",
-      "nearby_obstacles": [
-        "Poker chip tin directly in front of it",
-        "Mastermind box close on its left",
-        "Cabinet back panel directly behind it"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Very small cylindrical object resting on the paper sheet, pinned between the back panel and the tin with little room to approach from the front.",
-      "manipulation_factors": [
-        "against_wall",
-        "partially_obstructed",
-        "limited_approach_space",
-        "awkward_orientation"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "move_obstacle",
-          "direction": "right",
-          "distance_cm": 10,
-          "description": "Move the poker chip tin approximately 10 cm to the right so the marker is visible and accessible from the front."
-        },
-        {
-          "action": "translate_target",
-          "direction": "toward_front_of_shelf",
-          "distance_cm": 10,
-          "description": "Move the marker approximately 10 cm toward the front of the shelf, away from the back panel."
-        }
-      ],
-      "other_notes": "Only 1.5 cm in diameter; recorded dimensions are as provided, with the 14 cm length shown as depth."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "blue rectangular poker-chip tin with chips, cards, and dice printed on its fitted lid",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift clear of the printed paper instead of dragging the sheet",
+              "Keep the tin level and supported on the shelf",
+              "Do not strike the marker or cabinet panel"
+            ],
+            "context": "Separate the tin from the left-side pickup area and expose the space behind it."
+          },
+          {
+            "target_object": "blue-capped Expo marker lying at the back panel behind the poker-chip tin",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the cap fitted",
+              "Keep the marker on the shelf",
+              "Do not roll it under the game box or move the paper sheet"
+            ],
+            "context": "Bring the marker away from the rear panel into the cleared claw pickup area."
+          },
+          {
+            "target_object": "blue-capped Expo marker after it has been moved into the cleared front pickup area",
+            "action": {
+              "type": "rotate",
+              "qualifiers": {
+                "axis": "z",
+                "angle": 90,
+                "unit": "degrees",
+                "direction": "counterclockwise",
+                "viewing_convention": "from_positive_axis",
+                "pivot_offset_m": [
+                  0.07,
+                  -0.0075,
+                  0
+                ]
+              }
+            },
+            "constraints": [
+              "Keep the cap fitted",
+              "Support the uncapped bottom on the shelf after tipping",
+              "Do not leave the marker leaning against another object"
+            ],
+            "context": "Tip the marker cap-up so its uncapped bottom rests on the shelf for the claw pickup."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The tin obstructs the approach, the rear panel restricts clearance, and the thin marker lies flat instead of presenting the requested upright body grip.",
+        "rationale": "Clear the tin, move the marker forward, then stand it cap-up on its uncapped bottom before the robot grasps the body.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "The collector confirmed the single parallel-jaw claw and, on 2026-10-26, confirmed that existing numeric movement distances in scenes 6–10 may be reused as measured or deliberately staged. Task contexts are authored scenarios; task-specific grasp feasibility assumes compatible reach, jaw opening, and payload, without adding hardware. All three photographs were visually reviewed, but only the named image is an input. Collector correction on 2026-10-26: the claw requires the specified prepared pickup edge. Toward the camera is encoded backward in the captured-heading frame. New distances supplied in this correction are intended annotation offsets, not measurements inferred from RGB. Retain both existing 10 cm moves. The collector authorizes an approximate 90-degree tip-up with the camera-axis choice flagged. REVIEW REQUIRED: Z is selected on the approximation that the cap-to-bottom long axis runs from camera-left to camera-right in image 01. Under the documented Unity mapping +90 degrees about Z takes +X to +Y; counterclockwise here compiles to -90 degrees and tips a camera-left cap upward. The approximate pivot [0.07, -0.0075, 0] m assumes the animated anchor is near the body midpoint and uses the recorded 0.14 m length and 0.015 m diameter to model contact near the uncapped bottom. Axis, alignment, anchor-to-pivot offset, and final support require review against the captured frame; they are not measured pose ground truth."
+      }
     },
     {
-      "target_id": "T002",
-      "name": "Board game box",
-      "description": "Black-and-white 'Mastermind' board game box lying flat and rotated diagonally on the left side of the shelf, partly resting on the edge of the white paper sheet, with its left end close to the left cabinet side panel and the blue poker tin immediately to its right.",
-      "approximate_dimensions_m": {
-        "width": 0.15,
-        "depth": 0.34,
-        "height": 0.05,
-        "measurement_type": "measured"
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the closed Mastermind box and carry it level to a nearby game table. The marker, poker-chip tin, and paper sheet will remain in the cabinet.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the box across its thickness at the front pickup edge with parallel jaws, supporting the fitted lid and base together. For this task, approach is from the open shelf front rather than through the neighboring side gaps.",
+        "status_context": null
       },
-      "orientation": "flat, rotated diagonally",
-      "nearby_obstacles": [
-        "Left cabinet side panel close to its left end",
-        "Poker chip tin immediately to its right",
-        "Top panel of the cabinet overhead"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Long, thin box with its left end near the side panel and the tin close on the right; the front of the shelf is open.",
-      "manipulation_factors": [
-        "against_wall",
-        "awkward_orientation",
-        "limited_approach_space"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "away_from_wall",
-          "distance_cm": 5,
-          "description": "Move the box approximately 5 cm away from the left side panel to create more clearance."
-        },
-        {
-          "action": "translate_target",
-          "direction": "toward_front_of_shelf",
-          "distance_cm": 10,
-          "description": "Move the box approximately 10 cm toward the front of the shelf so its long edge is exposed at the shelf lip."
-        }
-      ],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "black-and-white Mastermind game box lying diagonally beside the left cabinet panel",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep most of the box supported on the shelf",
+              "Keep the fitted lid and base together",
+              "Do not drag the printed sheet"
+            ],
+            "context": "Expose a supported front pickup edge of the game box for the parallel jaws."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The game box needs a prepared edge closer to the shelf front for the claw grip.",
+        "rationale": "Bring the box forward for the front-edge grasp. The collector confirms that moving the tin or shifting the box sideways is unnecessary for this task.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "The collector confirmed the single parallel-jaw claw and, on 2026-10-26, confirmed that existing numeric movement distances in scenes 6–10 may be reused as measured or deliberately staged. Task contexts are authored scenarios; task-specific grasp feasibility assumes compatible reach, jaw opening, and payload, without adding hardware. All three photographs were visually reviewed, but only the named image is an input. Collector correction on 2026-10-26: the claw requires the specified prepared pickup edge. Toward the camera is encoded backward in the captured-heading frame. New distances supplied in this correction are intended annotation offsets, not measurements inferred from RGB. Only the existing 10 cm backward Mastermind-box move is retained. The former tin relocation and 5 cm rightward box shift are removed, along with their conflicting grasp-clearance assumptions."
+      }
     },
     {
-      "target_id": "T003",
-      "name": "Poker chip tin",
-      "description": "Blue rectangular poker-chip tin (with chips, cards, and dice printed on the lid) lying flat on the printed paper sheet at the right-center of the shelf, in front of the blue-capped marker and to the right of the Mastermind box.",
-      "approximate_dimensions_m": {
-        "width": 0.1,
-        "depth": 0.18,
-        "height": 0.06,
-        "measurement_type": "measured"
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the blue poker-chip tin and carry it level to a nearby game table. The Mastermind box, marker, and paper sheet will remain in the cabinet.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the tin at the prepared front edge with parallel jaws while supporting its body below the fitted lid. It does not require a lateral approach through the gap beside the game box.",
+        "status_context": null
       },
-      "orientation": "flat",
-      "nearby_obstacles": [
-        "Mastermind box close on its left",
-        "Expo marker directly behind it"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Open shelf space in front and to the right; the Mastermind box is close on the left side.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": "Resting on the paper sheet, which may slide when the tin is moved."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "blue rectangular poker-chip tin with chips, cards, and dice printed on its fitted lid",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.05,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep most of the object supported on the surface",
+              "Expose only the pickup edge needed by the parallel jaws",
+              "Keep clear of neighboring objects",
+              "Keep the tin level and fitted lid in place",
+              "Lift clear rather than drag the shared printed sheet"
+            ],
+            "context": "Prepare the poker-chip tin nearer the shelf edge for the claw grip."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The tin needs a prepared pickup edge nearer the shelf front.",
+        "rationale": "A 5 cm move toward the camera prepares the required edge without a sideways tin relocation.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "The collector confirmed the single parallel-jaw claw and, on 2026-10-26, confirmed that existing numeric movement distances in scenes 6–10 may be reused as measured or deliberately staged. Task contexts are authored scenarios; task-specific grasp feasibility assumes compatible reach, jaw opening, and payload, without adding hardware. All three photographs were visually reviewed, but only the named image is an input. Collector correction on 2026-10-26: the claw requires the specified prepared pickup edge. Toward the camera is encoded backward in the captured-heading frame. New distances supplied in this correction are intended annotation offsets, not measurements inferred from RGB. The collector specifies 5 cm backward toward the shelf edge. This replaces the previous 10 cm rightward motion."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will read the visible Mastermind title for a game inventory. All objects will remain in the cabinet.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. This step uses its camera and can read the visible top-face title from the planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No environmental change is needed to read the exposed title.",
+        "rationale": "The wall and tin constrain manipulation, not the specified visible-text reading task.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "The collector confirmed the single parallel-jaw claw and, on 2026-10-26, confirmed that existing numeric movement distances in scenes 6–10 may be reused as measured or deliberately staged. Task contexts are authored scenarios; task-specific grasp feasibility assumes compatible reach, jaw opening, and payload, without adding hardware. All three photographs were visually reviewed, but only the named image is an input. Same box and image as E002. No cap removal, box opening, or relocation is needed for this observation."
+      }
+    },
+    {
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will identify whether a blue-capped marker is present at the rear of the cabinet. It will not collect it.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. This step uses its camera and can identify the exposed cap and body portions without requiring a complete label reading.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical adjustment is required for the stated presence check.",
+        "rationale": "Enough of the marker is visible for identification even though the tin blocks the claw pickup path.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "The collector confirmed the single parallel-jaw claw and, on 2026-10-26, confirmed that existing numeric movement distances in scenes 6–10 may be reused as measured or deliberately staged. Task contexts are authored scenarios; task-specific grasp feasibility assumes compatible reach, jaw opening, and payload, without adding hardware. All three photographs were visually reviewed, but only the named image is an input. Same marker and image as E001. This does not assert that all marker text is readable."
+      }
     }
-  ],
-  "source": "locally collected scene"
+  ]
 }
