@@ -1,0 +1,81 @@
+{
+  "scene_id": "S0036",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Wooden table with a closed silver laptop at the front-left and an open brown box at the front-right. A brown Data Structures book lies farther back behind the laptop. Front is the open table edge; left and right are as seen facing it.",
+  "targets": [
+    {
+      "target_id": "T001",
+      "name": "silver laptop",
+      "description": "Closed silver Apple laptop with a blue sticker lying at the front-left, in front of the brown book and left of the box.",
+      "approximate_dimensions_m": {
+        "width": 0.34,
+        "depth": 0.24,
+        "height": 0.01,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat, lid closed",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Top and side edges are exposed, with open table around it.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": ""
+    },
+    {
+      "target_id": "T002",
+      "name": "brown box",
+      "description": "Open brown cardboard box holding small loose items, standing near the front-right of the table, to the right of the laptop.",
+      "approximate_dimensions_m": {
+        "width": 0.11,
+        "depth": 0.13,
+        "height": 0.06,
+        "measurement_type": "measured"
+      },
+      "orientation": "upright, flaps open",
+      "nearby_obstacles": [],
+      "physically_blocked": false,
+      "clearance_notes": "Sides are exposed beneath the open flaps, with no overhead obstruction.",
+      "manipulation_factors": [],
+      "generic_improvement_needed": false,
+      "candidate_improvements": [],
+      "other_notes": "Dimensions describe the box body, excluding the unfolded flaps."
+    },
+    {
+      "target_id": "T003",
+      "name": "brown Data Structures book",
+      "description": "Brown Schaum's 'Data Structures' paperback lying behind the silver laptop, toward the back-right of the arrangement.",
+      "approximate_dimensions_m": {
+        "width": 0.21,
+        "depth": 0.3,
+        "height": 0.01,
+        "measurement_type": "measured"
+      },
+      "orientation": "lying flat, cover facing up",
+      "nearby_obstacles": [
+        "Silver laptop in front"
+      ],
+      "physically_blocked": false,
+      "clearance_notes": "Top and sides are exposed, but the laptop occupies the direct approach from the front.",
+      "manipulation_factors": [
+        "far_from_accessible_edge",
+        "limited_approach_space"
+      ],
+      "generic_improvement_needed": true,
+      "candidate_improvements": [
+        {
+          "action": "translate_target",
+          "direction": "toward_front_of_table",
+          "distance_cm": null,
+          "description": "Move the book to an open area near the front edge, clear of the laptop."
+        }
+      ],
+      "other_notes": ""
+    }
+  ],
+  "source": "locally collected scene"
+}
