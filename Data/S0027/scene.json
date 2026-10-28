@@ -5,146 +5,243 @@
     "images/02.jpg",
     "images/03.jpg"
   ],
-  "scene_description": "Black-topped table against a cream wall. A hole punch lies tipped over by the wall, a sanitizer pump lies on its back, and a tape dispenser stands at the front-left. A letter tray of paper hangs off the front edge; a pencil sharpener is in the back corner. Front is the edge away from the wall.",
-  "targets": [
+  "scene_description": "A black-topped table against a cream wall. A hole punch lies tipped over by the wall, a Purell sanitizer pump lies on its back, and a tape dispenser stands at the front-left. A wire letter tray of paper hangs partly off the front edge, and a plugged-in pencil sharpener stands in the back-right corner.",
+  "examples": [
     {
-      "target_id": "T001",
-      "name": "hole punch",
-      "description": "Black and silver three-hole punch tipped over near the back-left wall, its metal base plate facing up and forward.",
-      "approximate_dimensions_m": {
-        "width": 0.11,
-        "depth": 0.31,
-        "height": 0.08,
-        "measurement_type": "measured"
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the three-hole punch and place it upright on a supply shelf.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the punch's base from the sides while the punch rests on its base; it cannot right a tipped-over object.",
+        "status_context": null
       },
-      "orientation": "lying on its side, base plate facing up and forward",
-      "nearby_obstacles": [
-        "Wall directly behind it"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Open on the front and sides, but resting on its back in an unstable pose.",
-      "manipulation_factors": [
-        "awkward_orientation",
-        "against_wall"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "rotate_target",
-          "direction": null,
-          "distance_cm": null,
-          "description": "Set the hole punch back down flat on its base."
-        }
-      ],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "black and silver three-hole punch tipped over near the back-left wall, base plate facing the camera",
+            "action": {
+              "type": "rotate",
+              "qualifiers": {
+                "axis": "x",
+                "angle": 90,
+                "unit": "degrees",
+                "direction": "counterclockwise",
+                "viewing_convention": "from_positive_axis"
+              }
+            },
+            "constraints": [
+              "Set it down flat on its base",
+              "Keep it clear of the wall"
+            ],
+            "context": "Set the punch back on its base so the robot can grip it."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The punch lies tipped onto its back, so its base isn't available for the stated grasp.",
+        "rationale": "Righting a tipped object is quick for a person and avoids an unstable robot grasp.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T001. The 90 degree angle follows from the punch lying on its side; the axis is camera x because its base plate faces the camera. Rotation axis and direction follow the captured camera frame with the from_positive_axis viewing convention, with x to camera-right, y up, and z along the camera heading (away from the camera) to match the forward direction; they are approximate and need review against the frame, not measured pose ground truth."
+      }
     },
     {
-      "target_id": "T002",
-      "name": "hand sanitizer pump",
-      "description": "Purell hand sanitizer pump bottle lying on its back in the middle of the table, pump nozzle pointing toward the front-right.",
-      "approximate_dimensions_m": {
-        "width": 0.1,
-        "depth": 0.035,
-        "height": 0.13,
-        "measurement_type": "measured"
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will press the sanitizer pump to dispense sanitizer into a person's hand.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It presses pump heads straight down on upright bottles and cannot right a fallen bottle.",
+        "status_context": null
       },
-      "orientation": "lying on its side, label facing up",
-      "nearby_obstacles": [],
-      "physically_blocked": false,
-      "clearance_notes": "Open table on all sides, but the bottle is lying down.",
-      "manipulation_factors": [
-        "awkward_orientation"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "rotate_target",
-          "direction": null,
-          "distance_cm": null,
-          "description": "Stand the sanitizer upright on its base."
-        }
-      ],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "Purell sanitizer pump bottle lying on its back in the middle of the table",
+            "action": {
+              "type": "rotate",
+              "qualifiers": {
+                "axis": "x",
+                "angle": 90,
+                "unit": "degrees",
+                "direction": "clockwise",
+                "viewing_convention": "from_positive_axis"
+              }
+            },
+            "constraints": [
+              "Stand it upright on its base",
+              "Keep the pump head on top"
+            ],
+            "context": "Stand the bottle upright so the robot can press the pump."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The bottle lies on its back, so the robot can't press the pump straight down.",
+        "rationale": "Standing the bottle up is a one-second human fix.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T002. The 90 degree angle follows from the bottle lying flat; the axis is approximated as camera x because the bottle points mostly toward the camera. Rotation axis and direction follow the captured camera frame with the from_positive_axis viewing convention, with x to camera-right, y up, and z along the camera heading (away from the camera) to match the forward direction; they are approximate and need review against the frame, not measured pose ground truth."
+      }
     },
     {
-      "target_id": "T003",
-      "name": "tape dispenser",
-      "description": "Black tape dispenser standing at an angle on the open front-left of the table.",
-      "approximate_dimensions_m": {
-        "width": 0.09,
-        "depth": 0.17,
-        "height": 0.09,
-        "measurement_type": "measured"
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the tape dispenser and hand it to a person.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the dispenser's sides between its jaws.",
+        "status_context": null
       },
-      "orientation": "upright",
-      "nearby_obstacles": [],
-      "physically_blocked": false,
-      "clearance_notes": "Open table on all sides.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The dispenser stands on open table at the front-left.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T003."
+      }
     },
     {
-      "target_id": "T004",
-      "name": "letter tray of paper",
-      "description": "Black wire-mesh letter tray holding a stack of printed paper, set at an angle with its front-right part hanging over the front edge of the table.",
-      "approximate_dimensions_m": {
-        "width": 0.22,
-        "depth": 0.31,
-        "height": 0.07,
-        "measurement_type": "measured"
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "A mobile robot will drive along the front of this table to reach the printer, passing close to the table's front edge.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Its base passes within a few centimeters of the table's front edge.",
+        "status_context": null
       },
-      "orientation": "lying flat, partly overhanging the front edge",
-      "nearby_obstacles": [],
-      "physically_blocked": false,
-      "clearance_notes": "Fully exposed, but the overhanging part is unsupported and could tip.",
-      "manipulation_factors": [
-        "awkward_orientation"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "toward_back_of_table",
-          "distance_cm": null,
-          "description": "Slide the tray back until it rests fully on the table, keeping it level."
-        }
-      ],
-      "other_notes": "Paper may fall out if the tray is tilted."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "black wire-mesh letter tray of paper hanging partly over the front edge of the table",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "forward",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the tray level so the paper does not slide out",
+              "Rest it fully on the table",
+              "Keep it clear of the sanitizer bottle lying behind it"
+            ],
+            "context": "Slide the tray back from the edge so it no longer overhangs the robot's path."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The tray's front-right part overhangs the front edge where the robot will pass; a bump could knock the tray and its paper off the table.",
+        "rationale": "Pushing the tray fully onto the table removes the hazard without changing the robot's route.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T004 had no distance. Judged against the tray's measured 22 cm side, its front corner overhangs the edge by about 10 cm, so a 10 cm move away from the camera rests it fully on the table. The sanitizer bottle lies only a few centimeters behind the tray's back corner, so the person may need to nudge it aside; the composer does not avoid collisions. Collector note: paper may fall out if the tray is held at an angle. Distances are derived from the collector's measured object sizes as described above; they were not staged. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward."
+      }
     },
     {
-      "target_id": "T005",
-      "name": "pencil sharpener",
-      "description": "Black electric pencil sharpener with a clear shavings bin, standing alone in the back-right corner against the wall, its cord running off the back.",
-      "approximate_dimensions_m": {
-        "width": 0.07,
-        "depth": 0.07,
-        "height": 0.18,
-        "measurement_type": "measured"
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will carry the electric pencil sharpener to a desk across the room.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the sharpener's body and cannot unplug cords.",
+        "status_context": null
       },
-      "orientation": "upright",
-      "nearby_obstacles": [
-        "Wall directly behind it",
-        "Power cord"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Front and sides are open, but it sits against the wall far from the front edge.",
-      "manipulation_factors": [
-        "against_wall",
-        "far_from_accessible_edge"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "toward_front_of_table",
-          "distance_cm": 15,
-          "description": "Unplug the sharpener, then move it approximately 15 cm toward the front."
-        }
-      ],
-      "other_notes": "Plugged in; must be unplugged before it is moved."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "power plug on the end of the electric pencil sharpener's black cord",
+            "action": {
+              "type": "detach",
+              "qualifiers": {
+                "reference_object": "wall outlet the sharpener's cord runs to behind the table"
+              }
+            },
+            "constraints": [
+              "Pull the plug itself, not the cord",
+              "Leave the sharpener standing where it is"
+            ],
+            "context": "Unplug the sharpener so the cord cannot pull taut or snag while the robot carries it."
+          },
+          {
+            "target_object": "black electric pencil sharpener with a clear shavings bin in the back-right corner against the wall",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep it upright so the shavings stay in the bin"
+            ],
+            "context": "Bring the sharpener forward from the wall."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The sharpener is plugged in, so carrying it would pull the cord taut; it also sits against the wall far from the front edge.",
+        "rationale": "Unplugging is a quick human step the robot cannot do, and the forward move puts it within easy reach.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T005, 15 cm toward the front. Collector note: the sharpener needs to be unplugged before it is moved. The outlet is not visible in image 01. Distances are reused from the legacy annotation, where they were chosen from visibly free surface space rather than measured or staged. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward."
+      }
+    },
+    {
+      "example_id": "E006",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will lift the letter tray of paper and carry it level to a printer station.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It slides its lower jaw under the tray's overhanging front edge and lifts it level.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The overhang gives the jaws access, and the stated level lift keeps the paper in the tray.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Same tray as the drive-past example; a different task needs no change. Collector note: paper may fall out if the tray is held at an angle."
+      }
     }
-  ],
-  "source": "Staged permutation of S0023 and S0025, using the same objects in a different arrangement."
+  ]
 }
