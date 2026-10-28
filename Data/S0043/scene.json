@@ -5,101 +5,116 @@
     "images/02.jpg",
     "images/03.jpg"
   ],
-  "scene_description": "Scuffed, paint-stained wooden workbench. An empty filament spool lies flat with an orange scraper stuck blade-first in its center hole. Clear safety glasses stand on edge against the left side of the spool. Front is the bench edge nearest the viewer.",
-  "targets": [
+  "scene_description": "A brown cardboard ELEGOO filament spool lies flat on a scuffed wooden workbench. The narrow handle of an orange plastic scraper is inserted into the center hole, with its broad head projecting above the upper flange. Clear safety glasses lean on edge against the left side of the spool.",
+  "examples": [
     {
-      "target_id": "T001",
-      "name": "filament spool",
-      "description": "Empty brown cardboard ELEGOO filament spool lying flat, with the scraper in its center hole and the glasses against its left side.",
-      "approximate_dimensions_m": {
-        "width": 0.19,
-        "depth": 0.19,
-        "height": 0.07,
-        "measurement_type": "measured"
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the empty brown ELEGOO filament spool and carry it to a nearby recycling collection tray. The scraper and safety glasses will remain in the work area.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and handles one object at a time. It grips an exposed rear-right segment of the upper cardboard flange with opposing jaw contacts above and below it. Assume compatible jaw opening, tip clearance, reach and payload. Its pickup begins with a controlled vertical lift; it does not collect another object first.",
+        "status_context": null
       },
-      "orientation": "lying flat",
-      "nearby_obstacles": [
-        "Scraper in its center hole",
-        "Safety glasses against its left side"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Right and front rims are open; the center hole is filled by the scraper.",
-      "manipulation_factors": [
-        "partially_obstructed"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "move_obstacle",
-          "direction": null,
-          "distance_cm": null,
-          "description": "Pull the scraper out of the center hole and lay it flat on the bench."
-        }
-      ],
-      "other_notes": "Spool is empty and may need to be replaced."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "orange plastic scraper with its narrow handle inserted into the spool center hole",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "up",
+                "distance": 0.05,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the scraper controlled by hand",
+              "Do not lever its handle against the cardboard hole"
+            ],
+            "context": "Withdraw the scraper handle from the spool before its transport."
+          },
+          {
+            "target_object": "orange plastic scraper after its upward withdrawal from the spool",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 0.1,
+                "unit": "meters",
+                "reference_object": "brown ELEGOO filament spool with the orange scraper inserted in its center hole"
+              }
+            },
+            "constraints": [
+              "Keep the scraper supported by hand and outside the spool pickup path",
+              "Do not return it to the hole before the spool has been collected"
+            ],
+            "context": "Hold the extracted scraper clear to the right while the robot collects the spool."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The scraper is inserted into the spool the robot will transport and could be carried or displaced with it.",
+        "rationale": "Withdraw the scraper first, then separate it to the right so the robot transports only the empty spool. The collector explicitly states that the glasses do not require relocation.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "All three unchanged photographs were visually reviewed; only image 01 is supplied as input. Task contexts and task-specific grasp capabilities are authored scenario assumptions, not robot logs or measured outcomes. Legacy T001. On 2026-10-27 the collector supplied an approximate 5 cm upward withdrawal followed by a 10 cm rightward displacement, with the spool as reference. The reference grounds the description; direction/right is displacement from the scraper position, not a destination 10 cm from the spool anchor. The endpoint is deliberately supported by the human through the spool pickup: no invented tip-down angle or numeric drop to bench height is added. REVIEW BEFORE SFT: confirm that the supplied 5 cm withdrawal clears the inserted handle and that the held scraper is outside the pickup path. The collector directed that the glasses remain in place. Their contact is treated as non-catching during the controlled vertical spool lift; no glasses rotation or move is encoded."
+      }
     },
     {
-      "target_id": "T002",
-      "name": "3D print scraper",
-      "description": "Orange plastic 3D print scraper stuck blade-first in the spool's center hole, its handle angled up out of the hole.",
-      "approximate_dimensions_m": {
-        "width": 0.05,
-        "depth": 0.12,
-        "height": 0.005,
-        "measurement_type": "measured"
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the orange plastic 3D-print scraper from the spool center hole and carry it to a nearby tool tray. The spool and safety glasses will remain on the bench.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and handles one object at a time. It grips the exposed raised broad plastic head between opposing jaws and withdraws the tool upward as part of its pickup. Assume compatible jaw opening, contact clearance, reach and payload; the tool is loosely inserted, rather than mechanically fastened.",
+        "status_context": null
       },
-      "orientation": "tilted, blade inserted in the spool hole",
-      "nearby_obstacles": [
-        "Filament spool around its blade"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "The handle sticks up and is exposed; the blade is held in the hole.",
-      "manipulation_factors": [
-        "awkward_orientation",
-        "partially_obstructed"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "out_of_spool_hole",
-          "distance_cm": null,
-          "description": "Lift the scraper straight up out of the hole and lay it flat on the bench."
-        }
-      ],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No human preparation is necessary for the specified grasp on the exposed tool head.",
+        "rationale": "The raised broad plastic head offers opposing jaw surfaces above the flange. The robot can withdraw the loosely inserted tool itself; laying it flush on the bench would instead hide an underside grasp surface.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "All three unchanged photographs were visually reviewed; only image 01 is supplied as input. Task contexts and task-specific grasp capabilities are authored scenario assumptions, not robot logs or measured outcomes. Legacy T002. The photographs contradict the old blade-first/handle-up wording: the narrow handle enters the hole and the broad head is exposed. This authored transport task uses a head grasp, not a handle grasp for scraping. Loose insertion and feasible extraction are explicit task assumptions, not measured extraction-force facts."
+      }
     },
     {
-      "target_id": "T003",
-      "name": "safety glasses",
-      "description": "Clear plastic safety glasses standing on edge and leaning against the left side of the spool.",
-      "approximate_dimensions_m": {
-        "width": 0.17,
-        "depth": 0.06,
-        "height": 0.07,
-        "measurement_type": "measured"
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the clear safety glasses leaning against the left of the spool and carry them to a nearby protective-equipment tray. The spool and scraper will remain on the bench.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and handles one object at a time. It closes its jaws on an exposed raised solid frame section while avoiding the lenses, then lifts the glasses away from their contact with the spool. Assume frame localization and compatible jaw opening, tip clearance, reach, payload and controlled closing force.",
+        "status_context": null
       },
-      "orientation": "leaning, standing on edge against the spool",
-      "nearby_obstacles": [
-        "Filament spool supporting them"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Mostly exposed but propped on the spool and may fall; clear plastic is hard to see.",
-      "manipulation_factors": [
-        "awkward_orientation",
-        "low_side_clearance"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "rotate_target",
-          "direction": null,
-          "distance_cm": null,
-          "description": "Lay the glasses down on the bench, clear of the spool."
-        }
-      ],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No human preparation is necessary for the specified raised-frame grasp.",
+        "rationale": "The frame is accessible above the bench; the robot can take control of the glasses before lifting them away. Their lean alone does not require a human rotation for this pickup.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "All three unchanged photographs were visually reviewed; only image 01 is supplied as input. Task contexts and task-specific grasp capabilities are authored scenario assumptions, not robot logs or measured outcomes. Legacy T003. Transparent material is not itself evidence that a relocation or highlight is necessary when the input explicitly assumes successful frame localization. This differs from moving the spool that currently supports the glasses."
+      }
     }
-  ],
-  "source": "Staged permutation of S0041 and S0045, using the same objects in a different arrangement."
+  ]
 }

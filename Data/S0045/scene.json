@@ -5,92 +5,153 @@
     "images/02.jpg",
     "images/03.jpg"
   ],
-  "scene_description": "Scuffed, paint-stained wooden workbench. An empty filament spool lies flat with clear safety glasses resting on its top flange. An orange scraper lies flat with its blade end tucked under the front of the spool. Front is the bench edge nearest the viewer.",
-  "targets": [
+  "scene_description": "A brown cardboard ELEGOO filament spool lies flat on a scuffed wooden workbench with clear safety glasses resting across its upper flange and center hole. An orange scraper lies beneath the front lower rim: its narrow handle is underneath the spool and its broad head projects toward the camera.",
+  "examples": [
     {
-      "target_id": "T001",
-      "name": "filament spool",
-      "description": "Empty brown cardboard ELEGOO filament spool lying flat, with the glasses on top and the scraper under its front rim.",
-      "approximate_dimensions_m": {
-        "width": 0.19,
-        "depth": 0.19,
-        "height": 0.07,
-        "measurement_type": "measured"
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the empty brown ELEGOO filament spool and carry it to a nearby recycling collection tray. The scraper and glasses will remain in the work area.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and handles one object at a time. It grips an exposed upper-flange segment between opposing jaw contacts and initially lifts vertically. Assume compatible jaw opening, tip clearance, reach and payload. It transports only the spool and does not collect the glasses first.",
+        "status_context": null
       },
-      "orientation": "lying flat",
-      "nearby_obstacles": [
-        "Safety glasses resting on top",
-        "Scraper under its front rim"
-      ],
-      "physically_blocked": true,
-      "clearance_notes": "Side rims are open, but the glasses cover the top and center hole.",
-      "manipulation_factors": [
-        "under_another_object",
-        "partially_obstructed"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "move_obstacle",
-          "direction": null,
-          "distance_cm": null,
-          "description": "Lift the safety glasses off the spool and set them on the bench."
-        }
-      ],
-      "other_notes": "Spool is empty and may need to be replaced."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "clear safety glasses resting across the upper flange and center hole of the brown ELEGOO spool",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 0.1,
+                "unit": "meters",
+                "reference_object": "brown ELEGOO filament spool resting over the orange scraper handle"
+              }
+            },
+            "constraints": [
+              "Lift the frame free of the flange rather than scrape the lenses along it",
+              "Keep the glasses supported by hand and clear of the spool motion until it has been moved",
+              "Do not leave the glasses balanced on the flange edge"
+            ],
+            "context": "Remove the glasses from the spool before its support is moved."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The glasses rest on the upper flange of the spool the robot will transport.",
+        "rationale": "Removing the supported glasses first prevents their being carried or dropped with the spool. The vertical initial lift releases the scraper handle beneath the lower flange without sweeping the scraper sideways.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "All three unchanged photographs were visually reviewed; only image 01 is supplied as input. Task contexts and task-specific grasp capabilities are authored scenario assumptions, not robot logs or measured outcomes. Legacy T001. The collector supplied a 10 cm rightward displacement with the spool as reference. The move uses direction plus reference_object, preserving displacement semantics. The human supports the relocated glasses clear of the spool through its removal or repositioning; no unprovided numeric vertical drop is invented. REVIEW BEFORE SFT: verify frame clearance at the supplied lateral offset; a modeled anchor shift alone does not verify that the entire glasses frame clears the spool. The scraper handle is under the lower rim and the broad head projects toward the camera, contrary to the old blade-under wording. No separate scraper move is needed for the stated vertical spool pickup."
+      }
     },
     {
-      "target_id": "T002",
-      "name": "3D print scraper",
-      "description": "Orange plastic 3D print scraper lying flat in front of the spool, its blade end tucked under the spool's lower rim.",
-      "approximate_dimensions_m": {
-        "width": 0.05,
-        "depth": 0.12,
-        "height": 0.005,
-        "measurement_type": "measured"
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the orange plastic 3D-print scraper and carry it to a nearby tool tray. The empty spool and safety glasses will remain in the work area.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and handles one object at a time. It pinches the narrow scraper handle with opposing jaw contacts above and below it. The lower jaw approaches from the open bench front. Assume compatible reach, jaw-tip clearance, opening and payload; the robot does not move another object before this pickup.",
+        "status_context": null
       },
-      "orientation": "lying flat",
-      "nearby_obstacles": [
-        "Filament spool resting on its blade end"
-      ],
-      "physically_blocked": true,
-      "clearance_notes": "Handle is exposed, but the blade is pinned under the spool and it is only 0.5 cm thick.",
-      "manipulation_factors": [
-        "under_another_object",
-        "awkward_orientation"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "move_obstacle",
-          "direction": null,
-          "distance_cm": null,
-          "description": "Lift the spool off the scraper, then slide the scraper out."
-        }
-      ],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "clear safety glasses resting across the upper flange and center hole of the brown ELEGOO spool",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 0.1,
+                "unit": "meters",
+                "reference_object": "brown ELEGOO filament spool resting over the orange scraper handle"
+              }
+            },
+            "constraints": [
+              "Lift the frame free of the flange rather than scrape the lenses along it",
+              "Keep the glasses supported by hand and clear of the spool motion until it has been moved",
+              "Do not leave the glasses balanced on the flange edge"
+            ],
+            "context": "Remove the glasses from the spool before its support is moved."
+          },
+          {
+            "target_object": "brown ELEGOO filament spool resting over the orange scraper handle",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift the lower rim clear of the handle rather than drag the cardboard across the scraper",
+              "Leave the empty spool supported on the bench",
+              "Keep the relocated glasses clear of the spool"
+            ],
+            "context": "Release the scraper handle from beneath the lower spool rim."
+          },
+          {
+            "target_object": "orange plastic scraper after its handle has been freed from beneath the spool",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the scraper flat",
+              "Leave enough of it supported on the bench for a stable edge grasp"
+            ],
+            "context": "Expose the handle over the front bench edge for the claw pickup."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The scraper handle is pinned beneath the spool, and the thin handle lacks underside jaw clearance on the bench. Glasses rest on the support that must be moved.",
+        "rationale": "Clear the glasses before moving their support, shift the spool to release the handle, then expose the scraper at the front edge. The robot can then collect only the scraper.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "All three unchanged photographs were visually reviewed; only image 01 is supplied as input. Task contexts and task-specific grasp capabilities are authored scenario assumptions, not robot logs or measured outcomes. Legacy T002. The collector supplied a 10 cm rightward displacement with the spool as reference. The move uses direction plus reference_object, preserving displacement semantics. The human supports the relocated glasses clear of the spool through its removal or repositioning; no unprovided numeric vertical drop is invented. REVIEW BEFORE SFT: verify frame clearance at the supplied lateral offset; a modeled anchor shift alone does not verify that the entire glasses frame clears the spool. On 2026-10-27 the collector supplied spool 10 cm camera-left and scraper 10 cm toward the camera. The scraper displacement is encoded as backward in the frozen camera heading. The photographed broad head projects outward while the narrow handle is under the spool; the original annotation reversed those ends. REVIEW BEFORE SFT: confirm that the freed handle, rather than only the broad head, has the required underside purchase after the supplied edge slide."
+      }
     },
     {
-      "target_id": "T003",
-      "name": "safety glasses",
-      "description": "Clear plastic safety glasses resting on top of the spool's upper flange, lens edge across the center hole.",
-      "approximate_dimensions_m": {
-        "width": 0.17,
-        "depth": 0.06,
-        "height": 0.07,
-        "measurement_type": "measured"
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the clear safety glasses resting on top of the spool and carry them to a nearby protective-equipment tray. The spool and scraper will remain on the workbench.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and handles one object at a time. It pinches an exposed solid frame section with opposing jaws and lifts the glasses clear of the upper flange. It avoids lens contacts. Assume frame localization and compatible jaw opening, tip clearance, reach, payload and controlled closing force.",
+        "status_context": null
       },
-      "orientation": "lying flat on top of the spool",
-      "nearby_obstacles": [
-        "Filament spool underneath"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Fully exposed on top of the spool; clear plastic is hard to see.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear preparatory change is necessary for the stated frame grasp.",
+        "rationale": "The glasses are the upper object with exposed frame surfaces; lifting them does not require moving their spool support.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "All three unchanged photographs were visually reviewed; only image 01 is supplied as input. Task contexts and task-specific grasp capabilities are authored scenario assumptions, not robot logs or measured outcomes. Legacy T003 is labeled accessible. No invented lens cleaning, arm opening, special gripper or spool movement is added."
+      }
     }
-  ],
-  "source": "Staged permutation of S0041 and S0043, using the same objects in a different arrangement."
+  ]
 }

@@ -6,79 +6,166 @@
     "images/03.jpg"
   ],
   "scene_description": "Light gray wood-grain desk along a wall with a power-outlet strip at its back edge. A charger block is plugged into the outlet strip at the back edge, and a whiteboard eraser stands on its end, leaning against the charger. Front is the edge away from the wall.",
-  "targets": [
+  "examples": [
     {
-      "target_id": "T001",
-      "name": "whiteboard eraser",
-      "description": "Gray felt whiteboard eraser standing on its short end at the back of the desk, leaning against the plugged-in charger.",
-      "approximate_dimensions_m": {
-        "width": 0.055,
-        "depth": 0.13,
-        "height": 0.025,
-        "measurement_type": "measured"
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the gray felt whiteboard eraser and carry it to a nearby whiteboard tray. The black charger will stay connected in the outlet strip.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and handles one object at a time. It uses a downward approach and a low horizontal edge grasp on the eraser body. It does not balance or reorient an object before closing the jaws.",
+        "status_context": null
       },
-      "orientation": "leaning, standing on its end against the charger",
-      "nearby_obstacles": [
-        "Charger block behind it",
-        "Outlet strip behind it"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Front and sides are open, but it is balanced on its end and may tip.",
-      "manipulation_factors": [
-        "awkward_orientation",
-        "against_wall",
-        "far_from_accessible_edge"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "rotate_target",
-          "direction": null,
-          "distance_cm": null,
-          "description": "Lay the eraser flat on the desk."
-        },
-        {
-          "action": "translate_target",
-          "direction": "toward_front_of_desk",
-          "distance_cm": 15,
-          "description": "Move the eraser approximately 15 cm toward the front, away from the strip."
-        }
-      ],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "gray felt whiteboard eraser standing on its short end against the charger at the back of the desk",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.2,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Support the eraser by hand during relocation so it cannot tip against the charger",
+              "Keep it supported on the desk at the end of this move"
+            ],
+            "context": "Separate the eraser from the charger and bring it toward the front pickup area."
+          },
+          {
+            "target_object": "gray whiteboard eraser after its 20 cm move toward the camera",
+            "action": {
+              "type": "rotate",
+              "qualifiers": {
+                "axis": "x",
+                "angle": 90,
+                "unit": "degrees",
+                "direction": "counterclockwise",
+                "viewing_convention": "from_positive_axis",
+                "pivot_offset_m": [
+                  0,
+                  -0.065,
+                  -0.0125
+                ]
+              }
+            },
+            "constraints": [
+              "Control the tip by hand",
+              "Leave the eraser flat and supported on the desk"
+            ],
+            "context": "Tip the eraser toward the camera until it lies flat for the pickup."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The eraser is leaning on the charger at the rear of the desk, rather than lying flat in the planned pickup area.",
+        "rationale": "Moving the eraser separates it from the fixed charger; a controlled tip then provides the flat pickup orientation.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not observed robot logs. All three unchanged photographs were visually reviewed; only image 01 is supplied to the VLM. On 2026-10-27 the collector authorized reuse of existing numeric candidate distances as measured or deliberately staged. Legacy T001. The collector specified 20 cm toward the camera followed by an approximate 90-degree tip toward the camera. The captured X axis with counterclockwise/from_positive_axis maps an initially upright long axis toward camera-backward. REVIEW BEFORE SFT: the initial lean and captured 3D pose are not measured. Pivot [0,-0.065,-0.0125] assumes the anchor is the body midpoint, the recorded 13 cm dimension is vertical, and the 2.5 cm dimension is depth; it models rotation about the lower camera-near edge so the idealized final body contacts the desk. The quarter-turn is a collector-authorized approximation, not a measured pose correction. Tipping adds a backward center shift beyond the separate 20 cm translation. "
+      }
     },
     {
-      "target_id": "T002",
-      "name": "charger block",
-      "description": "Small black charger block plugged into the outlet strip along the back edge, with the whiteboard eraser leaning on its front.",
-      "approximate_dimensions_m": {
-        "width": 0.025,
-        "depth": 0.07,
-        "height": 0.055,
-        "measurement_type": "measured"
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the black charger block and carry it to a nearby electronics storage tray. The eraser will remain on the desk.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and handles one object at a time. It uses an opposing-side grasp on the insulated charger body for transport. Socket extraction and handling a second object are outside this transport routine.",
+        "status_context": null
       },
-      "orientation": "upright, plugged into the outlet strip",
-      "nearby_obstacles": [
-        "Whiteboard eraser leaning on its front",
-        "Outlet strip it is plugged into"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "The eraser covers most of its front; it is held in the outlet at the very back.",
-      "manipulation_factors": [
-        "partially_obstructed",
-        "against_wall",
-        "far_from_accessible_edge"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "move_obstacle",
-          "direction": "toward_front_of_desk",
-          "distance_cm": null,
-          "description": "Move the eraser away from the charger, then unplug the charger."
-        }
-      ],
-      "other_notes": "Plugged in; must be unplugged before it is moved."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "gray felt whiteboard eraser standing on its short end against the charger at the back of the desk",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.2,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Support the eraser by hand during relocation so it cannot tip against the charger",
+              "Keep it supported on the desk at the end of this move"
+            ],
+            "context": "Separate the eraser from the charger and bring it toward the front pickup area."
+          },
+          {
+            "target_object": "gray whiteboard eraser after its 20 cm move toward the camera",
+            "action": {
+              "type": "rotate",
+              "qualifiers": {
+                "axis": "x",
+                "angle": 90,
+                "unit": "degrees",
+                "direction": "counterclockwise",
+                "viewing_convention": "from_positive_axis",
+                "pivot_offset_m": [
+                  0,
+                  -0.065,
+                  -0.0125
+                ]
+              }
+            },
+            "constraints": [
+              "Control the tip by hand",
+              "Leave the eraser flat and supported on the desk"
+            ],
+            "context": "Tip the eraser toward the camera until it lies flat for the pickup."
+          },
+          {
+            "target_object": "black charger block plugged into the white outlet strip at the back of the desk",
+            "action": {
+              "type": "detach",
+              "qualifiers": {
+                "reference_object": "white power-outlet strip along the back edge of the desk"
+              }
+            },
+            "constraints": [
+              "Grip the insulated charger body",
+              "Withdraw its prongs fully from the socket before translating along the desk"
+            ],
+            "context": "Disconnect the charger before the robot collects it for transport."
+          },
+          {
+            "target_object": "black charger block after the eraser has been cleared and the charger unplugged",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Leave the charger supported on the desk",
+              "Keep it separate from the relocated eraser"
+            ],
+            "context": "Set the disconnected charger in open desk space for the body grasp."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The eraser rests against the charger, which is still connected to the fixed outlet strip.",
+        "rationale": "Clear and stabilize the eraser before unplugging its support, then prepare the disconnected charger for independent transport.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not observed robot logs. All three unchanged photographs were visually reviewed; only image 01 is supplied to the VLM. On 2026-10-27 the collector authorized reuse of existing numeric candidate distances as measured or deliberately staged. Legacy T002. The collector specified 20 cm toward the camera followed by an approximate 90-degree tip toward the camera. The captured X axis with counterclockwise/from_positive_axis maps an initially upright long axis toward camera-backward. REVIEW BEFORE SFT: the initial lean and captured 3D pose are not measured. Pivot [0,-0.065,-0.0125] assumes the anchor is the body midpoint, the recorded 13 cm dimension is vertical, and the 2.5 cm dimension is depth; it models rotation about the lower camera-near edge so the idealized final body contacts the desk. The quarter-turn is a collector-authorized approximation, not a measured pose correction. Tipping adds a backward center shift beyond the separate 20 cm translation. The charger relocation reuses the same 15 cm staged frontward preparation for this charger and desk in S0037/T001; it is a transferred preparation distance, not a separate S0039 measurement."
+      }
     }
-  ],
-  "source": "Staged permutation of S0035 and S0037, using the same objects in a different arrangement."
+  ]
 }
