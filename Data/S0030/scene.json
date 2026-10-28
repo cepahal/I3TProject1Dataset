@@ -5,84 +5,124 @@
     "images/02.jpg",
     "images/03.jpg"
   ],
-  "scene_description": "Two adjacent wire publication racks beside a glass entrance door. The upper-right shelf holds a thick newspaper stack, the middle-right shelf holds red magazines, and the lower-left shelf holds white-covered magazines.",
-  "targets": [
+  "scene_description": "Two adjacent wire publication racks beside a glass entrance door. The right rack's top shelf holds a thick newspaper stack and its middle shelf holds red Judicature magazines; the left rack's lower shelf holds white-covered magazines below a blue Chronicle sign.",
+  "examples": [
     {
-      "target_id": "T001",
-      "name": "newspaper stack",
-      "description": "Thick stack of folded publications with dark blue-green cover bands on the top shelf of the right-hand rack, above the red magazines.",
-      "approximate_dimensions_m": {
-        "width": 0.3,
-        "depth": 0.185,
-        "height": 0.16,
-        "measurement_type": "measured"
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will take the whole newspaper stack to a recycling bin.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the stack's front and back from the front of the rack; the side rails block grasps from the sides.",
+        "status_context": null
       },
-      "orientation": "lying flat",
-      "nearby_obstacles": [
-        "Wire rails on both sides",
-        "Rear rack panel"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Top and front are exposed, but the stack is set back from the front shelf rail and side rails constrain lateral access.",
-      "manipulation_factors": [
-        "far_from_accessible_edge",
-        "limited_approach_space"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "toward_front_of_shelf",
-          "distance_cm": 8,
-          "description": "Move the whole newspaper stack approximately 8 cm toward the front of its shelf while keeping it fully supported behind the front rail."
-        }
-      ],
-      "other_notes": "Target and dimensions refer to the entire newspaper stack, not a single publication. The visible upper and lower bundles are treated together."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "thick newspaper stack on the top shelf of the right rack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.08,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the stack together",
+              "Keep it supported behind the front rail"
+            ],
+            "context": "Bring the stack forward on its shelf for the robot's front grasp."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The stack sits set back from the front rail, with side rails limiting access.",
+        "rationale": "A short slide forward brings its front edge within the robot's grasp.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T001, 8 cm toward the front. Distances are reused from the legacy target annotation. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward."
+      }
     },
     {
-      "target_id": "T002",
-      "name": "red magazine stack",
-      "description": "Stack of red Judicature magazines on the middle shelf of the right rack, directly below the newspaper stack.",
-      "approximate_dimensions_m": {
-        "width": 0.215,
-        "depth": 0.28,
-        "height": 0.055,
-        "measurement_type": "measured"
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will take the stack of red Judicature magazines to a lobby table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the stack's front edge from the front of the rack.",
+        "status_context": null
       },
-      "orientation": "lying flat",
-      "nearby_obstacles": [
-        "Wire shelf above",
-        "Side and front shelf rails"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Front edges and much of the top are exposed. The rack restricts some side and overhead approaches, but a front approach remains open.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": "Dimensions refer to the complete 21.5 x 28 x 5.5 cm stack. No obvious repositioning is needed for general access; rack constraints depend on the intended approach."
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The stack's front edge and top are exposed with a clear front approach.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T002."
+      }
     },
     {
-      "target_id": "T003",
-      "name": "white magazine stack",
-      "description": "Stack of white-covered magazines with a dark head silhouette and red lower bands on the lower shelf of the left rack, below the blue Chronicle sign.",
-      "approximate_dimensions_m": {
-        "width": 0.215,
-        "depth": 0.28,
-        "height": 0.035,
-        "measurement_type": "measured"
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will take the stack of white-covered magazines to a lobby table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the stack's front edge from the front of the rack.",
+        "status_context": null
       },
-      "orientation": "lying flat",
-      "nearby_obstacles": [
-        "Wire shelf above",
-        "Side and front shelf rails"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Front and top of the stack are visible, with space above it. Rails restrict some approach directions, but the front remains accessible.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": "Dimensions refer to the complete 21.5 x 28 x 3.5 cm stack. Target excludes the separate newspaper visible farther back on another shelf."
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The stack's front and top are exposed with space above it.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T003."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will read the cover of the top red Judicature magazine for a display check. It will not touch anything.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume the magazine cover is visible from its planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is needed for this visual check.",
+        "rationale": "The top cover faces up at the front of its shelf.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. New non-contact task for this revision."
+      }
     }
-  ],
-  "source": ""
+  ]
 }

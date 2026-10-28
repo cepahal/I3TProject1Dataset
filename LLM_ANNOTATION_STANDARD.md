@@ -1,8 +1,8 @@
-# LLM Annotation Standard
+# LLM Annotation Standard (SamARitan)
 
-This file makes `scene.json` output look the same no matter which LLM (Claude, ChatGPT, Gemini, etc.) writes it. The [README](README.md) explains *what* to annotate; this file fixes *how* the JSON is written: exact keys, value formats, vocabulary, and length limits.
+This file keeps `scene.json` output consistent no matter which LLM (Claude, ChatGPT, Gemini, etc.) writes it. It follows the *SamARitan Dataset Collection Instructions v3*: each scene holds training pairs that ask what a person should change, if anything, so that an upcoming or ongoing human–robot interaction goes safely and reliably. Scenes S0001–S0005 are the reference examples.
 
-To use it, paste the **Prompt** section below into the model along with the scene photos and your measurements. Then check the output against the **Checklist** before adding it to `Data/`.
+To use it, paste the **Prompt** below into the model together with the scene photos and any facts you know (measurements, staged distances, collector notes). Before adding the result to `Data/`, check it against the **Checklist**.
 
 ---
 
@@ -11,147 +11,160 @@ To use it, paste the **Prompt** section below into the model along with the scen
 Copy everything inside this block into the model:
 
 ~~~text
-You are annotating one scene for the Manipulation Scene Bank. Output ONE JSON object and nothing else:
+You are writing one scene.json for the SamARitan dataset. Output ONE JSON object and nothing else:
 no Markdown fences, no comments, no text before or after it.
 
-Inputs I will give you:
-- Scene ID (e.g. S0031) and 1+ photos of the same unchanged setup, in order (01, 02, 03...).
-- Object measurements in cm, if I have them.
-- Optionally: "Staged permutation of <scene IDs>" if the same objects appear in other scenes.
+GOAL
+Each example is a training pair. The input is what a vision-language model sees at run time (one
+photo plus task, robot and status context). The output is an ordered list of guidance specs: the
+small physical changes a person should make now to prevent a foreseeable problem, or to fix one
+that is already happening. If no change is needed, the list is empty ([]). Look for problems the
+robot might not notice or could only fix at much greater cost: spills, cords pulling equipment,
+objects being knocked over, blocked grasps, hidden labels, unstable stacks.
 
-Follow these rules exactly:
+INPUTS I WILL GIVE YOU
+- Scene ID (e.g. S0046) and 1+ photos of the same unchanged scene, named images/01.jpg, 02.jpg...
+- Optional: measured object sizes, staged or measured move distances, and collector notes.
 
-STRUCTURE
-- Keys and key order must match the TEMPLATE below exactly. Do not add, rename, or drop keys.
-- 2-space indentation, double quotes, no trailing commas, UTF-8.
-- "images" lists every photo as "images/01.jpg", "images/02.jpg", ... (lowercase .jpg, two digits).
-- target_id values are "T001", "T002", ... in order, with no gaps.
-
-VALUES
-- Unknown scalar -> null. Empty list -> []. Yes/no -> true/false (never strings).
-- Dimensions are in METERS (12 cm -> 0.12). Record them as measured with the object upright,
-  even if it is lying on its side in this scene.
-- measurement_type: "measured" (I measured it), "known" (spec sheet/label), "estimated"
-  (judged from the photo), or "unknown" (then width/depth/height are all null).
-- distance_cm: a number only if you are at least 80% confident, using known object sizes as a
-  ruler. Otherwise null. Never guess to fill the field.
-- generic_improvement_needed is true if and only if candidate_improvements is non-empty.
-- physically_blocked is true only if another object rests on or fully blocks the target.
-
-VOCABULARY
-- manipulation_factors may only use:
-  far_from_accessible_edge, low_side_clearance, low_overhead_clearance, against_wall,
-  partially_obstructed, fully_obstructed, under_another_object, surrounded_by_clutter,
-  awkward_orientation, limited_approach_space
-  If nothing applies, use [] (do not use open_clearance or isolated_target).
-- action may only be: translate_target, rotate_target, move_obstacle, reconfigure_target.
-- direction is snake_case and starts with one of:
-  left, right, toward_front, toward_back, away_from_wall, away_from_<object>,
-  off_<object>, out_of_<container>, toward_center
-  e.g. "toward_front_of_shelf", "away_from_red_can". Use null for rotations or when no
-  single direction fits.
-- orientation starts with one of: "upright", "lying flat", "lying on its side",
-  "upside down", "leaning", "tilted", "tipped up", optionally followed by ", <short detail>".
-- source is exactly "locally collected scene", or
-  "Staged permutation of S00XX and S00YY, using the same objects in a different arrangement."
-
-WRITING
-- Directions (front/back/left/right) are as seen facing the surface; front is its open,
-  accessible edge. Say this once at the end of scene_description. Never refer to a
-  specific photo ("in 01.jpg", "in the second image").
-- Only mention objects that are targets, plus fixed structures that affect access (walls,
-  panels, shelf rails). Leave out background clutter, items on other shelves, people, etc.
-- Each target "description" must single out that object: color + type + label text if
-  any + position relative to the surface and neighboring objects.
-- Length limits (characters, including spaces):
-    scene_description        <= 300  (2-4 sentences)
-    target description       <= 200  (1 sentence)
-    clearance_notes          <= 120  (1 sentence)
-    improvement description  <= 120  (1 sentence, starts with a verb, includes the distance
-                                      as "approximately N cm" when distance_cm is set)
-    other_notes              <= 80   ("" if there is nothing important to add)
-- Do not invent problems. Easy targets get manipulation_factors [],
-  generic_improvement_needed false, candidate_improvements [].
-- Do not reason about a specific robot's reach, payload, or gripper size.
-
-TEMPLATE
+STRUCTURE (keys in exactly this order)
 {
-  "scene_id": "S0000",
-  "images": [
-    "images/01.jpg"
-  ],
-  "scene_description": "",
-  "targets": [
+  "scene_id": "S0046",
+  "images": ["images/01.jpg", "images/02.jpg"],
+  "scene_description": "<1-3 plain sentences naming the visible objects and where they are>",
+  "examples": [
     {
-      "target_id": "T001",
-      "name": "",
-      "description": "",
-      "approximate_dimensions_m": {
-        "width": null,
-        "depth": null,
-        "height": null,
-        "measurement_type": "unknown"
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "<QUESTION, copied exactly>",
+        "task_context": "<what the robot will do next>",
+        "robot_context": "<ROBOT BASE SENTENCE> <task-specific capability assumptions>",
+        "status_context": null
       },
-      "orientation": "",
-      "nearby_obstacles": [],
-      "physically_blocked": false,
-      "clearance_notes": "",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "toward_front_of_shelf",
-          "distance_cm": null,
-          "description": ""
-        }
-      ],
-      "other_notes": ""
+      "vlm_output": { "guidance_specs": [] },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "<the foreseeable issue, or that none requires a change>",
+        "rationale": "<why this change, or no change, is right>",
+        "information_sources": ["headset_visual", "task_context", "robot_context"],
+        "notes": "<NOTES BASE> <legacy/provenance details>"
+      }
     }
-  ],
-  "source": "locally collected scene"
+  ]
 }
+
+QUESTION (use this exact text in every example):
+Given the image and the task, robot, and status context, what should the human change, if anything,
+to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered
+guidance_specs array; use an empty array if no intervention is needed.
+
+ROBOT BASE SENTENCE (first sentence of every robot_context):
+The robot has one claw gripper with parallel jaws and manipulates one object at a time.
+
+NOTES BASE (first sentences of every review.notes):
+Task and robot contexts are authored scenario assumptions, not recorded robot observations. All
+listed photographs were visually reviewed; this example uses only the named input image. Robot
+hardware follows the dataset-wide assumption of one claw gripper with parallel jaws.
+
+WHAT GOES IN THE INPUT
+- task_context: a specific task. Say what will happen to which object, where it goes, and what stays
+  put. Name the robot's target, but not the object the person should change.
+- robot_context: the base sentence, then capability facts the task depends on (how it grips, which
+  side it approaches from, what it cannot do, such as unplug cords or operate caps while holding).
+- status_context: null before the task. For a "during" example, give the assumed task facts
+  (e.g. "The robot paused after its jaw touched the tape roll") and add "status_context" to
+  information_sources.
+- NEVER put the problem, the fix, or the reason for intervening in the input.
+
+GUIDANCE SPECS (the output)
+Each spec is {"target_object", "action": {"type", "qualifiers"}, "constraints", "context"}.
+- target_object: the object the PERSON acts on (often not the robot's target). It must uniquely
+  identify a visible object: color, type, label text, position, neighbors.
+- action.type must be one of these six. Do not use any other type.
+    move     {"direction": "left|right|forward|backward|up|down", "distance": <meters>, "unit": "meters"}
+    rotate   {"axis": "x|y|z", "angle": <degrees>, "unit": "degrees",
+              "direction": "clockwise|counterclockwise", "viewing_convention": "from_positive_axis"}
+    interact {"operation": "<e.g. switch_on, switch_off>"}       e.g. turn on a light switch
+    close    {}                                                   e.g. close a box lid or a flip cap
+    clean    {"method": "<e.g. wipe>", "end_state": "<e.g. dry>"} e.g. wipe up a spill on the floor
+    detach   {"reference_object": "<what it is detached from>"}   e.g. unplug a cord from an outlet
+- Directions are global, along the captured camera heading of the named input image (photo 01 is
+  always the front view), gravity-aligned, matching S0001-S0005: right/left = camera right/left;
+  backward = toward the camera (the person's side); forward = away from the camera, along its
+  heading; up/down = gravity. This holds even when the surface sits at an angle in the photo:
+  "toward the front edge of the table" is "backward". For rotations, x = camera right, y = up,
+  z = along the camera heading (away from the camera).
+- One spec carries one direction. Describe a diagonal move as two separate specs (e.g. left, then
+  backward), and lifting something off a stack as a sideways move plus a down move.
+- constraints: short, descriptive (e.g. "Keep the bottle upright"). They are not executed.
+- context: one sentence on why this step helps the upcoming interaction.
+- List several specs in the order the person should do them (e.g. close the cap, then move the
+  bottle; unplug the cord, then move the sharpener).
+
+NUMBERS
+- Give a distance or angle only when it is defensible: measured, deliberately staged, or derived
+  from measured sizes. Never invent meters or degrees from the photo alone.
+- If a move is needed but no defensible distance exists, set "distance": null and say so in notes.
+  The collector must supply a value before the example is used with the composer.
+
+REVIEW LABELS (dataset-only; never shown to the model)
+- phase: "before" or "during".
+- category: "efficacy_remediation" (task success, blocked grasp, retry), "safety_from_robot"
+  (the robot could spill, knock over or drag something), or "safety_for_robot".
+- problem / rationale: one or two sentences each.
+- notes: the NOTES BASE, then where the target and distances came from (e.g. "Legacy T003, 10 cm
+  toward the camera, encoded backward"), how directions were encoded, and any collector notes.
+
+EXAMPLES TO INCLUDE PER SCENE
+- At least one example per useful target, each with a specific task.
+- No-change examples are required: the same object can need a fix for one task and none for
+  another (e.g. carrying an open box vs. picking one item from it; non-contact reading tasks).
+- Where it fits, add a "during" example that uses status_context.
+- Don't invent problems because a scene is cluttered, and don't describe background objects that
+  play no part in any task.
 ~~~
 
 ---
 
-## Example target
+## Example
 
-From [Data/S0021/scene.json](Data/S0021/scene.json):
+From [Data/S0025/scene.json](Data/S0025/scene.json): a plugged-in pencil sharpener stands in the path of a tray the robot will pull forward.
 
 ~~~json
 {
-  "target_id": "T002",
-  "name": "purple coffee can",
-  "description": "Unopened purple 'Chameleon Latte classic' can in the back-left corner, standing directly in front of the leaning notebook.",
-  "approximate_dimensions_m": {
-    "width": 0.05,
-    "depth": 0.05,
-    "height": 0.14,
-    "measurement_type": "measured"
+  "example_id": "E004",
+  "vlm_input": {
+    "image": "images/01.jpg",
+    "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+    "task_context": "The robot will pull the letter tray of paper straight forward off the wall and carry it level to a printer station.",
+    "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the tray's front edge and drags it straight toward the front before lifting; it cannot steer around objects in that path.",
+    "status_context": null
   },
-  "orientation": "upright",
-  "nearby_obstacles": [
-    "Notebook touching it from behind",
-    "White left panel about 2 cm to its left"
-  ],
-  "physically_blocked": false,
-  "clearance_notes": "Open to the front and right, but boxed in by the notebook behind and the panel on its left.",
-  "manipulation_factors": [
-    "limited_approach_space",
-    "low_side_clearance",
-    "far_from_accessible_edge"
-  ],
-  "generic_improvement_needed": true,
-  "candidate_improvements": [
-    {
-      "action": "translate_target",
-      "direction": "toward_front_of_desk",
-      "distance_cm": 10,
-      "description": "Move the purple can approximately 10 cm toward the front of the desk, out of the corner."
-    }
-  ],
-  "other_notes": ""
+  "vlm_output": {
+    "guidance_specs": [
+      {
+        "target_object": "power plug on the end of the electric pencil sharpener's black cord",
+        "action": {"type": "detach", "qualifiers": {"reference_object": "wall outlet the sharpener's cord runs to beyond the right end of the table"}},
+        "constraints": ["Pull the plug itself, not the cord", "Leave the sharpener standing where it is"],
+        "context": "Unplug the sharpener before it is moved so its cord cannot drag across the table."
+      },
+      {
+        "target_object": "black electric pencil sharpener with a clear shavings bin in front of the letter tray",
+        "action": {"type": "move", "qualifiers": {"direction": "right", "distance": 0.15, "unit": "meters"}},
+        "constraints": ["Keep it upright so the shavings stay in the bin"],
+        "context": "Move the sharpener out of the tray's forward path."
+      }
+    ]
+  },
+  "review": {
+    "phase": "before",
+    "category": "safety_from_robot",
+    "problem": "The pencil sharpener stands in front of the tray's right half, in the robot's straight pull path.",
+    "rationale": "Moving the small sharpener aside is easier than re-planning the pull; it must be unplugged first.",
+    "information_sources": ["headset_visual", "task_context", "robot_context"],
+    "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. ... Legacy T004, 15 cm right. ..."
+  }
 }
 ~~~
 
@@ -161,31 +174,28 @@ From [Data/S0021/scene.json](Data/S0021/scene.json):
 
 ~~~text
 Data/
-  S0031/
+  S0046/
     scene.json
     images/
       01.jpg
       02.jpg
-      03.jpg
 ~~~
 
-- The folder name, `scene_id`, and the `images` list must all match.
-- Photos are renamed to `01.jpg`, `02.jpg`, ... in the order they were taken. Use lowercase `.jpg`; convert iPhone `.HEIC` photos to JPG first.
-- Store each photo once, even if it has several targets.
+- The folder name and `scene_id` match, and `images` lists every file in `images/`.
+- Name photos `01.jpg`, `02.jpg`, ... in the order they were taken, in lowercase `.jpg`. Convert iPhone `.HEIC` photos first.
+- Store only photos of the initial, unchanged scene. Don't store after photos.
 
 ---
 
 ## Checklist
 
-Before adding a scene, check that:
-
-- [ ] The output is valid JSON with exactly the template's keys, in the template's order.
-- [ ] `scene_id` matches the folder name, and `images` matches the files in `images/`.
-- [ ] Target IDs run `T001`, `T002`, ... with no gaps.
-- [ ] Dimensions are in meters, and `measurement_type` says where they came from.
-- [ ] Every `manipulation_factors` entry and `action` comes from the allowed lists.
-- [ ] `generic_improvement_needed` is `true` exactly when there are candidate improvements.
-- [ ] Every number in `distance_cm` is one you would bet on; otherwise it is `null`.
-- [ ] No text field goes over its length limit, and nothing refers to a specific photo.
-- [ ] Background objects that aren't targets aren't described.
-- [ ] Easy targets are left as easy, with no invented problems.
+- [ ] Valid JSON with exactly the keys above, in that order.
+- [ ] Every example's `question` matches the fixed text, and its `image` is one of the scene's photos.
+- [ ] Every `robot_context` starts with the robot base sentence, and every `notes` starts with the notes base.
+- [ ] No input field states the problem, the fix, or the reason to intervene.
+- [ ] Every `action.type` is `move`, `rotate`, `interact`, `close`, `clean` or `detach`, with the qualifiers shown.
+- [ ] Directions are from the person's viewpoint in the named image (toward the camera = `backward`, as in S0001–S0005), and diagonal moves are split into two specs.
+- [ ] Every distance and angle is measured, staged or derived from measurements; any `null` is explained in the notes.
+- [ ] Multi-step fixes are in the order the person should do them.
+- [ ] The scene includes no-change examples, and `status_context` is filled in exactly when `phase` is `during`.
+- [ ] Every target and reference object is uniquely identifiable in the named image.

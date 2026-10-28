@@ -5,105 +5,163 @@
     "images/02.jpg",
     "images/03.jpg"
   ],
-  "scene_description": "A wrapped lemon loaf rests on the lid of a tan food container on a gray table. The blue chip bag lies separately behind the container.",
-  "targets": [
+  "scene_description": "A clear-wrapped lemon loaf rests on the lid of a tan food container on a gray table. The blue chip bag lies separately behind the container.",
+  "examples": [
     {
-      "target_id": "T001",
-      "name": "food container",
-      "description": "Tan square container with a clear lid in front of the blue bag, supporting the lemon loaf package.",
-      "approximate_dimensions_m": {
-        "width": 0.165,
-        "depth": 0.165,
-        "height": 0.07,
-        "measurement_type": "measured"
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will carry the tan food container to a refrigerator. The loaf and bag will stay on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the container's sides from the front edge of the table and cannot carry items resting on it.",
+        "status_context": null
       },
-      "orientation": "lying flat",
-      "nearby_obstacles": [
-        "Lemon loaf resting on the lid"
-      ],
-      "physically_blocked": true,
-      "clearance_notes": "Front and side faces are exposed; the loaf covers and loads part of the lid. The target is set back from the front accessible edge; bringing it forward could reduce the approach distance even though some surfaces are exposed.",
-      "manipulation_factors": [
-        "under_another_object",
-        "partially_obstructed",
-        "far_from_accessible_edge"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "move_obstacle",
-          "direction": "to_clear_tabletop_right_of_container",
-          "distance_cm": 20,
-          "description": "Lift the lemon loaf package off the container and place it roughly 20 cm to the right on clear tabletop."
-        },
-        {
-          "action": "translate_target",
-          "direction": "toward_front_of_table",
-          "distance_cm": 15,
-          "description": "After removing the lemon loaf, move the food container approximately 15 cm toward the front edge of the table, into a clear position while keeping the entire object supported."
-        }
-      ],
-      "other_notes": "Front means the foreground edge in images/01.jpg."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "clear-wrapped lemon loaf lying on the lid of the tan food container",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 0.2,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift it off the container",
+              "Set it flat on clear table"
+            ],
+            "context": "Clear the loaf off the container lid."
+          },
+          {
+            "target_object": "tan clear-lidded food container in front of the blue bag",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep it level and fully supported"
+            ],
+            "context": "Bring the container toward the front edge for the robot's approach."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The loaf rests on the container's lid, and the container sits back from the front edge.",
+        "rationale": "Clearing the loaf, then sliding the container forward, leaves one object within reach.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T001: loaf 20 cm right, then container 15 cm toward the front. Distances are reused from the legacy target annotation. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward."
+      }
     },
     {
-      "target_id": "T002",
-      "name": "blue chip bag",
-      "description": "Blue snack bag lying directly on the table behind the food container and loaf.",
-      "approximate_dimensions_m": {
-        "width": 0.19,
-        "depth": 0.145,
-        "height": 0.05,
-        "measurement_type": "measured"
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the blue chip bag and hand it to a person.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It approaches low from the front of the table and cannot reach over the container.",
+        "status_context": null
       },
-      "orientation": "lying flat",
-      "nearby_obstacles": [
-        "Food container in front of the bag"
-      ],
-      "physically_blocked": true,
-      "clearance_notes": "Top and sides are exposed; the food container restricts a low approach from the front. It is also farther from the front table edge than the container; a forward-and-left placement can address both setback and the blocked frontal approach.",
-      "manipulation_factors": [
-        "partially_obstructed",
-        "far_from_accessible_edge"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "toward_front_left_of_table",
-          "distance_cm": 20,
-          "description": "Lift the blue bag out from behind the container and place it roughly 20 cm diagonally forward and left on clear tabletop, nearer the accessible front edge. Keep it fully supported."
-        }
-      ],
-      "other_notes": "Front-approach limitation only; access from above or another side may already be sufficient. Front refers to the foreground table edge in images/01.jpg."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "blue chip bag lying behind the food container",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.14,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift it out from behind the container",
+              "Keep it fully supported on the table"
+            ],
+            "context": "Move the bag out from behind the container."
+          },
+          {
+            "target_object": "blue chip bag lying behind the food container",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.14,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep it flat and fully supported on the table"
+            ],
+            "context": "Bring the bag toward the front edge so the robot's front approach is clear."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The food container sits in front of the bag and blocks a low frontal approach.",
+        "rationale": "Moving the light bag aside and forward is quicker than moving the loaded container.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T002 described a 20 cm diagonal placement toward the front and left. It is split into two moves of 14 cm each (left, and backward toward the camera), the components of 20 cm at 45 degrees. Distances are reused from the legacy target annotation. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward."
+      }
     },
     {
-      "target_id": "T003",
-      "name": "lemon loaf",
-      "description": "Yellow lemon loaf in clear wrapping with a black label, lying on the food container lid with no bag on top.",
-      "approximate_dimensions_m": {
-        "width": 0.15,
-        "depth": 0.105,
-        "height": 0.03,
-        "measurement_type": "measured"
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the lemon loaf and hand it to a person.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It reaches from the front edge of the table; reaching deep across the table reduces its grasp reliability.",
+        "status_context": null
       },
-      "orientation": "lying flat",
-      "nearby_obstacles": [],
-      "physically_blocked": false,
-      "clearance_notes": "Top and wrapper edges are exposed. The container supports it but does not cover it. The target is set back from the front accessible edge; bringing it forward could reduce the approach distance even though some surfaces are exposed.",
-      "manipulation_factors": [
-        "far_from_accessible_edge"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "translate_target",
-          "direction": "toward_front_of_table",
-          "distance_cm": 15,
-          "description": "Lift the loaf from the container and move the lemon loaf approximately 15 cm toward the front edge of the table, into a clear position while keeping the entire object supported."
-        }
-      ],
-      "other_notes": "The top package is unobstructed, but moving it nearer the front edge could improve approach access. Front means the foreground edge in images/01.jpg."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "clear-wrapped lemon loaf lying on the lid of the tan food container",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift it off the container",
+              "Set it flat on the table"
+            ],
+            "context": "Bring the loaf down and toward the front edge for the robot's approach."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The loaf sits on top of the container, set back from the front edge.",
+        "rationale": "One human move brings it within reach.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T003, 15 cm toward the front. Distances are reused from the legacy target annotation. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward."
+      }
     }
-  ],
-  "source": "Staged permutation of S0020 and S0022, using the same objects in a different arrangement."
+  ]
 }

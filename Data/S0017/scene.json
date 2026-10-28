@@ -5,121 +5,281 @@
     "images/02.jpg",
     "images/03.jpg"
   ],
-  "scene_description": "Wooden shelf top with curved wooden end panels against a gray wall. The two green boxes are stacked near the middle of the shelf, the upper one upside down. The white box top and the upside-down white box sit side by side on top of the stack. Front is the open edge of the shelf.",
-  "targets": [
+  "scene_description": "A wooden shelf top with curved wooden end panels against a gray wall. The two green boxes are stacked near the middle, the upper one upside down. The white box top and the upside-down white box sit side by side on top of the stack.",
+  "examples": [
     {
-      "target_id": "T001",
-      "name": "white box top",
-      "description": "White box top with blue handwritten 'HERBARIUM MICHAUX' on its front face, on the left half of the green box stack, directly beside the white box.",
-      "approximate_dimensions_m": {
-        "width": 0.13,
-        "depth": 0.19,
-        "height": 0.04,
-        "measurement_type": "measured"
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the white box top from the top of the stack and place it on a cart.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the box top across its width from above; each jaw needs free space beside the side it grips.",
+        "status_context": null
       },
-      "orientation": "lying flat, closed top facing up",
-      "nearby_obstacles": [
-        "White box touching its right side"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Front, back and left edges are exposed; it overhangs the left edge of the stack slightly.",
-      "manipulation_factors": [
-        "low_side_clearance"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "move_obstacle",
-          "direction": null,
-          "distance_cm": null,
-          "description": "Lift the white box off the stack to open up the right side of the box top."
-        }
-      ],
-      "other_notes": "Raised about 8 cm on the stacked green boxes."
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "white box top labeled 'HERBARIUM MICHAUX' on the left half of the green box stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.13,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift it off the stack",
+              "Keep it flat, closed top up"
+            ],
+            "context": "Move the box top clear of the stack onto open shelf to the left, away from the white box."
+          },
+          {
+            "target_object": "white box top labeled 'HERBARIUM MICHAUX' on the left half of the green box stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "down",
+                "distance": 0.08,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Set it flat on the shelf"
+            ],
+            "context": "Lower the box top from the stack onto the shelf."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The white box touches the box top's right side.",
+        "rationale": "Moving the box top onto the open shelf to the left of the stack leaves all of its sides clear.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T001 suggested lifting the white box off, but only about 8 cm of shelf is free right of the stack and little in front of it, while the left side has room. Distances: left by the box top's own 13 cm width, which clears its slight overhang of the stack's left edge; down by the stack height of two 4 cm green boxes. Distances are derived from the collector's measured object sizes as described above; they were not staged. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward."
+      }
     },
     {
-      "target_id": "T002",
-      "name": "white box",
-      "description": "White box turned upside down on the right half of the green box stack, directly beside the white box top.",
-      "approximate_dimensions_m": {
-        "width": 0.12,
-        "depth": 0.17,
-        "height": 0.11,
-        "measurement_type": "measured"
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will lift the upside-down white box off the stack and place it on a cart.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the box's walls from above.",
+        "status_context": null
       },
-      "orientation": "upside down, open side facing down",
-      "nearby_obstacles": [
-        "White box top touching the lower part of its left side"
-      ],
-      "physically_blocked": false,
-      "clearance_notes": "Top, front, back and right side are exposed; its sides rise well above the box top.",
-      "manipulation_factors": [],
-      "generic_improvement_needed": false,
-      "candidate_improvements": [],
-      "other_notes": "Overhangs the right edge of the stack slightly."
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The white box's top, front, back and right side are exposed and rise above the box top.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T002."
+      }
     },
     {
-      "target_id": "T003",
-      "name": "upper green box",
-      "description": "Darker green cloth-covered box with '623-683' written on its front, upside down on top of the lower green box and supporting both white objects.",
-      "approximate_dimensions_m": {
-        "width": 0.22,
-        "depth": 0.28,
-        "height": 0.04,
-        "measurement_type": "measured"
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will carry the upper green box to a storage cabinet.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the green box by its walls and cannot carry objects stacked on it.",
+        "status_context": null
       },
-      "orientation": "upside down, closed bottom facing up",
-      "nearby_obstacles": [
-        "White box top resting on it",
-        "White box resting on it",
-        "Lower green box directly underneath"
-      ],
-      "physically_blocked": true,
-      "clearance_notes": "Front and side walls are exposed, but its top is fully covered by the two white objects.",
-      "manipulation_factors": [
-        "under_another_object"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "move_obstacle",
-          "direction": null,
-          "distance_cm": null,
-          "description": "Lift the white box top and white box off the stack onto clear shelf space."
-        }
-      ],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "white box top labeled 'HERBARIUM MICHAUX' on the left half of the green box stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.13,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift it off the stack",
+              "Keep it flat, closed top up"
+            ],
+            "context": "Move the box top onto open shelf left of the stack."
+          },
+          {
+            "target_object": "white box top labeled 'HERBARIUM MICHAUX' on the left half of the green box stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "down",
+                "distance": 0.08,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Set it flat on the shelf"
+            ],
+            "context": "Lower the box top onto the shelf."
+          },
+          {
+            "target_object": "upside-down white box on the right half of the green box stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.255,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift it over the stack",
+              "Keep it upside down"
+            ],
+            "context": "Carry the white box over to sit on the relocated box top."
+          },
+          {
+            "target_object": "upside-down white box on the right half of the green box stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "down",
+                "distance": 0.04,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Rest it centered on the relocated box top"
+            ],
+            "context": "Lower the white box onto the box top."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "Both white objects rest on the upper green box.",
+        "rationale": "Clearing the two light objects is quick for the person and leaves a single box for the robot.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T003 had no distance. Only the shelf left of the stack has room for the white objects. Box top: left by its own 13 cm width, down by the stack height of two 4 cm green boxes. White box: left by 25.5 cm (the 12.5 cm between the touching objects' centers, from their 13 cm and 12 cm widths, plus the box top's 13 cm move), then down 4 cm to rest on the 4 cm box top. Distances are derived from the collector's measured object sizes as described above; they were not staged. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward."
+      }
     },
     {
-      "target_id": "T004",
-      "name": "lower green box",
-      "description": "Lighter green cloth-covered box at the bottom of the stack, resting directly on the shelf under the upper green box.",
-      "approximate_dimensions_m": {
-        "width": 0.22,
-        "depth": 0.28,
-        "height": 0.04,
-        "measurement_type": "measured"
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will carry the lower green box to a storage cabinet.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the green box by its walls and cannot carry objects stacked on it.",
+        "status_context": null
       },
-      "orientation": "lying flat",
-      "nearby_obstacles": [
-        "Upper green box and both white objects stacked on top of it"
-      ],
-      "physically_blocked": true,
-      "clearance_notes": "Only its 4 cm side walls are exposed; everything else in the scene rests on it.",
-      "manipulation_factors": [
-        "under_another_object"
-      ],
-      "generic_improvement_needed": true,
-      "candidate_improvements": [
-        {
-          "action": "move_obstacle",
-          "direction": null,
-          "distance_cm": null,
-          "description": "Remove the white objects, then lift the upper green box off the stack."
-        }
-      ],
-      "other_notes": ""
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "white box top labeled 'HERBARIUM MICHAUX' on the left half of the green box stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.13,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift it off the stack",
+              "Keep it flat, closed top up"
+            ],
+            "context": "Move the box top onto open shelf left of the stack."
+          },
+          {
+            "target_object": "white box top labeled 'HERBARIUM MICHAUX' on the left half of the green box stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "down",
+                "distance": 0.08,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Set it flat on the shelf"
+            ],
+            "context": "Lower the box top onto the shelf."
+          },
+          {
+            "target_object": "upside-down white box on the right half of the green box stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.255,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift it over the stack",
+              "Keep it upside down"
+            ],
+            "context": "Carry the white box over to sit on the relocated box top."
+          },
+          {
+            "target_object": "upside-down white box on the right half of the green box stack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "down",
+                "distance": 0.04,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Rest it centered on the relocated box top"
+            ],
+            "context": "Lower the white box onto the box top."
+          },
+          {
+            "target_object": "upper green box, upside down on top of the lower green box",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": null,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift it off the lower box",
+              "Set it flat on clear space"
+            ],
+            "context": "Clear the upper green box off the lower one."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The upper green box and both white objects are stacked on the lower green box.",
+        "rationale": "Unstacking in order from the top leaves the lower box free for the robot.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Legacy T004 had no distance. Only the shelf left of the stack has room for the white objects. Box top: left by its own 13 cm width, down by the stack height of two 4 cm green boxes. White box: left by 25.5 cm (the 12.5 cm between the touching objects' centers, from their 13 cm and 12 cm widths, plus the box top's 13 cm move), then down 4 cm to rest on the 4 cm box top. No visible free shelf area fits the upper green box's 22 x 28 cm footprint, so its move has no defensible destination or distance. Distances are derived from the collector's measured object sizes as described above; they were not staged. No defensible distance exists for at least one move, so its distance is null; it needs a staged or measured value before composer use. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward."
+      }
     }
-  ],
-  "source": "Staged permutation of S0013 and S0015, using the same objects in a different arrangement."
+  ]
 }
