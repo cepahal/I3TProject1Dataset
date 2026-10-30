@@ -1,0 +1,160 @@
+{
+  "scene_id": "S0044",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "A brown paper-wrapped Dixie Ultra napkin pack rests on a smaller blue Expo marker box on a gray table. Open black-handled scissors lie separately to the right of the stack.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the scissors and carry them to a supply tray beside a seated person. Both packages will stay on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grasps both handles together from above and carries the scissors without changing their opening. It cannot operate the scissor joint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "open black-handled scissors lying on the table to the right of the stacked packages",
+            "action": {
+              "type": "close",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Use the black handles to close the blades fully",
+              "Keep fingers clear of the cutting edges and pivot",
+              "Leave both handles accessible for pickup"
+            ],
+            "context": "Close the scissors before the robot lifts and carries them near a person."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The blades would remain spread as the robot carries the scissors near the person.",
+        "rationale": "Closing the scissors reduces the exposed cutting-edge area and spread before transport.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The nearby person is an authored task fact. The assumed transfer has clearance for the closed scissors; closing alone does not remove the tip hazard. Source photos: images/01.jpg = IMG_9752.JPG; images/02.jpg = IMG_9753.JPG; images/03.jpg = IMG_9754.JPG."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect only the blue Expo marker box and carry it to a supply cabinet. The napkin pack and scissors must remain on this table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the box body and lifts it vertically before carrying it. It cannot hold the upper package separately while lifting the lower box.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "brown paper-wrapped Dixie Ultra napkin pack resting on top of the blue Expo marker box",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.25,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Support the pack by hand and move it clear of the box onto the left side of the stack",
+              "Keep the wrapper intact and keep holding the pack for the following lowering step",
+              "Leave the scissors and marker box in place"
+            ],
+            "context": "Move the upper pack left until it is over clear tabletop beside the marker box."
+          },
+          {
+            "target_object": "brown paper-wrapped Dixie Ultra napkin pack resting on top of the blue Expo marker box",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "down",
+                "distance": 0.08,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lower the pack onto the clear tabletop to the left of the box",
+              "Release it only once its base is fully supported",
+              "Leave the scissors and marker box in place"
+            ],
+            "context": "Set the relocated pack on the table before the robot lifts the marker box."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The napkin pack rests on the box the robot will remove; it could be carried unintentionally or fall when its support is lifted.",
+        "rationale": "Removing the upper pack first lets the robot collect only the requested box.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The ordered moves separate the leftward relocation and downward placement onto the table. The target description identifies the same pack from the initial image throughout the procedure. No unseen box latch or exact marker count is asserted. Source photos: images/01.jpg = IMG_9752.JPG; images/02.jpg = IMG_9753.JPG; images/03.jpg = IMG_9754.JPG. At the collector's request on 2026-10-30, the movement distances are rough visual estimates: 0.25 m left, then 0.08 m down. These are proposed displacements estimated from the apparent object proportions and available space in the photos, not measured, calibrated, or deliberately staged distances. Absolute scale and exact endpoint clearance are unverified. This is a collector-requested exception to the v3 measurement guidance; validate these estimates in the physical setup before treating them as metric ground truth. Directions use the frozen, gravity-aligned camera heading of image 01: left/right are camera left/right and backward is toward the camera. The move must preserve tabletop support and clear the named grasp region; descriptive constraints are not executed by the composer."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect only the wrapped Dixie Ultra napkin pack and carry it to another dining table. The blue Expo box and scissors will remain here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its jaws can grip the exposed upper sides of the napkin pack without contacting the lower box. It lifts vertically, and the two packages are not attached.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The requested pack is the top item with exposed sides; the stated independent vertical lift leaves the marker box supported.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The packages being unattached and the grasp clearance are scenario assumptions, not measurements. Source photos: images/01.jpg = IMG_9752.JPG; images/02.jpg = IMG_9753.JPG; images/03.jpg = IMG_9754.JPG."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will read the exposed Expo branding on the front side of the lower box for an inventory. It will not touch the stack or scissors.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its camera can observe the exposed front side of the blue box from its planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is needed for this visual label check.",
+        "rationale": "The front-side branding is exposed even though the napkin pack rests on top of the box.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws.  Source photos: images/01.jpg = IMG_9752.JPG; images/02.jpg = IMG_9753.JPG; images/03.jpg = IMG_9754.JPG."
+      }
+    }
+  ]
+}

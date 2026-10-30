@@ -1,0 +1,110 @@
+{
+  "scene_id": "S0060",
+  "images": [
+    "images/01.jpg"
+  ],
+  "scene_description": "A dimly lit cream block wall has a toggle switch in a dark metal plate beside a brown door. The door has a curved metal pull handle and a bright window section near its upper edge.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot is inspecting the visible door-handle mounting plate for surface defects using its camera. It will capture the next inspection image without touching the door.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It relies on ambient visible light and has no illuminator. Fine surface inspection requires more light than coarse door-state detection. Assume the visible toggle switch controls functioning overhead lights in this room and the robot cannot operate it.",
+        "status_context": "The robot has reached the handle-inspection viewpoint. The room overhead lights are off."
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "light-switch toggle in the dark metal wall plate to the left of the door",
+            "action": {
+              "type": "interact",
+              "qualifiers": {
+                "operation": "switch_on"
+              }
+            },
+            "constraints": [],
+            "context": "Switch on the overhead lighting before the robot captures the next surface-inspection image."
+          }
+        ]
+      },
+      "review": {
+        "phase": "during",
+        "category": "efficacy_remediation",
+        "problem": "The scene is dim and the overhead lighting is off during a task that requires fine visual detail.",
+        "rationale": "Turning on the room lighting improves the illumination available for the next inspection image.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context",
+          "status_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The switch-to-light mapping and off state are authored scenario facts, not conclusions from the toggle appearance or photo exposure. This example does not claim the door hardware is defective. Source photos: images/01.jpg = IMG_9775.JPG."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The mobile robot will pass through this doorway into the adjoining room. Assume the door is unlocked and the doorway beyond it is clear.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Its base fits through the fully opened doorway, but its gripper cannot operate this pull handle. The robot waits outside the door swing until the opening is clear.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "brown door with the curved metal pull handle beside the wall switch",
+            "action": {
+              "type": "open",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Keep the robot and people clear of the door sweep",
+              "Open the door enough for the robot base and keep it open while the robot passes"
+            ],
+            "context": "Open the door to provide the required passage for the robot."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The door is closed across the robot required route and the robot cannot operate the handle.",
+        "rationale": "A person can open and hold the door while the robot traverses the doorway.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Unlocked state, full doorway clearance, and robot fit are authored task assumptions. No hinge side, swing angle, lock state, or automatic hold-open mechanism is inferred from this cropped photo. Source photos: images/01.jpg = IMG_9775.JPG."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will visually report whether the brown door is open or closed. It will remain on this side and will not inspect small surface details.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its camera can distinguish the door from its frame under the current ambient lighting; it does not need to read small markings.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is needed for this coarse door-state check.",
+        "rationale": "The door and frame are distinguishable for the stated task; opening the door or changing the lighting is unnecessary.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws.  Source photos: images/01.jpg = IMG_9775.JPG."
+      }
+    }
+  ]
+}

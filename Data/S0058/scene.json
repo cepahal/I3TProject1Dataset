@@ -1,0 +1,116 @@
+{
+  "scene_id": "S0058",
+  "images": [
+    "images/01.jpg"
+  ],
+  "scene_description": "A person holds the metal portion of a slender sharp tool, leaving its yellow-banded black handle exposed. A black power adapter is plugged into a low outlet on the cabinet face, with its cable looping down to a black charging base on the tiled floor.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the charging base together with its attached cable and wall adapter and move the assembly to a storage tray. The person will keep the held sharp tool outside the robot transfer path.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume it can lift the connected charger assembly as a single load with the cable and adapter supported by the planned grasp. It cannot pull a wall adapter from an outlet.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "black power adapter plugged into the low outlet on the cabinet face",
+            "action": {
+              "type": "detach",
+              "qualifiers": {
+                "reference_object": "low electrical outlet in the metal faceplate on the cabinet"
+              }
+            },
+            "constraints": [
+              "Pull the adapter body rather than its cord",
+              "Keep the detached adapter and cable supported for the planned assembly pickup",
+              "Keep the sharp tool away from the outlet and cable"
+            ],
+            "context": "Unplug the adapter before the robot lifts and transports the connected charger assembly."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The charger assembly is tethered to the outlet; lifting it could tension the cable and pull on the plugged-in adapter.",
+        "rationale": "Unplugging releases the external connection before transport.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The linked cable and visible adapter are the basis for the connection. Exact charger type, electrical ratings, and energized state are not inferred. Transport support for all connected components is an explicit robot assumption. The photo has substantial camera roll; this example uses no directional displacement. Source photos: images/01.jpg = IMG_9773.JPG."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will receive the sharp tool from the person and turn toward a nearby tool tray before placing it down. The person remains beside the handoff area, on the outer side of the planned turn. The charger stays where it is.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume the jaws can securely grip either the handle or the broad metal faces near the blade tip, without contacting the cutting edge or allowing slippage, and with only a short tip projecting beyond the jaws. The robot grasps the end presented to it rather than choosing another grasp. It remains stationary until the person releases the tool and withdraws the hand, then performs the planned wrist turn. It cannot independently regrasp the tool during transfer.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "sharp metal tool with the yellow-banded black handle held by the person",
+            "action": {
+              "type": "interact",
+              "qualifiers": {
+                "operation": "regrip_and_present_blade_side"
+              }
+            },
+            "constraints": [
+              "Hold the yellow-banded black handle, keeping fingers clear of the cutting edges",
+              "Present the blade-side gripping region to the robot while keeping the tip clear of the person",
+              "Keep the robot stationary during repositioning and until the hand has released and withdrawn"
+            ],
+            "context": "Regrip by the yellow-banded black handle and present the blade side so the robot holds the sharp end close to its jaws during the planned turn."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The person holds the blade region and exposes the handles. A grasp at that offered end would leave the sharp end projecting through the outer sweep near the person during the planned turn.",
+        "rationale": "Hold the yellow-banded black handle and offer the blade side. Under the stated compatible gripper and turn geometry, this keeps the sharp end close to the jaws while the handle occupies the outer sweep.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Collector correction on 2026-10-30: the intended human change is to hold the handle and offer the blade side to the robot. The photograph records the initial opposite grip; it is not an after image. Robot grip feasibility, tip projection, person location relative to the turn, and wrist motion are authored assumptions, not established by the photo. Blade-side grasping is not assumed suitable for an arbitrary gripper. The interact operation regrip_and_present_blade_side expresses the human grip-and-presentation change; support for this operation in a particular composer renderer has not been verified. No camera-relative rotation axis or numeric angle is invented. Ordinary release is part of the handoff. Source photos: images/01.jpg = IMG_9773.JPG."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will visually check whether the black adapter is inserted into the outlet. It will not touch the adapter, cable, or held tool.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its camera can observe the adapter and outlet from its planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is needed for the visual connection check.",
+        "rationale": "The adapter body is visible at the outlet; unplugging it would change the state being checked.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The task checks physical insertion only, not electrical power or charging activity. Source photos: images/01.jpg = IMG_9773.JPG."
+      }
+    }
+  ]
+}

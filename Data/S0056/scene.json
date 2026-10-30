@@ -1,0 +1,210 @@
+{
+  "scene_id": "S0056",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "An open brown Amazon carton sits on the left of two adjoining wood-grain tables. It contains a red-and-black Fahrenheit box, a green notebook, a blue reed box, and a black charger assembly with loose cable loops. An annotated white paper stack lies on the right table with a black-and-silver clamp at its front edge.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will carry the whole loaded Amazon carton to another room, including a tilted transfer onto a cart. The papers and clamp will remain on this table. Packing tape is available to the human at this station.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its jaw opening, payload, and body grasp support the loaded carton. It cannot fold or fasten the carton flaps while carrying it.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "raised top flaps of the brown Amazon carton on the left table",
+            "action": {
+              "type": "close",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Keep all contents and cable loops below the flap seam",
+              "Fold the small flaps inward before folding the large flaps over them"
+            ],
+            "context": "Close the carton top before the robot carries and tilts the loaded box."
+          },
+          {
+            "target_object": "top flaps of the brown Amazon carton on the left table",
+            "action": {
+              "type": "secure",
+              "qualifiers": {
+                "method": "tape"
+              }
+            },
+            "constraints": [
+              "Tape the closed top seam so the flaps remain shut",
+              "Keep the robot intended body grasp region clear"
+            ],
+            "context": "Fasten the closed flaps so the contents remain enclosed during the tilted transfer."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The top is open and loose contents could leave the carton when it tilts; folded flaps alone can reopen.",
+        "rationale": "Closing and then taping the top provides containment through the planned transfer.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Tape availability, body-grasp feasibility, and the tilted transfer are authored scenario assumptions. Tape is not claimed to be visible. The top-flap target is identified from its initial open state in both ordered steps. Source photos: images/01.jpg = IMG_9770.JPG; images/02.jpg = IMG_9771.JPG; images/03.jpg = IMG_9772.JPG."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect only the red-and-black Fahrenheit box from inside the carton and place it on a nearby counter. The remaining contents stay inside.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its jaws can reach and grasp the exposed upper portion of the Fahrenheit box vertically without snagging the cable loops beside it.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The carton opening exposes the requested package for the assumed independent vertical pickup.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. No perfume bottle or liquid contents are inferred from the packaging. This task concerns the visible closed package. Source photos: images/01.jpg = IMG_9770.JPG; images/02.jpg = IMG_9771.JPG; images/03.jpg = IMG_9772.JPG."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the entire annotated paper stack and carry it to a document tray. The clamp must remain on this table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It pinches the paper stack at its front edge and carries the pages together. It cannot operate or remove spring clamps while holding paper.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "black-and-silver spring clamp attached at the front edge of the annotated white paper stack on the right table",
+            "action": {
+              "type": "detach",
+              "qualifiers": {
+                "reference_object": "annotated white paper stack on the right table beside the open Amazon carton"
+              }
+            },
+            "constraints": [
+              "Squeeze the clamp handles to release its jaws before removing it",
+              "Keep the pages together on the table"
+            ],
+            "context": "Release and remove the clamp from the papers before the robot collects the stack."
+          },
+          {
+            "target_object": "black-and-silver spring clamp attached at the front edge of the annotated white paper stack on the right table",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "forward",
+                "distance": 0.4,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep holding the detached clamp while moving it clear of the paper",
+              "Place it fully on the clear tabletop beyond the rear paper edge",
+              "Do not drag its jaws across the page"
+            ],
+            "context": "Set the detached clamp on the clear tabletop behind the papers, outside their pickup area."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The clamp is attached at the paper edge and would be carried with the pages or interfere with the specified pinch grasp.",
+        "rationale": "Releasing it first and then placing it behind the stack leaves the requested papers available on their own.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The clamp attachment is an authored interpretation of the visible jaw straddling the paper edge, consistent with the collector identifying the tool as a clamp. The second spec refers to the same clamp after detachment. The 40 cm forward estimate must end on clear tabletop beyond the paper, not on top of the stack. Source photos: images/01.jpg = IMG_9770.JPG; images/02.jpg = IMG_9771.JPG; images/03.jpg = IMG_9772.JPG. Movement distances are rough visual estimates requested by the collector, not measured, calibrated, or deliberately staged values. Absolute scale and exact endpoint clearance are unverified; check the physical setup before treating these as metric ground truth. This follows the collector override of the v3 measurement guidance. Directions refer to the frozen gravity-aligned camera heading of the named image: backward is toward the camera, forward is away, and left/right are camera left/right. Constraints describe manual handling and are not executed by the composer."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the black-and-silver clamp and put it in a tool tray. The annotated paper stack must remain on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It can grasp a single rigid clamp handle and lift the tool, but cannot squeeze the pair of handles to release the jaws.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "black-and-silver spring clamp attached at the front edge of the annotated white paper stack on the right table",
+            "action": {
+              "type": "detach",
+              "qualifiers": {
+                "reference_object": "annotated white paper stack on the right table beside the open Amazon carton"
+              }
+            },
+            "constraints": [
+              "Operate the handles to release the jaws before separating the clamp",
+              "Keep the paper stack on the table and leave a clamp handle exposed"
+            ],
+            "context": "Detach the clamp from the paper before the robot lifts it."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "Lifting the attached clamp could pull the paper stack with it.",
+        "rationale": "Releasing the jaws allows the clamp to be collected independently.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Clamping at the front paper edge is the authored scenario assumption. Detach includes removing the released tool from the paper; it does not mean pulling a closed clamp off the pages. Source photos: images/01.jpg = IMG_9770.JPG; images/02.jpg = IMG_9771.JPG; images/03.jpg = IMG_9772.JPG."
+      }
+    },
+    {
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will visually check whether the red-and-black Fahrenheit package is present inside the carton. It will not touch anything.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its camera can see through the open top at the exposed red-and-black package.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is needed for this visual presence check.",
+        "rationale": "The open carton gives a direct view of the requested package.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws.  Source photos: images/01.jpg = IMG_9770.JPG; images/02.jpg = IMG_9771.JPG; images/03.jpg = IMG_9772.JPG."
+      }
+    }
+  ]
+}

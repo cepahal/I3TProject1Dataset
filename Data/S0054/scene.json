@@ -1,0 +1,79 @@
+{
+  "scene_id": "S0054",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "The Sounds of Life paperback lies flat, cover upward, inside a wooden cubby with empty compartments beside it. Its front page edge is set back from the shelf lip. Other books and papers are visible in the row below.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect The Sounds of Life paperback and carry it to a reading table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It approaches the book front edge with a horizontal parallel-jaw grasp, one jaw above and one below the book. It cannot wedge its lower jaw between a book lying flush and the shelf, or switch to a side grasp.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "white-covered The Sounds of Life paperback lying flat by itself in the middle wooden cubby",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the book flat with most of its base supported by the shelf",
+              "Stop with only enough overhang for the lower jaw",
+              "Do not let the book fall from the shelf"
+            ],
+            "context": "Slide the book toward the camera so its front edge projects slightly beyond the shelf lip for the lower jaw."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The book rests flat with its front edge behind the shelf lip, so the lower jaw cannot get underneath for the specified grasp.",
+        "rationale": "A short outward slide exposes an underside grasp region while keeping most of the book supported.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The 10 cm displacement is an approximate proposal, not a measured setback. Use the named image for the direction and verify the endpoint support. Source photos: images/01.jpg = IMG_9767.JPG; images/02.jpg = IMG_9768.JPG; images/03.jpg = IMG_9769.JPG. Movement distances are rough visual estimates requested by the collector, not measured, calibrated, or deliberately staged values. Absolute scale and exact endpoint clearance are unverified; check the physical setup before treating these as metric ground truth. This follows the collector override of the v3 measurement guidance. Directions refer to the frozen gravity-aligned camera heading of the named image: backward is toward the camera, forward is away, and left/right are camera left/right. Constraints describe manual handling and are not executed by the composer."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will read the book title and author on its cover for an inventory. It will not touch the book or shelf contents.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its camera can observe the upward-facing cover from its planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is needed for the cover-reading task.",
+        "rationale": "The cover is unobstructed and the title and author face upward.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws.  Source photos: images/01.jpg = IMG_9767.JPG; images/02.jpg = IMG_9768.JPG; images/03.jpg = IMG_9769.JPG."
+      }
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "scene_id": "S0052",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Two wooden cubbies hold an open black box with a yellow porous insert, its separate oval lid, and a slender sharp metal tool with a yellow-banded handle on the left. A black-and-silver spring clamp lies separately in the right cubby. Books occupy a lower compartment.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the black box together with its yellow insert and carry it to a supply tray. Its transfer includes tipping the box opening downward; the sharp tool and clamp will remain on the shelf.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its jaws can grasp the box body and carry its load. It cannot fit a loose lid while holding the box.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "separate black oval lid lying immediately right of the open black box with the yellow insert",
+            "action": {
+              "type": "close",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Fit the lid fully over the matching box opening",
+              "Keep the yellow insert inside",
+              "Leave the box body accessible for grasping"
+            ],
+            "context": "Close the black box with its matching lid before the robot tips and transports it."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The open box would allow its yellow insert to fall out during the planned tilt.",
+        "rationale": "Fitting the matching lid retains the insert during transport.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The collector identified the separate object as this box lid and confirmed that closing the box is intended to retain the yellow insert. Assume the intact lid fits securely; no separate latch is asserted. Source photos: images/01.jpg = IMG_9764.JPG; images/02.jpg = IMG_9765.JPG; images/03.jpg = IMG_9766.JPG."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will take only the yellow insert out of the black box and place it in a small tray. The box and lid will stay in the cubby.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its jaws can gently pinch the exposed insert and withdraw it through the opening without moving the housing.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The insert is exposed through the open box. Closing the lid would obstruct the stated extraction task.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The insert material and purpose are not inferred; yellow porous insert is a visual description. Source photos: images/01.jpg = IMG_9764.JPG; images/02.jpg = IMG_9765.JPG; images/03.jpg = IMG_9766.JPG."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the sharp yellow-banded tool by its handle and place it in a tool tray. People will remain outside the transfer path.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its jaws fit around the exposed black-and-yellow handle section. It withdraws the tool handle-first from the cubby without rotating, and the path has clearance for the blade.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No additional adjustment is needed for the stated handle grasp and clear transfer path.",
+        "rationale": "The handle projects toward the accessible shelf front while the sharp end points into the cubby.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The collector described this as a generic sharp tool. Its exact type and dimensions are unknown; the transfer path is an authored assumption. Source photos: images/01.jpg = IMG_9764.JPG; images/02.jpg = IMG_9765.JPG; images/03.jpg = IMG_9766.JPG."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the black-and-silver clamp and place it in a storage tray. The left cubby contents will stay in place.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its jaws can grasp one exposed rigid handle without squeezing the two clamp handles together. It lifts and transports the entire clamp.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The clamp is separate from other objects with an exposed handle and an open approach.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The collector identified the black-and-silver spring-loaded object as a clamp. Source photos: images/01.jpg = IMG_9764.JPG; images/02.jpg = IMG_9765.JPG; images/03.jpg = IMG_9766.JPG."
+      }
+    }
+  ]
+}

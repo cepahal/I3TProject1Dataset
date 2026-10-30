@@ -1,0 +1,76 @@
+{
+  "scene_id": "S0048",
+  "images": [
+    "images/01.jpg"
+  ],
+  "scene_description": "A person holds closed black-handled scissors by the metal blade region in front of a pale wall. The two handles are together and extend beyond the hand; the lower blade region is partly covered by the fingers.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will receive the scissors from the person and turn toward a nearby tool tray before placing it down. The person remains beside the handoff area, on the outer side of the planned turn.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume the jaws can securely grip either the handle or the broad metal faces near the blade tip with the scissors closed, without contacting the cutting edge or allowing slippage, and with only a short tip projecting beyond the jaws. The robot grasps the end presented to it rather than choosing another grasp. It remains stationary until the person releases the tool and withdraws the hand, then performs the planned wrist turn. It cannot independently regrasp the tool during transfer. It cannot operate the scissor joint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "black-handled scissors held by the person at the metal blade region",
+            "action": {
+              "type": "interact",
+              "qualifiers": {
+                "operation": "regrip_and_present_blade_side"
+              }
+            },
+            "constraints": [
+              "Hold the black handles, keeping fingers clear of the cutting edges and pivot",
+              "Present the blade-side gripping region to the robot while keeping the tip clear of the person",
+              "Keep the robot stationary during repositioning and until the hand has released and withdrawn",
+              "Keep the scissor blades fully closed"
+            ],
+            "context": "Regrip by the black handles and present the blade side so the robot holds the sharp end close to its jaws during the planned turn."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The person holds the blade region and exposes the handles. A grasp at that offered end would leave the sharp end projecting through the outer sweep near the person during the planned turn.",
+        "rationale": "Hold the black handles and offer the blade side. Under the stated compatible gripper and turn geometry, this keeps the sharp end close to the jaws while the handle occupies the outer sweep.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Collector correction on 2026-10-30: the intended human change is to hold the handle and offer the blade side to the robot. The photograph records the initial opposite grip; it is not an after image. Robot grip feasibility, tip projection, person location relative to the turn, and wrist motion are authored assumptions, not established by the photo. Blade-side grasping is not assumed suitable for an arbitrary gripper. The interact operation regrip_and_present_blade_side expresses the human grip-and-presentation change; support for this operation in a particular composer renderer has not been verified. No camera-relative rotation axis or numeric angle is invented. Ordinary release is part of the handoff. Source photos: images/01.jpg = IMG_9758.JPG."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will visually identify the held tool as scissors. There is no handoff or tool movement during this task.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It uses its camera only and keeps its arm away from the person and tool. Assume the visible handles and blade body are sufficient for identification.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is needed for the non-contact identification task.",
+        "rationale": "The visible tool can be identified without receiving it or moving it.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. This no-change label applies only to visual identification, not to the suitability of the photographed grip for a handoff. Source photos: images/01.jpg = IMG_9758.JPG."
+      }
+    }
+  ]
+}

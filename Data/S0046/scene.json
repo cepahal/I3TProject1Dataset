@@ -1,0 +1,165 @@
+{
+  "scene_id": "S0046",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "A brown paper-wrapped Dixie Ultra napkin pack and a blue Expo marker box sit close together on a gray table. Closed black-handled scissors lie in the narrow space between them, with the handles toward the back and blade tips toward the front.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the closed scissors and carry them to a supply tray. The napkin pack and marker box will stay on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It approaches from above and grips the two handles together across their outer left and right edges. Both jaws require lateral clearance beside the handles; it cannot grasp the blades.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "closed black-handled scissors lying between the brown Dixie Ultra pack on the left and the blue Expo box on the right, tips toward the front of the table",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the blades closed and the scissors flat on the tabletop",
+              "Move them toward the camera until both handles are clear of the adjacent packages",
+              "Keep the entire scissors supported away from the table edge"
+            ],
+            "context": "Bring the closed scissors into the open foreground so the robot can grasp both handles."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The packages flank the handles, limiting the lateral space required by the stated two-jaw grasp.",
+        "rationale": "Moving the scissors into the clear foreground exposes both handle sides without opening the blades.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Source photos: images/01.jpg = IMG_9755.JPG; images/02.jpg = IMG_9756.JPG; images/03.jpg = IMG_9757.JPG. At the collector's request on 2026-10-30, the movement distances are rough visual estimates: 0.15 m backward. These are proposed displacements estimated from the apparent object proportions and available space in the photos, not measured, calibrated, or deliberately staged distances. Absolute scale and exact endpoint clearance are unverified. This is a collector-requested exception to the v3 measurement guidance; validate these estimates in the physical setup before treating them as metric ground truth. Directions use the frozen, gravity-aligned camera heading of image 01: left/right are camera left/right and backward is toward the camera. The move must preserve tabletop support and clear the named grasp region; descriptive constraints are not executed by the composer."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the blue Expo box and carry it level to a supply cabinet. The napkin pack and scissors will stay here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its jaw opening and payload fit the box. It grips the left and right side faces from above, with each jaw extending down beside the box.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "blue Expo marker box immediately right of the closed scissors",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the box supported on the table and its end flaps closed",
+              "Move it far enough that the left jaw can descend without touching the scissors",
+              "Leave the closed scissors in place"
+            ],
+            "context": "Separate the marker box from the scissors before the side grasp."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The scissors lie immediately beside the box left side, within the approach region for the descending left jaw.",
+        "rationale": "A small rightward relocation into open tabletop space gives the jaw clearance and avoids disturbing the scissors.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The closed box is transported level; no precise contents count or hidden fastening is inferred. Source photos: images/01.jpg = IMG_9755.JPG; images/02.jpg = IMG_9756.JPG; images/03.jpg = IMG_9757.JPG. At the collector's request on 2026-10-30, the movement distances are rough visual estimates: 0.1 m right. These are proposed displacements estimated from the apparent object proportions and available space in the photos, not measured, calibrated, or deliberately staged distances. Absolute scale and exact endpoint clearance are unverified. This is a collector-requested exception to the v3 measurement guidance; validate these estimates in the physical setup before treating them as metric ground truth. Directions use the frozen, gravity-aligned camera heading of image 01: left/right are camera left/right and backward is toward the camera. The move must preserve tabletop support and clear the named grasp region; descriptive constraints are not executed by the composer."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the whole wrapped Dixie Ultra napkin pack and carry it to another dining table. The scissors and Expo box will stay here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its jaw opening and payload fit the pack. It grips the pack left and right sides from above, with each jaw descending beside the package to the tabletop.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "brown paper-wrapped Dixie Ultra napkin pack immediately left of the closed scissors",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the pack wrapped and fully supported on the table",
+              "Separate its right side from the scissors enough for the descending jaw",
+              "Leave the scissors closed and undisturbed"
+            ],
+            "context": "Create space between the napkin pack and scissors for the robot right jaw."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The closed scissors occupy space immediately beside the pack right side where the stated jaw must descend.",
+        "rationale": "Moving the pack left opens the required side clearance.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Source photos: images/01.jpg = IMG_9755.JPG; images/02.jpg = IMG_9756.JPG; images/03.jpg = IMG_9757.JPG. At the collector's request on 2026-10-30, the movement distances are rough visual estimates: 0.1 m left. These are proposed displacements estimated from the apparent object proportions and available space in the photos, not measured, calibrated, or deliberately staged distances. Absolute scale and exact endpoint clearance are unverified. This is a collector-requested exception to the v3 measurement guidance; validate these estimates in the physical setup before treating them as metric ground truth. Directions use the frozen, gravity-aligned camera heading of image 01: left/right are camera left/right and backward is toward the camera. The move must preserve tabletop support and clear the named grasp region; descriptive constraints are not executed by the composer."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will visually check whether the scissors are open or closed. It will not touch the scissors or either package.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its camera can observe the exposed blade pair from its planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is needed for the visual state check.",
+        "rationale": "The aligned blades are visible; the narrow space around the handles does not prevent this non-contact task.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws.  Source photos: images/01.jpg = IMG_9755.JPG; images/02.jpg = IMG_9756.JPG; images/03.jpg = IMG_9757.JPG."
+      }
+    }
+  ]
+}

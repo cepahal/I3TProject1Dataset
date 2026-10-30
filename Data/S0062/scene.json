@@ -1,0 +1,251 @@
+{
+  "scene_id": "S0062",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Two wood-grain tables hold a closed red-and-black Fahrenheit box on the left and a green spiral notebook near the front of the right table. A blue tape-covered cube rests on the notebook. An open dark blue Vandoren reed box overlaps the notebook right edge, with a wrapped packet protruding from its open end.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect only the green notebook and carry it to a desk. The blue cube, reed box, and Fahrenheit package must remain on the tables.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It pinches the notebook front edge with one jaw above and one below, using the visible overhang. It lifts the notebook as a whole without independently holding objects on its cover.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "blue tape-covered cube resting near the center of the green spiral notebook",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.12,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift it slightly clear of the cover during relocation",
+              "Set it fully on the table without contacting the Fahrenheit box",
+              "Leave the notebook in place"
+            ],
+            "context": "Move the cube off the notebook onto the clear tabletop between the notebook and Fahrenheit box."
+          },
+          {
+            "target_object": "dark blue individually wrapped reed packet protruding from the open end of the Vandoren box",
+            "action": {
+              "type": "interact",
+              "qualifiers": {
+                "operation": "push_fully_into_box"
+              }
+            },
+            "constraints": [
+              "Slide the wrapped packet along the box opening without bending it",
+              "Keep the packet wrapper intact",
+              "Do not close the flaps on the protruding packet"
+            ],
+            "context": "Push the protruding packet fully inside the Vandoren box before closing its end."
+          },
+          {
+            "target_object": "open end flaps of the dark blue Vandoren reed box beside the green notebook",
+            "action": {
+              "type": "close",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Fold in the small flaps and tuck the main flap closed",
+              "Keep all packets inside and avoid crushing them"
+            ],
+            "context": "Close the reed box end so its packets stay inside during handling."
+          },
+          {
+            "target_object": "open dark blue Vandoren reed box lying diagonally along the green notebook right edge",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 0.1,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the end flaps closed",
+              "Keep the entire box supported inside the table edge",
+              "Clear the notebook cover and edge before pickup"
+            ],
+            "context": "Move the closed reed box right until it no longer overlaps the notebook."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The cube rests on the notebook and the reed box overlaps its edge; lifting the notebook could carry or dislodge them. The protruding packet and open box also need containment before the box is moved.",
+        "rationale": "Remove the cube, put the protruding packet inside and close the box, then move the box clear before the notebook lift.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The numbered specs are sequential. The packet insertion is a semantic interact operation, not a claim of an existing tested composer animation. The closed box and packet remain the same objects described in the initial image. The notebook overhang is useful for this stated grasp and is not removed. Source photos: images/01.jpg = IMG_9776.JPG; images/02.jpg = IMG_9777.JPG; images/03.jpg = IMG_9778.JPG. Movement distances are rough visual estimates requested by the collector, not measured, calibrated, or deliberately staged values. Absolute scale and exact endpoint clearance are unverified; check the physical setup before treating these as metric ground truth. This follows the collector override of the v3 measurement guidance. Directions refer to the frozen gravity-aligned camera heading of the named image: backward is toward the camera, forward is away, and left/right are camera left/right. Constraints describe manual handling and are not executed by the composer."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will carry the Vandoren box and all its reed packets to a music stand. The transfer includes tilting the open-end side downward. The notebook and cube will stay here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume it can grasp and lift the box body vertically without disturbing the notebook. It cannot insert a loose packet or operate cardboard flaps while holding the box.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "dark blue individually wrapped reed packet protruding from the open end of the Vandoren box",
+            "action": {
+              "type": "interact",
+              "qualifiers": {
+                "operation": "push_fully_into_box"
+              }
+            },
+            "constraints": [
+              "Slide the wrapped packet along the box opening without bending it",
+              "Keep the packet wrapper intact",
+              "Do not close the flaps on the protruding packet"
+            ],
+            "context": "Push the protruding packet fully inside the Vandoren box before closing its end."
+          },
+          {
+            "target_object": "open end flaps of the dark blue Vandoren reed box beside the green notebook",
+            "action": {
+              "type": "close",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Fold in the small flaps and tuck the main flap closed",
+              "Keep all packets inside and avoid crushing them"
+            ],
+            "context": "Close the reed box end so its packets stay inside during handling."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The protruding packet prevents closure as-is, and packets can slide out of the open end during the planned tilt.",
+        "rationale": "Insert the exposed packet first, then close the flaps to contain the contents during transfer.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The printed package quantity is not used as a remaining count. Assume the existing tuck flap is intact and can retain the packets. push_fully_into_box is an explicit semantic interaction label; renderer support is not asserted. Source photos: images/01.jpg = IMG_9776.JPG; images/02.jpg = IMG_9777.JPG; images/03.jpg = IMG_9778.JPG."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect only the protruding individually wrapped reed packet and deliver it to a musician. The outer box and other objects will stay on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its jaws can gently pinch the exposed packet end and withdraw it along the box opening without moving the supported box or damaging the packet.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The existing opening and protruding packet provide access for the stated individual-packet retrieval.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws.  Source photos: images/01.jpg = IMG_9776.JPG; images/02.jpg = IMG_9777.JPG; images/03.jpg = IMG_9778.JPG."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the blue cube and place it in a sorting tray. The notebook and reed box will remain on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its jaws can grip the exposed cube sides from above and lift vertically without contacting the nearby box. The cube is not attached to the notebook.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The cube is on top with accessible sides for the assumed independent pickup.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The blue exterior appears tape-covered; its hidden contents and exact size are not inferred. Source photos: images/01.jpg = IMG_9776.JPG; images/02.jpg = IMG_9777.JPG; images/03.jpg = IMG_9778.JPG."
+      }
+    },
+    {
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the closed Fahrenheit package from the left table and place it on a storage shelf. The objects on the right table will stay in place.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its jaw opening and payload fit the package and it can approach its exposed sides from above.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The closed package stands separately with accessible sides and clear surrounding tabletop.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. This task concerns the visible package; no hidden bottle or liquid state is inferred. Source photos: images/01.jpg = IMG_9776.JPG; images/02.jpg = IMG_9777.JPG; images/03.jpg = IMG_9778.JPG."
+      }
+    },
+    {
+      "example_id": "E006",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will read the exposed white Staples and notebook-type printing on the green cover for an inventory. It will not touch any object.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its camera can observe the exposed cover printing from its planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is needed to read the exposed printing.",
+        "rationale": "The blue cube covers the middle of the notebook but the named printed regions remain visible.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws.  Source photos: images/01.jpg = IMG_9776.JPG; images/02.jpg = IMG_9777.JPG; images/03.jpg = IMG_9778.JPG."
+      }
+    }
+  ]
+}

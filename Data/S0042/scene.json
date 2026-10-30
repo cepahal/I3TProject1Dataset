@@ -1,0 +1,201 @@
+{
+  "scene_id": "S0042",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "A gray table holds open black-handled scissors in the foreground, a brown paper-wrapped Dixie Ultra napkin pack behind them, and a separate blue Expo marker box to the right. The marker box has an open end with its main flap resting on the tabletop.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the scissors and carry them to a supply tray beside a seated person. The two packages will remain on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grasps both handles together from above and carries the scissors without changing their opening. It cannot operate the scissor joint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "open black-handled scissors lying in the foreground of the gray table, in front of the Dixie Ultra pack",
+            "action": {
+              "type": "close",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Use the black handles to close the blades fully",
+              "Keep fingers clear of the cutting edges and pivot",
+              "Leave both handles accessible for pickup"
+            ],
+            "context": "Close the scissors before the robot lifts and carries them near a person."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The open blades would remain spread during transport near the person.",
+        "rationale": "Closing the scissors reduces the exposed cutting-edge area and spread of the carried object before pickup.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The nearby person and destination are task assumptions, not people or objects claimed to be visible. Closing does not eliminate the pointed-tip hazard; the assumed transport path has clearance. Source photos: images/01.jpg = IMG_9750.JPG; images/02.jpg = IMG_9751.JPG; images/03.jpg = IMG_9749.JPG."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will carry the Expo box, containing loose markers, to a supply cabinet. The scissors and napkin pack will stay here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its reach, jaw opening, and payload support grasping the box body. Its planned transfer tilts the box so the flap end is lower. It cannot operate packaging flaps.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "open end flaps of the blue Expo marker box to the right of the Dixie Ultra pack",
+            "action": {
+              "type": "close",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Fold the end flaps into their closed position and tuck the main flap into the box",
+              "Keep the markers inside and avoid crushing the cardboard"
+            ],
+            "context": "Close the open end before the robot tilts and transports the marker box."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "Loose markers could slide out of the open end when the robot tilts the box during transfer.",
+        "rationale": "Closing the end retains the contents during the stated transfer.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Loose contents and the transfer tilt are authored task facts. The printed 12-pack label is not treated as a count of remaining markers. Assume the existing cardboard tuck flap is intact and can stay closed; no separate latch is asserted. Source photos: images/01.jpg = IMG_9750.JPG; images/02.jpg = IMG_9751.JPG; images/03.jpg = IMG_9749.JPG."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will carry the entire wrapped Dixie Ultra napkin pack to another dining table. It will leave the scissors and marker box in place.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its jaws can grip the pack on its exposed left and right sides from above without contacting the other objects, and its payload supports the pack.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The wrapped pack is separate from the other objects and its upper side grasp regions are accessible. The wrapper can remain on for whole-pack transport.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws.  Source photos: images/01.jpg = IMG_9750.JPG; images/02.jpg = IMG_9751.JPG; images/03.jpg = IMG_9749.JPG."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will take one napkin from the Dixie Ultra pack and deliver it to a diner. The remaining napkins, marker box, and scissors will stay here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It can pinch and lift an exposed top napkin from a supported stack. It cannot tear or remove a package wrapper.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "brown printed paper wrapper around the Dixie Ultra napkin pack behind the scissors",
+            "action": {
+              "type": "open",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Open the top of the wrapper enough to expose the uppermost napkin",
+              "Keep the remaining napkins stacked and supported on the table"
+            ],
+            "context": "Expose the top napkin before the robot attempts to pinch and collect it."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The wrapper covers the napkins, leaving no exposed top napkin for the stated pinch grasp.",
+        "rationale": "Opening the pack gives the robot access to one napkin without moving the whole pack.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The pack is treated as containing napkins for this authored task; no quantity or individual napkin dimensions are inferred. This is a wrapped stack, not a paper roll. Source photos: images/01.jpg = IMG_9750.JPG; images/02.jpg = IMG_9751.JPG; images/03.jpg = IMG_9749.JPG."
+      }
+    },
+    {
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect one marker from the open end of the Expo box and place it in a pen tray. The box and other objects will remain on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume a marker is reachable through the existing opening, the jaws fit through it, and the robot can withdraw that marker without moving the supported box.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The existing opening is useful for the stated individual-marker retrieval; closing it would prevent that access.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Marker availability and grasp feasibility are explicit scenario assumptions. The photo does not establish an exact remaining count. Same box as the whole-box transport example, with a different task. Source photos: images/01.jpg = IMG_9750.JPG; images/02.jpg = IMG_9751.JPG; images/03.jpg = IMG_9749.JPG."
+      }
+    },
+    {
+      "example_id": "E006",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will visually count the scissors on the table for an inventory. It will not touch any object.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume its camera can see the scissors from its planned viewpoint; its arm stays outside the tabletop workspace.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is needed for the non-contact count.",
+        "rationale": "The scissors are visible and no pickup or transport will occur. Their open state does not interfere with counting them.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws.  Source photos: images/01.jpg = IMG_9750.JPG; images/02.jpg = IMG_9751.JPG; images/03.jpg = IMG_9749.JPG."
+      }
+    }
+  ]
+}
