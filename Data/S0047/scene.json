@@ -1,0 +1,111 @@
+{
+  "scene_id": "S0047",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "A wooden cafeteria table holds an empty clear plastic cup with a green printed band on the left and a closed white molded-fiber takeout clamshell on the right, a few centimeters apart. Both stand well back from the table's front edge.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the empty clear cup and drop it into a recycling bin. The clamshell will stay on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the cup body from the front of the table, with its jaws closing from the front and back of the cup, so it does not need clearance beside the cup.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The cup is empty and upright, and its front and back faces are exposed; the clamshell beside it is not in the front-to-back grasp.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Collector measurement: the cup is 18 cm from the front edge. Edge distances are the collector's measurements from each object to the table's front edge, the edge nearest the camera in image 01. Source photos: images/01.jpg = IMG_5941.HEIC; images/02.jpg = IMG_5942.HEIC; images/03.jpg = IMG_5943.HEIC."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the closed takeout clamshell and carry it level to a pickup shelf. The cup will stay on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the clamshell's front and back from above, closing its jaws on the lid's front and rear flanges.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The clamshell is closed, its front and back flanges are exposed, and the cup beside it is outside this grasp.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Collector measurement: the clamshell is 16 cm from the front edge. Collector review: no change is needed in this scene. Edge distances are the collector's measurements from each object to the table's front edge, the edge nearest the camera in image 01. Source photos: images/01.jpg = IMG_5941.HEIC; images/02.jpg = IMG_5942.HEIC; images/03.jpg = IMG_5943.HEIC."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will wipe a 10 cm-wide strip along the table's front edge with a cloth, sweeping from left to right. It will not touch the cup or clamshell.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It holds the cloth flat on the table and sweeps it along the front edge; anything inside the strip would be pushed.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "Both objects stand well behind the strip being wiped, so the cloth will not reach them.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Collector measurements: the cup is 18 cm and the clamshell 16 cm from the front edge, both outside the 10 cm strip. Edge distances are the collector's measurements from each object to the table's front edge, the edge nearest the camera in image 01. Source photos: images/01.jpg = IMG_5941.HEIC; images/02.jpg = IMG_5942.HEIC; images/03.jpg = IMG_5943.HEIC."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will read the printing on the clear cup's green band for a recycling inventory. No object will be handled.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume the robot can read the band's printing from its planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is required for the planned non-contact reading task.",
+        "rationale": "The printed band faces the camera and is not covered by the clamshell.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Source photos: images/01.jpg = IMG_5941.HEIC; images/02.jpg = IMG_5942.HEIC; images/03.jpg = IMG_5943.HEIC."
+      }
+    }
+  ]
+}

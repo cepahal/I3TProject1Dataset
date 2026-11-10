@@ -1,0 +1,232 @@
+{
+  "scene_id": "S0053",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "A black table holds an open black laptop with stickers on its bezel and palm rest. A roll of black tape rests on the left palm rest, and a glass of ice water stands immediately right of the keyboard, close to the table's front edge.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the glass of ice water and deliver it upright to a seated person. The laptop will stay on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the glass body from the side and lifts it straight up; a slipped grasp could tip or drop the glass.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "glass of ice water standing immediately right of the open laptop's keyboard",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the glass upright",
+              "Slide it on the table, do not lift it over the laptop"
+            ],
+            "context": "Move the glass far enough from the laptop that a spill or fall cannot reach it."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The full glass stands right against the laptop's keyboard, so a failed grasp would spill water onto the laptop.",
+        "rationale": "A short slide by the person keeps any spill away from the electronics at no cost to the task.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Collector review: the glass is too close to the laptop, which is at risk if the robot fails. Glass: about 15 cm right leaves a gap wider than the glass's roughly 14 cm height, scaled from the laptop, so a tipped or dropped glass cannot land on the laptop; images 01 and 03 show open table to its right. It stays 7 cm from the front edge, as the collector measured. Distances are visual estimates from the photographs, scaled as described above; they were not measured or staged. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward. Source photos: images/01.jpg = IMG_5952.HEIC; images/02.jpg = IMG_5953.HEIC; images/03.jpg = IMG_5954.HEIC."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will close the laptop lid and carry the laptop to a charging desk. The glass of water will stay on this table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It lowers the lid with one jaw, then grips the closed laptop's right and left edges and lifts it; a fumbled grasp could knock objects beside the laptop.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "black roll of tape resting on the left palm rest of the open laptop",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.05,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift it clear of the palm rest"
+            ],
+            "context": "Move the tape roll past the laptop's left edge."
+          },
+          {
+            "target_object": "black roll of tape resting on the left palm rest of the open laptop",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "down",
+                "distance": 0.02,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Set it flat on the table"
+            ],
+            "context": "Lower the tape roll onto the table."
+          },
+          {
+            "target_object": "glass of ice water standing immediately right of the open laptop's keyboard",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the glass upright",
+              "Slide it on the table, do not lift it over the laptop"
+            ],
+            "context": "Move the glass far enough from the laptop that a spill or fall cannot reach it."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The tape roll would be crushed between the lid and keyboard, and the glass beside the laptop would spill onto it if the jaw or laptop bumped it.",
+        "rationale": "Clearing the tape protects the screen, and moving the glass away keeps a fumble from becoming a spill.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Tape roll: about 5 cm left takes it past the laptop's left edge and 2 cm down sets it on the table, scaled from the laptop's apparent 36 cm width and 2 cm base thickness. Collector review: the glass is too close to the laptop, which is at risk if the robot fails. Glass: about 15 cm right leaves a gap wider than the glass's roughly 14 cm height, scaled from the laptop, so a tipped or dropped glass cannot land on the laptop; images 01 and 03 show open table to its right. It stays 7 cm from the front edge, as the collector measured. Distances are visual estimates from the photographs, scaled as described above; they were not measured or staged. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward. Source photos: images/01.jpg = IMG_5952.HEIC; images/02.jpg = IMG_5953.HEIC; images/03.jpg = IMG_5954.HEIC."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the roll of tape from the laptop and place it in a desk drawer.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the tape roll across its outer diameter from above.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The roll sits on the palm rest with its sides exposed, and the glass is on the far side of the laptop.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Source photos: images/01.jpg = IMG_5952.HEIC; images/02.jpg = IMG_5953.HEIC; images/03.jpg = IMG_5954.HEIC."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will close the laptop lid so the laptop can be carried away later. The glass of water will stay on this table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It lowers the lid slowly from the front with one jaw; it stops when the lid meets resistance.",
+        "status_context": "The robot has lowered the laptop lid partway and paused after the screen touched the roll of tape on the palm rest."
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "black roll of tape resting on the left palm rest of the open laptop",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.05,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift it clear of the palm rest"
+            ],
+            "context": "Move the tape roll past the laptop's left edge."
+          },
+          {
+            "target_object": "black roll of tape resting on the left palm rest of the open laptop",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "down",
+                "distance": 0.02,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Set it flat on the table"
+            ],
+            "context": "Lower the tape roll onto the table."
+          }
+        ]
+      },
+      "review": {
+        "phase": "during",
+        "category": "efficacy_remediation",
+        "problem": "The robot has started lowering the lid and stopped when the screen met the tape roll on the palm rest.",
+        "rationale": "Removing the tape lets the lid close fully without pressing on the screen.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context",
+          "status_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Tape roll: about 5 cm left takes it past the laptop's left edge and 2 cm down sets it on the table, scaled from the laptop's apparent 36 cm width and 2 cm base thickness. Distances are visual estimates from the photographs, scaled as described above; they were not measured or staged. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward. Source photos: images/01.jpg = IMG_5952.HEIC; images/02.jpg = IMG_5953.HEIC; images/03.jpg = IMG_5954.HEIC."
+      }
+    },
+    {
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will read the stickers on the laptop for a lost-and-found description. No object will be handled.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume the robot can read the bezel and palm rest stickers from its planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is required for the planned non-contact reading task.",
+        "rationale": "The stickers face up or toward the camera and are not covered; the tape roll lies beside, not on, them.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Source photos: images/01.jpg = IMG_5952.HEIC; images/02.jpg = IMG_5953.HEIC; images/03.jpg = IMG_5954.HEIC."
+      }
+    }
+  ]
+}

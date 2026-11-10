@@ -1,0 +1,201 @@
+{
+  "scene_id": "S0051",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "A white display bin holds only two purple Duke Arts 2026-27 Season brochures on its right and basketball newspapers on its left. A loose stack of the same brochures lies on top of the white FedEx drop box to its right.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will take Duke Arts Season brochures one at a time from the display bin and hand one to each of the next several visitors.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It pinches the top edge of a standing brochure in the bin's right section; it only takes brochures from the bin and cannot reach the top of the drop box.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "loose stack of purple Duke Arts 2026-27 Season brochures lying on top of the FedEx drop box, above and right of the display bin",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.3,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the brochures together and face up"
+            ],
+            "context": "Bring the spare brochures over the display bin's right section."
+          },
+          {
+            "target_object": "loose stack of purple Duke Arts 2026-27 Season brochures lying on top of the FedEx drop box, above and right of the display bin",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "down",
+                "distance": 0.4,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Set them with the two standing brochures, covers facing out",
+              "Do not cover the basketball newspapers"
+            ],
+            "context": "Lower the spare brochures into the bin so the robot's supply is refilled."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "Only two brochures remain in the bin, so the robot will run out after two visitors.",
+        "rationale": "The spare stack is within the person's reach, so refilling the bin takes a moment and keeps the task going.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Collector review: the robot takes brochures from the small stack in the display bin, which is running low, and more copies come from the stack higher up on the drop box. Collector measurement: the small stack in the bin is 7.5 cm from the left edge of the bin's opening. Distances use the two standing brochures as a scale, assumed to be standard rack brochures about 10 cm wide. Left: in image 01 the stack's center is about 30 cm right of the bin's brochure section. Down: in image 02 the drop box top is about 30 cm above the bin's rim and the bin floor about 10 cm below it, so the stack drops about 40 cm. Distances are visual estimates from the photographs, scaled as described above; they were not measured or staged. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward. Source photos: images/01.jpg = IMG_5947.HEIC; images/02.jpg = IMG_5948.HEIC; images/03.jpg = IMG_5949.HEIC."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will take Duke Arts Season brochures one at a time from the display bin and hand one to each of the next several visitors.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It pinches the top edge of a standing brochure in the bin's right section; it only takes brochures from the bin and cannot reach the top of the drop box.",
+        "status_context": "The robot has handed out one brochure; one brochure remains in the bin and three more visitors are waiting."
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "loose stack of purple Duke Arts 2026-27 Season brochures lying on top of the FedEx drop box, above and right of the display bin",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.3,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the brochures together and face up"
+            ],
+            "context": "Bring the spare brochures over the display bin's right section."
+          },
+          {
+            "target_object": "loose stack of purple Duke Arts 2026-27 Season brochures lying on top of the FedEx drop box, above and right of the display bin",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "down",
+                "distance": 0.4,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Set them with the two standing brochures, covers facing out",
+              "Do not cover the basketball newspapers"
+            ],
+            "context": "Lower the spare brochures into the bin so the robot's supply is refilled."
+          }
+        ]
+      },
+      "review": {
+        "phase": "during",
+        "category": "efficacy_remediation",
+        "problem": "The robot has already handed out one brochure, and only one remains in the bin for the visitors still waiting.",
+        "rationale": "Refilling the bin now lets the robot keep handing out brochures without stopping.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context",
+          "status_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Collector review: the robot takes brochures from the small stack in the display bin, which is running low, and more copies come from the stack higher up on the drop box. Collector measurement: the small stack in the bin is 7.5 cm from the left edge of the bin's opening. Distances use the two standing brochures as a scale, assumed to be standard rack brochures about 10 cm wide. Left: in image 01 the stack's center is about 30 cm right of the bin's brochure section. Down: in image 02 the drop box top is about 30 cm above the bin's rim and the bin floor about 10 cm below it, so the stack drops about 40 cm. The status is an authored assumption; image 01 still shows two brochures. Distances are visual estimates from the photographs, scaled as described above; they were not measured or staged. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward. Source photos: images/01.jpg = IMG_5947.HEIC; images/02.jpg = IMG_5948.HEIC; images/03.jpg = IMG_5949.HEIC."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will take one Duke Arts Season brochure from the display bin and hand it to a single visitor.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It pinches the top edge of a standing brochure in the bin's right section.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "Two brochures stand in the bin with their top edges exposed, enough for one visitor.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Same input image and target as E001; the shorter task needs no refill. Source photos: images/01.jpg = IMG_5947.HEIC; images/02.jpg = IMG_5948.HEIC; images/03.jpg = IMG_5949.HEIC."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will take one basketball newspaper from the left section of the display bin and hand it to a visitor.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It pinches the edge of the top newspaper in a stack.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The newspapers are stacked in the bin's left section with their top edges exposed and plenty of copies.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Source photos: images/01.jpg = IMG_5947.HEIC; images/02.jpg = IMG_5948.HEIC; images/03.jpg = IMG_5949.HEIC."
+      }
+    },
+    {
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will read the FedEx holiday schedule plate on the drop box and relay the pickup times to a visitor. No object will be handled.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume the robot can read the plate from its planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is required for the planned non-contact reading task.",
+        "rationale": "The schedule plate faces the camera, and the brochure stack sits above it without covering the text.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Source photos: images/01.jpg = IMG_5947.HEIC; images/02.jpg = IMG_5948.HEIC; images/03.jpg = IMG_5949.HEIC."
+      }
+    }
+  ]
+}
