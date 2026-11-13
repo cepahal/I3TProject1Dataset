@@ -1,0 +1,155 @@
+{
+  "scene_id": "S0072",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "A wide wooden drawer is partly open beneath a white counter. A black rectangular tray fills the middle, a blue Ziploc box is on the right, and a clear wrapper with white material and brown marks is on the left; a narrow wrapped item lies along the tray right side.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the black rectangular tray from the drawer and place it on the countertop for sorting. The Ziploc box and loose items must remain in the drawer.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It needs access from above to both opposing tray rims and lifts vertically. It cannot reach underneath the counter overhang or operate the drawer while holding the tray.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "partly open wide wooden drawer with the central silver handle beneath the white counter",
+            "action": {
+              "type": "open",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Pull the handle toward the camera while keeping the drawer on its runners",
+              "Stop once the target clears the counter overhang",
+              "Do not remove the drawer from the cabinet"
+            ],
+            "context": "Open the drawer farther to expose the pickup area above its contents."
+          },
+          {
+            "target_object": "narrow clear-wrapped item resting along the right side of the black tray inside the drawer",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.35,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift it clear of the tray rim",
+              "Place it on the unoccupied drawer floor to the left of the tray without covering the other wrapper or brown marks"
+            ],
+            "context": "Remove the loose wrapped item from the tray before its support is lifted."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The counter covers much of the tray, and a separate wrapped item rests on it.",
+        "rationale": "Expose the tray first, then set the loose item on independent support so the robot can collect only the tray.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Directions use the named image camera heading; backward means toward the camera. The wrapped item is not identified as cutlery or counted. Verify that the opened drawer provides the stated lift clearance."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the blue Ziploc box and carry it level to a food-packing station. The tray and loose items will remain in the drawer.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grasps the box between opposing jaws from above and lifts vertically. It does not reach under the counter lip or pull the drawer itself.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "partly open wide wooden drawer with the central silver handle beneath the white counter",
+            "action": {
+              "type": "open",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Pull the handle toward the camera while keeping the drawer on its runners",
+              "Stop once the target clears the counter overhang",
+              "Do not remove the drawer from the cabinet"
+            ],
+            "context": "Open the drawer farther to expose the pickup area above its contents."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The counter overhang obscures the rear part of the box and restricts the stated overhead pickup.",
+        "rationale": "Opening the drawer exposes the target without moving its contents individually.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The printed package quantity is not a measurement of remaining bags. No flap closure is required for the level body-supported transfer."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will close the drawer after a kitchen inventory. All contents will stay inside.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It can push the exposed wooden drawer front straight inward using its claw. The drawer slides freely, no person is in its path, and the assumed contents are below the closing envelope.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No visible item projects beyond the drawer front to require a preparatory change.",
+        "rationale": "The robot can perform the intended closing task directly under the stated drawer-motion assumptions.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Free runner motion and clearance of hidden contents are authored scenario assumptions, not verified from the photographs."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will visually report whether a blue Ziploc package is present in the drawer. It will not handle the package or move the drawer.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Its camera can read the exposed Ziploc branding; the task is a presence check, not a remaining-bag count.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No adjustment is needed to identify the exposed package.",
+        "rationale": "The visible box face suffices despite the partial counter occlusion.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws."
+      }
+    }
+  ]
+}

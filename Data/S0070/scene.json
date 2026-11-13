@@ -1,0 +1,254 @@
+{
+  "scene_id": "S0070",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "A beige dish rack beside a stainless-steel sink holds two large white patterned plates, a colorful bowl, several darker plates or platters, a clear glass container, and utensils. A white textured mug and a green-and-red printed mug stand upside down in front of the rack, and a spoon lies in the sink.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the white textured mug and place it upside down on a drying mat on another counter. The printed mug and rack contents will stay here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It pinches the exposed outer section of the white mug handle, lifts vertically, and carries it in the same inverted orientation. Handle access, payload, and ceramic-compatible grip force are assumed.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear change is needed for the exposed-handle mug transfer.",
+        "rationale": "The handle projects toward the camera and the task retains the current inverted orientation.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. No assumption is made that the mug is dry or sanitized."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the green-and-red printed mug and place it upside down on a drying mat on another counter. The white mug and rack contents will stay here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It pinches the exposed outer section of the printed mug handle, lifts vertically, and retains its inverted orientation. Reach and payload are compatible and the handle grasp avoids the neighboring mug.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear preparatory change is needed for the printed mug handle grasp.",
+        "rationale": "The handle is exposed at the front and does not require access through the rack or between the mug bodies.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the front large white patterned plate and place it in a plate-storage slot. The rear matching plate and the remaining dishes will stay in the rack.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the exposed top rim of the front white plate and lifts vertically before translating. Its rim grasp fits the exposed gap and can carry this plate within payload limits.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear environmental adjustment is needed for the specified top-rim extraction.",
+        "rationale": "The upper part of the front white plate is exposed above the bowl and smaller dishes.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The front plate is the right-hand one of the two matching large white plates in image 01. No inference is made about dish cleanliness."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the clear glass container and place it in a storage tray on the adjacent counter. The mugs and other rack contents will stay here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It requires a two-sided body grasp with room for both jaws and can collect the container from a separate supported counter position. It cannot use a narrow rim pinch or reach through rack walls.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "clear rectangular glass container standing on edge inside the front-left part of the beige dish rack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 0.45,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift clear of the rack and neighboring dishes before moving right",
+              "Set the container on a stable broad face with both grasp sides exposed",
+              "Leave the mugs and other dishes supported"
+            ],
+            "context": "Place the glass container on the clear counter to the right of the rack for a body grasp."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The glass container is enclosed by the rack and adjacent dishes, restricting the two-sided body grasp.",
+        "rationale": "Moving the target out to the open counter gives the robot access without trying to reach through the rack walls.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Directions use the named image camera heading; backward means toward the camera. The human may need to steady neighboring dishes during extraction; do not infer an unobstructed robot rim grasp."
+      }
+    },
+    {
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/02.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the metal spoon from the sink basin and place it in a cutlery washing basket. All dishes on the counter will stay in place.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It pinches the spoon handle between opposing jaws, requiring an exposed lower edge. It cannot scoop a thin handle off a flat basin floor.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "metal spoon lying along the front of the stainless-steel sink basin",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "up",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Hold the spoon above the front sink rim until the following move"
+            ],
+            "context": "Lift the spoon clear of the basin before bringing it to the rim."
+          },
+          {
+            "target_object": "metal spoon lifted from the front of the stainless-steel sink basin",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.10,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Set most of the spoon on the solid counter with a short handle section spanning the basin for jaw access",
+              "Keep the spoon stable and do not balance it on a narrow point"
+            ],
+            "context": "Present a supported handle edge at the front sink rim for the claw."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The spoon lies against the basin floor without the underside purchase required by the claw.",
+        "rationale": "The human can lift it to a supported rim position where the handle can be pinched.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Directions use the named image camera heading; backward means toward the camera. Use image 02, where the spoon is clearly visible. Up is a gravity-aligned lift and backward is toward the camera; the final rim support and edge exposure require collector verification."
+      }
+    },
+    {
+      "example_id": "E006",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will visually record whether the beige dish rack contains plates and mugs. It will not handle the dishes or rack.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. The camera can distinguish the visible dish types; this task does not require counting obscured dishes or checking cleanliness.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical intervention is needed for the visible dish-type inventory.",
+        "rationale": "Overlapping dishes do not prevent the requested coarse presence check.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws."
+      }
+    },
+    {
+      "example_id": "E007",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the colorful patterned bowl and place it in a storage tray. The white plates and darker dishes will remain in the rack.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It requires a two-sided body grasp and cannot extract a bowl using only a small exposed rim segment between adjacent dishes. It can pick the bowl from a separate supported counter position.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "colorful red, blue, and cream patterned bowl between the white plates and darker dishes in the beige rack",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 0.35,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift the bowl clear of the plate rims rather than drag through them",
+              "Place it on a stable broad surface with space on both sides",
+              "Keep the other dishes supported in their rack slots"
+            ],
+            "context": "Separate the bowl onto the clear counter to the right of the rack for a body grasp."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The bowl body is surrounded by plates and does not offer two opposing jaw approaches.",
+        "rationale": "Preparing the target bowl alone on the open right counter avoids rearranging the entire rack.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Directions use the named image camera heading; backward means toward the camera."
+      }
+    }
+  ]
+}

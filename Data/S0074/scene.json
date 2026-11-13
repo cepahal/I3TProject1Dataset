@@ -1,0 +1,224 @@
+{
+  "scene_id": "S0074",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "A worn wooden workbench holds a marked pine board clamped at both ends along its front edge. A green-and-gray Ryobi router rests on another marked board in the middle, with a separate black battery on the left; more boards, clamps, and an open small padlock are visible around them.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the marked pine board along the front edge and carry it to a lumber cart. The clamps, router, and other boards will remain at this workbench.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the board across its exposed thickness, with compatible reach, jaw opening, and payload, and lifts vertically before carrying it level. It cannot operate bar-clamp release mechanisms.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "yellow-and-black bar clamp gripping the left end of the marked pine board along the front workbench edge",
+            "action": {
+              "type": "detach",
+              "qualifiers": {
+                "reference_object": "marked pine board held across the front workbench edge by the two yellow-and-black bar clamps and the workbench edge beneath it"
+              }
+            },
+            "constraints": [
+              "Keep the board supported on the bench",
+              "Set the released clamp clear of the board pickup and carry path"
+            ],
+            "context": "Release the left attachment before the robot lifts the board."
+          },
+          {
+            "target_object": "yellow-and-black bar clamp with blue tape gripping the right end of the marked pine board along the front workbench edge",
+            "action": {
+              "type": "detach",
+              "qualifiers": {
+                "reference_object": "marked pine board held across the front workbench edge by the two yellow-and-black bar clamps and the workbench edge beneath it"
+              }
+            },
+            "constraints": [
+              "Keep the board supported while releasing the final clamp",
+              "Set the released clamp clear of the board pickup and carry path"
+            ],
+            "context": "Release the remaining attachment so the board can be lifted independently."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_for_robot",
+        "problem": "Two clamps fasten the requested board to the bench, preventing an independent lift.",
+        "rationale": "A human can release both attachments before the robot tries to lift the board; releasing only one leaves the other engaged.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the left yellow-and-black bar clamp from the front board and place it in a clamp rack. The board and right clamp will stay at the bench.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grasps the clamp body with its parallel jaws but cannot actuate its release mechanism. It carries only the selected clamp.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "yellow-and-black bar clamp gripping the left end of the marked pine board along the front workbench edge",
+            "action": {
+              "type": "detach",
+              "qualifiers": {
+                "reference_object": "marked pine board held across the front workbench edge by the two yellow-and-black bar clamps and the workbench edge beneath it"
+              }
+            },
+            "constraints": [
+              "Keep the board supported on the bench with the right clamp attached",
+              "Set the released left clamp in a clear supported pickup position"
+            ],
+            "context": "Release the left clamp before the robot collects it for transfer to the clamp rack."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The selected clamp is still attached to the board and workbench.",
+        "rationale": "Release it before pickup while the other clamp continues to hold the board.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The human sets the released clamp in a clear supported pickup position as part of detachment; no precise displacement is claimed."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the green-and-gray Ryobi router from the middle of the bench and place it in a tool-storage tray. The marked board underneath will remain here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips the exposed insulated body with its parallel jaws, keeps the base and bit region away from people, and carries the tool without running it. Assume the tool is off, its battery is removed, and its bit has stopped.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear preparatory environmental change is required for the specified inactive-tool transfer.",
+        "rationale": "The tool body is exposed and the stated task does not run the router or move its supporting board.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The battery socket appears empty and a battery is separate on the bench. Off state and a stationary bit are explicit task assumptions; no hidden bit condition is inferred."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect only the marked board beneath the Ryobi router and carry it to a lumber cart. The router and other tools will remain on the bench.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grasps an exposed end of the board and carries that board alone, with compatible load capacity. It does not collect objects resting on the board first. Assume the router is off with its battery removed and bit stationary.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "green-and-gray Ryobi router resting on the marked board in the middle of the workbench",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 0.25,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Lift the router clear of the board before moving sideways",
+              "Keep the base and bit region clear of hands and nearby wood",
+              "Set it stably on clear bench between the right-hand loose board and the front clamped board",
+              "Leave the board extraction path clear"
+            ],
+            "context": "Remove the router from the board before the robot lifts its support."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The router rests on the board target and could fall or be carried unintentionally when the support is lifted.",
+        "rationale": "Relocate the tool to independent stable support before the single-board pickup.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Directions use the named image camera heading; backward means toward the camera. The intended landing area is the exposed bench to the router right in image 01. Verify sufficient footprint clearance before setting it down."
+      }
+    },
+    {
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the separate black battery at the left of the workbench and place it in a battery-storage tray. The router and boards will remain where they are.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grasps opposing sides of the battery casing without contacting its electrical terminals and lifts vertically. The battery is within reach and payload capacity.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No human preparation is required for the separate battery pickup.",
+        "rationale": "The battery is already separate from the router and has an exposed casing for the stated grasp.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Charge level, temperature, and internal condition are not inferred from appearance."
+      }
+    },
+    {
+      "example_id": "E006",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will read the visible layout marks on the front pine board using its camera. It will not move the board, clamps, or tools.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Its planned view can see the central marks between the two clamps; it does not need to observe the wood covered by the clamp jaws.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is needed to observe the exposed layout marks.",
+        "rationale": "The clamps support the board and do not cover the specified central marks; releasing them would be unnecessary.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws."
+      }
+    }
+  ]
+}

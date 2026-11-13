@@ -1,0 +1,200 @@
+{
+  "scene_id": "S0066",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "Open black-handled scissors lie on the right side of a wood-grain table. An open clear hinged box of silver paper clips sits to their left, with a black electric pencil sharpener and clear paper trays farther back.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the scissors and turn toward a nearby tool tray beside a seated person before placing them down. The person is on the outer side of the planned turn. The paper-clip box and sharpener will remain on the table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Assume the jaws can securely grip either the handle or the broad metal faces near the blade tip with the scissors closed, without contacting the cutting edge or allowing slippage, and with only a short tip projecting beyond the jaws. It grasps the accessible end presented to it rather than choosing another grasp. It remains stationary until the person releases the tool and withdraws the hand, then performs the planned wrist turn. It cannot independently regrasp the tool during transfer or operate the scissor joint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "open black-handled scissors lying on the table to the right of the clear paper-clip box",
+            "action": {
+              "type": "close",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Operate the scissors using their black handles",
+              "Keep fingers clear of the cutting edges and pivot",
+              "Bring the blades fully together before presenting them to the robot",
+              "Keep the robot stationary"
+            ],
+            "context": "Close the scissors before preparing the blade-side grasp."
+          },
+          {
+            "target_object": "open black-handled scissors lying on the table to the right of the clear paper-clip box",
+            "action": {
+              "type": "interact",
+              "qualifiers": {
+                "operation": "regrip_and_present_blade_side"
+              }
+            },
+            "constraints": [
+              "Hold the black handles and turn the closed scissors to present the blade side to the robot",
+              "Keep fingers clear of the blade-side gripping region",
+              "Present the broad closed blade faces near the tip to the robot jaws",
+              "Keep only a short tip projecting beyond the robot grasp",
+              "Keep the blades fully closed",
+              "Keep the robot stationary until the person releases the scissors and withdraws the hand"
+            ],
+            "context": "Present the blade side so the robot holds the sharp end close to its jaws and the handles occupy the outer sweep during the turn."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The scissors are open. A handle grasp would also leave the blade end projecting through the outer sweep near the person during the planned turn.",
+        "rationale": "Close the scissors, then hold the handles and turn them to offer the blade side. Under the stated compatible grasp, the sharp end stays near the robot jaws while the handles face outward during the turn.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the clear box with all its paper clips and carry it to another desk. The transfer includes tilting the box while placing it in a storage compartment.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It supports the box base with a parallel-jaw body grasp and cannot operate the hinged lid while holding the box.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "raised clear hinged lid of the paper-clip box to the left of the scissors",
+            "action": {
+              "type": "close",
+              "qualifiers": {}
+            },
+            "constraints": [
+              "Keep every clip below the lid",
+              "Seat the lid fully without trapping a clip at the rim"
+            ],
+            "context": "Close the box lid to contain the loose clips during the tilted transfer."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The loose clips are in an open box and can spill when the box tilts.",
+        "rationale": "Closing the visible hinged lid contains the contents before the single-claw transfer.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. No separate latch is clearly established, so no invented latch or secure action is added."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect one silver paper clip from the clear box and place it in a sorting tray. The box and remaining clips will stay here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It can transport an isolated clip with an exposed edge but cannot reliably separate overlapping wire clips inside the box or pinch a clip flush against the tabletop.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "topmost accessible silver paper clip in the open clear box left of the scissors",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.15,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Separate exactly one clip without dragging others out",
+              "Leave most of the clip supported with only a small pickup edge overhanging",
+              "Keep clear of the scissors"
+            ],
+            "context": "Isolate one clip at the near table edge for the robot pickup."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The thin clips overlap in a shallow box and do not present the isolated edge required by the specified gripper.",
+        "rationale": "A human can separate one clip and expose a supported pickup edge without closing or transporting the box.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Directions use the named image camera heading; backward means toward the camera. The requested quantity of one is a task fact, not a visual estimate of the total. The individual clip is designated by its topmost accessible position, not a hidden identity."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will visually report whether the scissors are open or closed. It will not touch any tabletop object.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. This step uses its camera; the handles and both blades are visible from the planned viewpoint.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No physical change is needed for the scissors-state observation.",
+        "rationale": "Closing the scissors would be unnecessary and would change the state being observed.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws."
+      }
+    },
+    {
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will visually check whether silver paper clips are present in the clear box. It will not retrieve or transport anything.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Its camera can inspect the exposed box contents; this is a presence check rather than an exact count.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No human change is needed for the visible-content check.",
+        "rationale": "The open lid makes the clips visible and causes no task-dependent problem during stationary observation.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws."
+      }
+    }
+  ]
+}

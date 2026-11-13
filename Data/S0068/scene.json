@@ -1,0 +1,272 @@
+{
+  "scene_id": "S0068",
+  "images": [
+    "images/01.jpg",
+    "images/02.jpg",
+    "images/03.jpg"
+  ],
+  "scene_description": "A stack of loose white paper rests on the left of a wood-grain table. Two clear letter trays are stacked at the back with a white sheet in the upper tray, while a black electric pencil sharpener stands separately on the right with its cord running behind the table.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the entire loose white-paper stack and place it in a document tray at a nearby printer. The clear letter trays and sharpener will stay here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It carries the paper stack as one load with one jaw above and one beneath an exposed stack edge. It cannot establish the underside grasp while the stack lies flush on the tabletop.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "entire loose stack of white paper on the tabletop to the left of the clear letter trays",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.25,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the sheets together and most of the stack supported",
+              "Stop at a small stable overhang at the near table edge"
+            ],
+            "context": "Expose a narrow underside edge for the paper-stack pickup."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The paper stack lies flush on the table, without the underside edge required by the claw.",
+        "rationale": "Slide the aligned stack toward the near edge to prepare the grasp, following the paper-edge treatment in scenes 6–10.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Directions use the named image camera heading; backward means toward the camera."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the white sheet from the upper clear letter tray and deliver it to a nearby desk. Both trays and the loose paper stack will stay here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It pinches one sheet between parallel jaws using an exposed underside edge at the tray opening. It has no suction tool and cannot lift a sheet by its upper face alone.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "white sheet resting in the upper clear letter tray at the back of the table",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.05,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep most of the sheet supported by the upper tray",
+              "Avoid creasing the paper or pulling it completely out"
+            ],
+            "context": "Present a small sheet edge beyond the upper tray opening for the claw."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The sheet is supported inside the upper tray and does not present a prepared underside pickup edge.",
+        "rationale": "A small forward paper adjustment gives the claw purchase without relocating the tray assembly.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Directions use the named image camera heading; backward means toward the camera."
+      }
+    },
+    {
+      "example_id": "E003",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the upper clear letter tray together with its white sheet and carry it level to a printer station. The lower tray and other tabletop objects will stay here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grasps the exposed front rim of the upper tray, lifts vertically to separate the stacked trays, and carries the upper tray level. The tray is within reach and payload, and the stack separates by lifting without a fastener.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear human preparation is needed for the stated upper-tray rim grasp.",
+        "rationale": "The upper tray has an open front approach; the lower tray remains supported and the sheet stays inside during the level transfer.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Free separation of the stacked trays is an explicit robot/task assumption, not a visually verified latch state. The sharpener is to the right of the planned vertical lift."
+      }
+    },
+    {
+      "example_id": "E004",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will visually identify the black electric pencil sharpener for a supply inventory. It will not touch the sharpener or its cord.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. The camera can identify the exposed body and pencil opening from the table front.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No change is required for the stationary visual inventory.",
+        "rationale": "The visible cord does not interfere with identifying the sharpener.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The collector confirms that the sharpener is plugged in. The cord end and outlet are outside the images; neither needs to be handled for this visual-inventory task."
+      }
+    },
+    {
+      "example_id": "E005",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot is collecting the entire loose paper stack for delivery to the printer document tray. The letter trays and sharpener will remain in place.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It needs one jaw beneath an exposed stack edge and carries all sheets together; it has no suction or sheet-separation tool.",
+        "status_context": "The robot is paused before its next grasp attempt in a document-transfer routine. No tabletop object has been moved."
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "entire loose stack of white paper on the tabletop to the left of the clear letter trays",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "backward",
+                "distance": 0.25,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the pages aligned and most of the stack supported",
+              "Expose only a small overhang at the near table edge"
+            ],
+            "context": "Prepare an underside pickup edge before the next grasp attempt."
+          }
+        ]
+      },
+      "review": {
+        "phase": "during",
+        "category": "efficacy_remediation",
+        "problem": "The required lower-jaw purchase is absent while the stack remains flush on the table.",
+        "rationale": "The same edge preparation resolves the pending pickup without changing unrelated objects.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context",
+          "status_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. Directions use the named image camera heading; backward means toward the camera."
+      }
+    },
+    {
+      "example_id": "E006",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect the black electric pencil sharpener and carry it upright to a desk across the room. It is connected to a power outlet by its black cord. The paper and clear letter trays will remain on this table.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grasps the main sharpener housing with its parallel jaws, supporting the appliance rather than pulling on the removable shavings bin. Reach, jaw opening, and payload are compatible. It cannot disconnect a power plug before carrying the appliance.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "power plug at the end of the black cord attached to the electric pencil sharpener on the right side of the table",
+            "action": {
+              "type": "detach",
+              "qualifiers": {
+                "reference_object": "power outlet connected to the pencil sharpener's black cord beyond the photographed table area"
+              }
+            },
+            "constraints": [
+              "Pull the plug body rather than tugging on the cord",
+              "Leave the sharpener upright with its shavings bin fitted",
+              "Keep the disconnected cord and plug clear of the trays and available to travel with the sharpener"
+            ],
+            "context": "Unplug the sharpener before the robot carries it so the cord cannot restrain the appliance or pull against the outlet."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_from_robot",
+        "problem": "The sharpener remains tethered to the power outlet; lifting and carrying it could tension the cord and pull on the appliance or outlet.",
+        "rationale": "Disconnect the power plug before the robot grasps and transports the sharpener. Its exposed body already provides the stated pickup access.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The collector confirms that unplugging is required. The plug and outlet are outside the frame and are identified by their connection to the visible sharpener cord, not claimed to be visible."
+      }
+    },
+    {
+      "example_id": "E007",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will collect a stack of blank white paper from the lower clear letter tray and deliver it to a printer station. The upper tray and pencil sharpener will remain here.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. Its paper-supply pickup is assigned to the lower tray. It can grasp a prepared stack at the open tray front and carry it as one load, but does not search for or transfer supplies from other tabletop locations.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "empty lower clear letter tray beneath the upper tray containing a white sheet",
+            "action": {
+              "type": "replenish",
+              "qualifiers": {
+                "item": "stack of blank white paper from the left side of the table",
+                "quantity": 1
+              }
+            },
+            "constraints": [
+              "Use the loose white-paper stack on the left of the table",
+              "Keep the sheets aligned and supported inside the lower tray",
+              "Present the stack at the open front with enough edge access for the stated claw grasp",
+              "Leave the white sheet in the upper tray"
+            ],
+            "context": "Restock the lower tray with the loose paper stack before the robot collects its next printer delivery."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The designated lower supply tray is empty, while the available paper stack is on the tabletop to its left.",
+        "rationale": "Loading the available stack into the assigned supply tray provides the requested pickup load without requiring the robot to search another location.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The replenishment quantity is one paper stack, not one sheet. No count of individual sheets is inferred."
+      }
+    }
+  ]
+}
