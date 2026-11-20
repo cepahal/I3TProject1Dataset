@@ -184,12 +184,15 @@ Data/
 - The folder name and `scene_id` match, and `images` lists every file in `images/`.
 - Name photos `01.jpg`, `02.jpg`, ... in the order they were taken, in lowercase `.jpg`. Convert iPhone `.HEIC` photos first.
 - Store only photos of the initial, unchanged scene. Don't store after photos.
+- Scenes converted from PRISM-100K video stills (one `01.jpg` each) add a final `source` object after
+  `examples`: `dataset`, `prism_id` (the labeler's frame key), `clip_path`, `frame_index`,
+  `timestamp_seconds` and `license` (`CC BY-NC 4.0`).
 
 ---
 
 ## Checklist
 
-- [ ] Valid JSON with exactly the keys above, in that order.
+- [ ] Valid JSON with exactly the keys above, in that order (plus `source` last for PRISM scenes).
 - [ ] Every example's `question` matches the fixed text, and its `image` is one of the scene's photos.
 - [ ] Every `robot_context` starts with the robot base sentence, and every `notes` starts with the notes base.
 - [ ] No input field states the problem, the fix, or the reason to intervene.

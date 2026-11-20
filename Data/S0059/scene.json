@@ -1,0 +1,84 @@
+{
+  "scene_id": "S0059",
+  "images": [
+    "images/01.jpg"
+  ],
+  "scene_description": "A grocery aisle lined with packaged goods on both sides. An open metal stepladder stands close to the lower left-hand shelves, and an employee stands farther down the aisle.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will take a bag of grain from the lower left-hand shelves beside the stepladder and place it in a customer's cart.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It approaches the shelf head-on from the aisle and pinches the top of a bag; it needs the space in front of the shelf clear to reach straight in.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "open metal stepladder standing in the aisle in front of the lower left-hand shelves",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 1.0,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the ladder upright and open",
+              "Make sure no one is standing on it"
+            ],
+            "context": "Move the ladder away from the shelf so the robot can reach the grain bags."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The ladder's top step sits in front of the grain bags and blocks the easiest straight reach, so the robot could take a long time or drop the bag working around it.",
+        "rationale": "Moving the ladder aside is quick for a person and gives the robot a direct reach.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The image is a single 480 x 270 still from a PRISM-100K egocentric video (CC BY-NC 4.0); no other photographs of the scene exist. Converted from the collector's manual PRISM label E001 (grasp of 'Bag of grain', decision intervene, evidence visible). The label's adjustment target hint was 'metal stepladder blocking the aisle on the left'. Robot context was not labeled; the head-on reach was added during conversion. Distances are reused from the collector's manual label; the source is a recorded video frame, so they were not measured or staged. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will take a red-and-white packet from the lower right-hand shelves and place it in a customer's cart.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It approaches the shelf head-on from the aisle and pinches the top of a packet.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The right-hand shelves are open to the aisle; the stepladder stands on the other side.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The image is a single 480 x 270 still from a PRISM-100K egocentric video (CC BY-NC 4.0); no other photographs of the scene exist. Added during conversion as a contrast to E001; it is not in the collector's PRISM label. "
+      }
+    }
+  ],
+  "source": {
+    "dataset": "PRISM-100K",
+    "prism_id": "clip_008712_52d6ef017832_0000012",
+    "clip_path": "videos/ego/001/clip_008712.mp4",
+    "frame_index": 12,
+    "timestamp_seconds": 3.0,
+    "license": "CC BY-NC 4.0"
+  }
+}

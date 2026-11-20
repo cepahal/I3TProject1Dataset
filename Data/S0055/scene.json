@@ -1,0 +1,100 @@
+{
+  "scene_id": "S0055",
+  "images": [
+    "images/01.jpg"
+  ],
+  "scene_description": "A grocery store seen from a shopper's cart. A blue crate of bagged goods sits on the floor at the end of a wire shelving unit, and a blue basket trolley stands farther down the aisle on the right. A shopper browses the produce stands on the left.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will drive down the aisle to the right of the wire shelving unit and collect goods from the far end of that aisle. Its exact route through the area is unknown.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It drives on a mobile base that needs a clear floor path wide enough for its body; it does not push objects out of its way and stops when its path is blocked.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "blue plastic crate of white bagged goods on the floor at the end of the wire shelving unit",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "left",
+                "distance": 0.3,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Keep the crate upright with its goods inside",
+              "Slide it along the floor"
+            ],
+            "context": "Move the crate off the open floor and out of the aisle the robot will drive through."
+          },
+          {
+            "target_object": "blue basket trolley standing farther down the aisle on the right",
+            "action": {
+              "type": "move",
+              "qualifiers": {
+                "direction": "right",
+                "distance": 2.0,
+                "unit": "meters"
+              }
+            },
+            "constraints": [
+              "Roll it, do not lift it",
+              "Leave it parked beside the shelving, out of the aisle"
+            ],
+            "context": "Move the trolley out of the aisle the robot will drive down."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_for_robot",
+        "problem": "The crate on the floor and the trolley farther down the aisle both sit in the robot's route to the end of the aisle, where it could be stopped or damaged by a collision.",
+        "rationale": "Both obstacles are quick for a person to move, and the robot cannot clear them itself.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The image is a single 480 x 270 still from a PRISM-100K egocentric video (CC BY-NC 4.0); no other photographs of the scene exist. Converted from the collector's manual PRISM label E001 (navigation, decision intervene, evidence visible). The label's status context, 'Robot needs to pick up goods from end of aisle on the right', describes the task, so it is folded into task_context; status_context is null because the phase is before. Robot context was not labeled; the mobile-base assumptions were added during conversion. The camera wearer's own cart frame at the right edge is not part of the task. Distances are reused from the collector's manual label; the source is a recorded video frame, so they were not measured or staged. Directions use the captured camera heading of image 01: movement toward the camera is encoded backward and movement away from it is encoded forward."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the blue crate of bagged goods from the floor and carry it to the stockroom.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It grips a crate by two opposite sides from above; each jaw needs free space beside the side it grips.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The crate stands on open floor with its sides exposed and nothing stacked on it.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The image is a single 480 x 270 still from a PRISM-100K egocentric video (CC BY-NC 4.0); no other photographs of the scene exist. Added during conversion as a contrast to E001; it is not in the collector's PRISM label. The same crate that blocks the robot's route is easy to pick up."
+      }
+    }
+  ],
+  "source": {
+    "dataset": "PRISM-100K",
+    "prism_id": "clip_003658_cd500a38f293_0000031",
+    "clip_path": "videos/ego/000/clip_003658.mp4",
+    "frame_index": 31,
+    "timestamp_seconds": 7.75,
+    "license": "CC BY-NC 4.0"
+  }
+}

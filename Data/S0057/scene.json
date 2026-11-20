@@ -1,0 +1,82 @@
+{
+  "scene_id": "S0057",
+  "images": [
+    "images/01.jpg"
+  ],
+  "scene_description": "An open glass-door grocery freezer, seen by a shopper holding a yellow snack bag. The left shelves hold several green Sweet Corn bags; the right shelves are nearly empty, with one orange bag of frozen snacks on the middle shelf and a red bag below it.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will take the orange bag of frozen snacks from the middle shelf of the right-hand freezer section and place it in a customer's basket. It will come back for the same product for later orders today.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It reaches straight into the open freezer and pinches the front edge of a bag on the shelf; it can only take bags already on the shelf and cannot fetch stock from storage.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": [
+          {
+            "target_object": "middle shelf of the right-hand freezer section, holding only one orange bag of frozen snacks",
+            "action": {
+              "type": "interact",
+              "qualifiers": {
+                "operation": "restock"
+              }
+            },
+            "constraints": [
+              "Restock with the same orange-bag product",
+              "Place the new bags at the front of the shelf"
+            ],
+            "context": "Refill the shelf so the robot can keep fetching this product."
+          }
+        ]
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "The orange bag is the last one on its shelf, so the robot's later pickups of this product will fail.",
+        "rationale": "Only a person can bring stock from storage, and restocking now keeps the later pickups possible.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The image is a single 480 x 270 still from a PRISM-100K egocentric video (CC BY-NC 4.0); no other photographs of the scene exist. Converted from the collector's manual PRISM label E001 (grasp of 'Orange Frozen bag of food', decision intervene, evidence visible). The label used the replenish action (item 'Orange frozen food bag', qualifiers marked for review); replenish is not an allowed action type, so it is encoded as interact with operation restock. The label's status context, 'This is the last remaining bag on the shelf, and an employee can restock it', states the problem and the fix, so it is kept out of the input; the task context instead says the robot will come back for more. The camera wearer is holding the freezer door open; the task assumes it is open when the robot arrives."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will take one green Sweet Corn bag from the left-hand freezer shelves and place it in a customer's basket.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It reaches straight into the open freezer and pinches the front edge of a bag on the shelf.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "Several Sweet Corn bags sit at the front of the left-hand shelf, enough for this and later pickups.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The image is a single 480 x 270 still from a PRISM-100K egocentric video (CC BY-NC 4.0); no other photographs of the scene exist. Added during conversion as a contrast to E001; it is not in the collector's PRISM label. "
+      }
+    }
+  ],
+  "source": {
+    "dataset": "PRISM-100K",
+    "prism_id": "clip_004000_1ee9d4c2a932_0000032",
+    "clip_path": "videos/ego/000/clip_004000.mp4",
+    "frame_index": 32,
+    "timestamp_seconds": 8.0,
+    "license": "CC BY-NC 4.0"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "scene_id": "S0061",
+  "images": [
+    "images/01.jpg"
+  ],
+  "scene_description": "On a grocery store floor, two stacked blue crates with a white board on top stand between the shelf aisles. A bag of packaged snacks lies on the board, and a small yellow-and-green Rubik's cube sits at its far right corner.",
+  "examples": [
+    {
+      "example_id": "E001",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the Rubik's cube from the top of the stacked crates and hand it to a customer.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It reaches over the crates from the near side and lifts the cube straight up between its jaws.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "safety_for_robot",
+        "problem": "The stacked crates could tip if the robot bumps them, but the cube's position does not add to that risk.",
+        "rationale": "The cube already sits at the corner of the board, where it can be lifted straight off without reaching across the snack bag, so no change is needed.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The image is a single 480 x 270 still from a PRISM-100K egocentric video (CC BY-NC 4.0); no other photographs of the scene exist. Converted from the collector's manual PRISM label E001 (grasp of 'Rubix Cube', decision no_intervention, evidence partial). The collector's concern was the robot knocking into the crates so that everything falls. Evidence was marked partial: the crates are seen from above at an angle and the cube is small in the frame."
+      }
+    },
+    {
+      "example_id": "E002",
+      "vlm_input": {
+        "image": "images/01.jpg",
+        "question": "Given the image and the task, robot, and status context, what should the human change, if anything, to prevent or resolve problems with this interaction? Return only a JSON object containing an ordered guidance_specs array; use an empty array if no intervention is needed.",
+        "task_context": "The robot will pick up the bag of snacks from the board on top of the crates and place it on a shelf.",
+        "robot_context": "The robot has one claw gripper with parallel jaws and manipulates one object at a time. It pinches the bag's sealed top edge from above.",
+        "status_context": null
+      },
+      "vlm_output": {
+        "guidance_specs": []
+      },
+      "review": {
+        "phase": "before",
+        "category": "efficacy_remediation",
+        "problem": "No clear task-dependent problem requires a human change.",
+        "rationale": "The bag lies alone on the board with its sealed edges exposed; the cube is well to one side.",
+        "information_sources": [
+          "headset_visual",
+          "task_context",
+          "robot_context"
+        ],
+        "notes": "Task and robot contexts are authored scenario assumptions, not recorded robot observations. All listed photographs were visually reviewed; this example uses only the named input image. Robot hardware follows the dataset-wide assumption of one claw gripper with parallel jaws. The image is a single 480 x 270 still from a PRISM-100K egocentric video (CC BY-NC 4.0); no other photographs of the scene exist. Added during conversion as a contrast to E001; it is not in the collector's PRISM label. "
+      }
+    }
+  ],
+  "source": {
+    "dataset": "PRISM-100K",
+    "prism_id": "clip_009549_e6d7acc1166e_0000008",
+    "clip_path": "videos/ego/001/clip_009549.mp4",
+    "frame_index": 8,
+    "timestamp_seconds": 2.0,
+    "license": "CC BY-NC 4.0"
+  }
+}
